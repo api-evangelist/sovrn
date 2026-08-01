@@ -1,0 +1,21 @@
+{
+  "repo": "sovrn",
+  "feeds": [
+    {
+      "source": "https://www.sovrn.com/feed/",
+      "feed_url": "https://www.sovrn.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.sovrn.com",
+      "feed_url": "https://www.sovrn.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 15,
+  "fetched": "2026-08-01T15:49:00Z"
+}

@@ -1,8 +1,28 @@
 aid: sovrn
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sovrn.png
 name: Sovrn
-description: 'Sovrn is a company surfaced as a portfolio company of foundry-group and added to the API
-  Evangelist network as a stub for enrichment. Sector: adtech. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Sovrn is an advertising technology and content monetization company that helps
+  online publishers, advertisers, and creators earn revenue from their websites and
+  audiences. Its platform spans Ad Exchange (an omnichannel programmatic demand
+  pipeline connecting publisher inventory to buyers and DSPs), Signal (ad-inventory
+  and yield optimization), Commerce (affiliate and commerce-content monetization,
+  formerly VigLink, with access to 50,000+ merchants), and Data solutions for
+  first-party data activation. Sovrn is headquartered in Boulder, Colorado. This API
+  Evangelist profile was created from a venture portfolio lead and enriched from
+  Sovrn's public security, legal, and status surfaces; no public developer portal or
+  OpenAPI was discoverable at enrichment time.
 url: https://raw.githubusercontent.com/api-evangelist/sovrn/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,10 +32,17 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Adtech
+- Advertising
+- Monetization
+- Affiliate Marketing
+- Programmatic
+- Publishers
+- Commerce
+- Data
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -25,3 +52,34 @@ maintainers:
 common:
 - type: Website
   url: https://www.sovrn.com
+- type: Blog
+  url: https://www.sovrn.com/blog/
+- type: Support
+  url: https://knowledge.sovrn.com/
+- type: GitHubOrganization
+  url: https://github.com/sovrn
+- type: StatusPage
+  url: https://status.sovrn.com/
+- type: TrustCenter
+  url: https://www.sovrn.com/trust-center/
+- type: PrivacyPolicy
+  url: https://www.sovrn.com/privacy-policy/privacy-policy/
+- type: TermsOfService
+  url: https://www.sovrn.com/legal/msa/
+- type: Security
+  url: https://www.sovrn.com/responsible-disclosure-policy/
+- type: SecurityTxt
+  url: https://www.sovrn.com/.well-known/security.txt
+- type: WellKnown
+  url: well-known/sovrn-well-known.yml
+- type: VulnerabilityDisclosure
+  url: security/sovrn-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/sovrn-domain-security.yml
+- type: Lifecycle
+  url: lifecycle/sovrn-lifecycle.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 5
+  pass: local-v1

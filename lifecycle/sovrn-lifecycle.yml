@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: searched
+source: https://status.sovrn.com/
+status_page: https://status.sovrn.com/
+versioning: null          # no public API versioning policy discovered
+deprecation: null         # no public deprecation / Sunset-header policy discovered
+sla: null
+notes: >-
+  Sovrn publishes a public status page for its platform (Ad Exchange, Signal,
+  Commerce). No public developer portal, API reference, or versioning/deprecation
+  policy was discoverable at enrichment time, so only the status surface is captured.
+deprecated_operations: []
