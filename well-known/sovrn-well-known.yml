@@ -1,16 +1,191 @@
-generated: '2026-07-21'
+generated: '2026-08-12'
 method: searched
-source: live probe of https://www.sovrn.com/.well-known/
-host: https://www.sovrn.com
-documents:
-- path: /.well-known/security.txt          # RFC 9116
-  status: 200
-  file: sovrn-security.txt
-- path: /.well-known/openid-configuration   # OIDC discovery
-  status: 404
-- path: /.well-known/oauth-authorization-server  # RFC 8414
-  status: 404
-- path: /.well-known/api-catalog             # RFC 9727
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
+source: live probe of /.well-known/ + /llms.txt across every Sovrn website, developer, API and MCP host
+note: >-
+  Probed 11 hosts x 11 paths. Two real documents are served: an RFC 9116 security.txt on
+  www.sovrn.com and an Agent Skills discovery index on developer.sovrn.com (the Sovrn
+  Developer Center, hosted on ReadMe). The three /.well-known/* paths that return 200 on
+  platform.sovrn.com are the single-page-app catch-all — every one returns the same 2,764
+  byte HTML shell, not a document — and are recorded as misses. comparisons.sovrn.com
+  answers 403 to every unauthenticated request (WAF), so nothing could be read there.
+hosts:
+- host: https://www.sovrn.com
+  documents:
+  - path: /.well-known/security.txt          # RFC 9116
+    status: 200
+    file: sovrn-security.txt
+  - path: /llms.txt
+    status: 200
+    file: ../llms/sovrn-www-llms.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/agent-skills/index.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+- host: https://developer.sovrn.com
+  note: Sovrn Developer Center (ReadMe-hosted). Advertises rel="agent-skills" in its Link header.
+  documents:
+  - path: /.well-known/agent-skills/index.json   # Agent Skills discovery 0.2.0
+    status: 200
+    file: sovrn-agent-skills-index.json
+  - path: /.well-known/agent-skills/read-the-docs/SKILL.md
+    status: 200
+    file: ../skills/sovrn-read-the-docs.md
+  - path: /llms.txt
+    status: 200
+    file: ../llms/sovrn-llms.txt
+  - path: /.well-known/api-catalog
+    status: 404
+    note: advertised as rel="api-catalog" in the response Link header but returns 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+- host: https://knowledge.sovrn.com
+  documents:
+  - path: /llms.txt
+    status: 200
+    file: ../llms/sovrn-knowledge-llms.txt
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://mcp.sovrn.com
+  note: Commerce MCP server host. No anonymous OAuth metadata is published.
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://api.sovrn.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+- host: https://api.viglink.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+- host: https://rest.viglink.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+- host: https://viglink.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+- host: https://platform.sovrn.com
+  note: >-
+    SPA catch-all — /.well-known/openid-configuration, /.well-known/oauth-authorization-server
+    and /.well-known/api-catalog all return HTTP 200 with the identical 2,764-byte HTML
+    application shell, not a document. Recorded as misses; no pointer is emitted for them.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    document: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    document: false
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    document: false
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://comparisons.sovrn.com
+  note: Every unauthenticated request returns 403 (WAF). Nothing readable.
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /llms.txt
+    status: 403
+- host: https://shopping-gallery.prd-commerce.sovrnservices.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+a2a:
+  agent_card_found: false
+  note: >-
+    /.well-known/agent-card.json and /.well-known/agent.json were probed on all 11 hosts.
+    Every one 404s (403 on comparisons.sovrn.com). No A2A agent card is published, so no
+    a2a/ artifact and no AgentCard pointer were written.

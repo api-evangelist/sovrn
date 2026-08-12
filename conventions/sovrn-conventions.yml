@@ -1,0 +1,157 @@
+generated: '2026-08-12'
+method: searched
+source: https://developer.sovrn.com/docs/authorization
+derived_from: openapi/*.yml
+note: >-
+  Sovrn's APIs are not one API. They are eight independently-built services published behind
+  one ReadMe developer centre, on five different hosts, with five differently-named security
+  schemes describing two credentials, three different pagination idioms and no shared error
+  envelope. This document records what is actually consistent and what is not, so an agent
+  does not generalise a convention from one endpoint to the next.
+authentication:
+  style: api-key-in-header
+  regimes: 2
+  detail: authentication/sovrn-authentication.yml
+  summary: >-
+    Commerce: `Authorization: secret {SECRET_KEY}` (per site). Advertising: `x-api-key:
+    {prefix}.{uuid}` (per account). Link building and Link Check additionally take the
+    campaign key as a `key` query parameter; Product Promo Codes takes `api_key` and Product
+    Recommendations takes `apiKey`, both as query parameters.
+  oauth: false
+  openid_connect: false
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No Idempotency-Key header, parameter or retry-safety contract is documented on any Sovrn
+    API. Sixteen of seventeen published operations are GET and therefore idempotent by HTTP
+    method; the single POST (/summaries, Approved Merchants) is a read-shaped query that
+    takes filters in a request body rather than a mutation. Sovrn publishes no write API at
+    all, so the absence of an idempotency contract is a consequence of the read-only surface
+    rather than a gap in a write path.
+pagination:
+  consistent: false
+  styles:
+  - style: page-number
+    api: openapi/sovrn-commerce-campaigns-openapi.yml
+    request_params:
+    - name: page
+      description: Page of results when results exceed rowsPerPage.
+    - name: rowsPerPage
+      description: Records per page.
+      default: 100
+    response_fields: []
+  - style: page-number
+    api: openapi/sovrn-merchant-summaries-openapi.yml
+    request_params:
+    - name: page
+      description: Page number, starting from 1.
+    - name: pageSize
+      description: Results per page.
+      default: 1000
+      maximum: 2500
+    response_fields:
+    - page
+    - perPage
+    - totalItems
+    source: https://developer.sovrn.com/reference/get_summaries-delta
+  - style: none
+    api: openapi/sovrn-commerce-reports-openapi.yml
+    note: >-
+      The Real-Time Reports endpoints publish no pagination parameters. Volume is bounded by
+      date filters (clickDate, clickDateStart/clickDateEnd, commissionDate, updateDate)
+      instead.
+  - style: windowed
+    api: openapi/sovrn-advertising-reporting-openapi.yml
+    note: >-
+      Advertising reporting is bounded by granularity windows rather than pages — hour
+      granularity accepts 1-24 hours, day accepts 1 day to 1 month, month accepts 1 month to
+      1 year. Requests outside the window are rejected.
+delta_sync:
+  supported: true
+  api: openapi/sovrn-merchant-summaries-openapi.yml
+  operation: GET /summaries/delta
+  mechanism: >-
+    A `since` query parameter returns only merchants updated after that timestamp, and an
+    `If-None-Match` request header yields HTTP 304 when nothing has changed. This is the only
+    conditional-request / cache-validation contract on any Sovrn API.
+  note: Also accepts an Accept-Encoding header for compressed responses.
+caching:
+  api: openapi/sovrn-product-recommendations-openapi.yml
+  mechanism: >-
+    Product Recommendation responses are cached keyed on the exact `pageUrl` value supplied
+    in the request; identical pageUrl values return the same cached response until expiry.
+  guidance:
+  - Use a stable slug or the real page URL as pageUrl (mens_shoes, /products/mens/shoes).
+  - One piece of content per pageUrl; variant intents need their own key.
+  - Never put prompt or page text in pageUrl — that belongs in the `content` field.
+  source: https://developer.sovrn.com/reference/get_product_recommendations
+tracking:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is documented on any Sovrn API, so a failing call
+    cannot be quoted back to support by id.
+  attribution_parameters:
+    description: >-
+      Sovrn's tracing model is commercial rather than operational — it identifies the click,
+      not the request. CUID plus the five UTM parameters are accepted on link construction,
+      Bid Check and Promo Codes, and come back out on the reporting endpoints as
+      linkUtm*/pageUtm* filters, which is what makes end-to-end attribution possible.
+    parameters:
+    - name: cuid
+      description: >-
+        Caller-chosen identifier associating a click with a user, page, campaign or event.
+        Maximum 2048 alphanumeric characters on link building; the onboarding guide quotes a
+        32-character limit for the Redirect API.
+    - {name: utm_source}
+    - {name: utm_medium}
+    - {name: utm_campaign}
+    - {name: utm_term}
+    - {name: utm_content}
+    reporting_filters: [cuids, subIds, linkUtmSource, linkUtmMedium, linkUtmCampaign, linkUtmTerm,
+      linkUtmContent, pageUtmSource, pageUtmMedium, pageUtmCampaign, pageUtmTerm, pageUtmContent]
+versioning:
+  scheme: mixed
+  detail: lifecycle/sovrn-lifecycle.yml
+  note: >-
+    Only two of the eight services carry a version at all, and they disagree on where to put
+    it: Commerce Real-Time Reports uses a URI path segment (viglink.io/v1) and Price
+    Comparisons pins a minor version in the path (/api/affiliate/v3.5). The remaining six —
+    Campaigns, Link Check, Bid Check, Merchant Group Summaries, Product Promo Codes, Product
+    Recommendations, Advertising Reporting — are unversioned. No header or date-based
+    versioning is used anywhere.
+error_envelope:
+  format: vendor-envelope
+  rfc9457: false
+  detail: errors/sovrn-problem-types.yml
+  shape: '{ error: { errors: [{reason, message, locationType, location}] }, code, message }'
+  note: >-
+    Schematized only on the Campaigns API. Every other operation declares its 4xx/5xx with a
+    prose description and no schema.
+rate_limit_signaling:
+  detail: rate-limits/sovrn-rate-limits.yml
+  response_headers: []
+  note: >-
+    Limits are published per API in prose (1/60s reporting, 1/10s merchant summaries,
+    100/second price comparisons, 30,000 per 5 minutes per key on recommendations). No
+    X-RateLimit-*, RateLimit-* or Retry-After header is documented, and only the Merchant
+    Group Summaries API declares a 429 response.
+content_negotiation:
+  response_formats: [json, xml]
+  note: >-
+    Campaigns and Link Check accept a `format` query parameter (json or xml) and Campaigns
+    additionally supports a JSON-P `callback` parameter — a legacy of the VigLink-era API.
+    Everything else is JSON only.
+consent_signals:
+  api: openapi/sovrn-commerce-bid-check-openapi.yml
+  parameters: [gdprApplies, gdprConsent, ccpaConsent, gppConsent]
+  note: >-
+    Bid Check accepts IAB consent strings (TCF, CCPA/US Privacy, GPP) as query parameters —
+    the privacy plumbing an adtech bid request needs. Sovrn documents no equivalent consent
+    surface on the Commerce reporting APIs.
+cross_links:
+  authentication: authentication/sovrn-authentication.yml
+  errors: errors/sovrn-problem-types.yml
+  lifecycle: lifecycle/sovrn-lifecycle.yml
+  rate_limits: rate-limits/sovrn-rate-limits.yml
+  data_model: data-model/sovrn-data-model.yml

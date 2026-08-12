@@ -1,0 +1,170 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "api",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.viglink.com/api"
+    }
+  ],
+  "security": [
+    {}
+  ],
+  "paths": {
+    "/link/": {
+      "get": {
+        "summary": "Link check API",
+        "description": "Get information on whether a specific URL can be monetized",
+        "operationId": "link",
+        "parameters": [
+          {
+            "name": "out",
+            "in": "query",
+            "description": "The URL to be tested for monetization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Commerce Api Key. This is found by logging into your account at https://commerce.sovrn.com and navigating to Sites. The API key field for the domain you wish to use should be entered here.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "optimize",
+            "in": "query",
+            "description": "Option on if the link can be optimized",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "We should always use `json`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "geo",
+            "in": "query",
+            "description": "Country code that can be passed in for affiliation testing",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fbu",
+            "in": "query",
+            "description": "Fallback url to go if out url can't beat the bid floor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bf",
+            "in": "query",
+            "description": "Bid floor for the fallback url",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n    \"url\": \"https://www.walmart.com/ip/105218827\",\n    \"optimized\": \"https://redirect.viglink.com?key={YOUR API KEY&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F105218827&prodOvrd=RAL\",\n    \"affiliatable\": false,\n    \"competitive\": null,\n    \"optimizable\": null,\n    \"eepc\": 0.0702\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://www.walmart.com/ip/105218827"
+                    },
+                    "optimized": {
+                      "type": "string",
+                      "example": "https://redirect.viglink.com?key={YOUR API KEY&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F105218827&prodOvrd=RAL"
+                    },
+                    "affiliatable": {
+                      "type": "boolean",
+                      "example": false,
+                      "default": true
+                    },
+                    "competitive": {},
+                    "optimizable": {},
+                    "eepc": {
+                      "type": "number",
+                      "example": 0.0702,
+                      "default": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n    \"status\": 400,\n    \"message\": \"Parameter 'key' is required.\",\n    \"error\": \"Bad Request\",\n    \"exception\": \"com.viglink.common.exception.ValidationException\",\n    \"timestamp\": 1608665790151\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400,
+                      "default": 0
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Parameter 'key' is required."
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "exception": {
+                      "type": "string",
+                      "example": "com.viglink.common.exception.ValidationException"
+                    },
+                    "timestamp": {
+                      "type": "integer",
+                      "example": 1608665790151,
+                      "default": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  },
+  "x-readme-fauxas": true
+}

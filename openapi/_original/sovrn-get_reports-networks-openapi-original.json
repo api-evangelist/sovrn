@@ -1,0 +1,362 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Commerce Real-Time Reports",
+    "description": "Transaction Reporting Service (TRS) provides Reporting APIs.",
+    "termsOfService": "http://sovrn.io/terms/",
+    "version": "20230630"
+  },
+  "externalDocs": {
+    "description": "Find out more Transaction Reporting Services",
+    "url": "https://authcore.atlassian.net/l/cp/G5HL5km5"
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://viglink.io/v1"
+    }
+  ],
+  "paths": {
+    "/reports/networks": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "Networks",
+        "description": "This endpoint is used to query aggregated performance metrics by Network. This data can be used to see connected Network performance, your top performing Networks, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions and EPC.",
+        "parameters": [
+          {
+            "name": "clickDateStart",
+            "in": "query",
+            "description": "Start Date",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "clickDateEnd",
+            "in": "query",
+            "description": "End Date",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "campaignIds",
+            "in": "query",
+            "description": "Comma separated list of campaign IDs",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9,]+$"
+            }
+          },
+          {
+            "name": "subIds",
+            "in": "query",
+            "description": "Comma separated list of sub IDs",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchantGroupIds",
+            "in": "query",
+            "description": "Comma separated list of merchant group IDs",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9,]+$"
+            }
+          },
+          {
+            "name": "cuids",
+            "in": "query",
+            "description": "Comma separated list of CUIDs (custom tracking IDs)",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageUtmSource",
+            "in": "query",
+            "description": "Comma seperated list of page UTM sources",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageUtmMedium",
+            "in": "query",
+            "description": "Comma seperated list of page UTM mediums",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageUtmCampaign",
+            "in": "query",
+            "description": "Comma seperated list of page UTM campaings",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageUtmTerm",
+            "in": "query",
+            "description": "Comma seperated list of page UTM terms",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageUtmContent",
+            "in": "query",
+            "description": "Comma seperated list of page UTM contents",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkUtmSource",
+            "in": "query",
+            "description": "Comma seperated list of link UTM sources",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkUtmMedium",
+            "in": "query",
+            "description": "Comma seperated list of link UTM mediums",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkUtmCampaign",
+            "in": "query",
+            "description": "Comma seperated list of link UTM campaigns",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkUtmTerm",
+            "in": "query",
+            "description": "Comma seperated list of link UTM terms",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkUtmContent",
+            "in": "query",
+            "description": "Comma seperated list of link UTM contents",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "programType",
+            "in": "query",
+            "description": "Type of program (CPA/CPC)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CPC",
+                "CPA"
+              ]
+            }
+          },
+          {
+            "name": "sovrnProduct",
+            "in": "query",
+            "description": "Sovrn Product",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/SovrnProductModel"
+            }
+          },
+          {
+            "name": "deviceType",
+            "in": "query",
+            "description": "Type of device",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/DeviceTypeModel"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "Two-letter ISO country code",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NetworkResponseModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid"
+          },
+          "404": {
+            "description": "Network data not found"
+          },
+          "5XX": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SovrnProductModel": {
+        "type": "string",
+        "enum": [
+          "UNK",
+          "ORG",
+          "INS",
+          "WRA",
+          "RAC",
+          "RAL",
+          "CUP",
+          "TPA",
+          "PCR",
+          "TXT",
+          "SHG",
+          "PRF"
+        ]
+      },
+      "DeviceTypeModel": {
+        "type": "string",
+        "enum": [
+          "DSK",
+          "MBL",
+          "TBL",
+          "UKN"
+        ]
+      },
+      "BaseResponseModel": {
+        "type": "object",
+        "properties": {
+          "revenue": {
+            "type": "number"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "sales": {
+            "type": "number"
+          },
+          "actions": {
+            "type": "number"
+          },
+          "conversionRate": {
+            "type": "number"
+          },
+          "epc": {
+            "type": "number"
+          }
+        }
+      },
+      "NetworkResponseModel": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/BaseResponseModel"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "networkName": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "totals": {
+            "properties": {
+              "networkNameTotal": {
+                "type": "number"
+              },
+              "revenueTotal": {
+                "type": "number"
+              },
+              "clicksTotal": {
+                "type": "number"
+              },
+              "salesTotal": {
+                "type": "number"
+              },
+              "actionsTotal": {
+                "type": "number"
+              },
+              "conversionRateTotal": {
+                "type": "number"
+              },
+              "epcTotal": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "apiKey",
+        "name": "authorization",
+        "in": "header"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Commerce Real-Time Reports",
+    "description": "Transaction Reporting Service (TRS) provides Reporting APIs.",
+    "termsOfService": "http://sovrn.io/terms/",
+    "version": "20230630"
+  },
+  "externalDocs": {
+    "description": "Find out more Transaction Reporting Services",
+    "url": "https://authcore.atlassian.net/l/cp/G5HL5km5"
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://viglink.io/v1"
+    }
+  ],
+  "paths": {
+    "/reports/transactions": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "Transactions",
+        "description": "This endpoint is used to query all commission events (transactions) that have occurred or been updated on a specified date. This data can be used to see individual link performance, actualized earnings, individual site performance and more, all in real-time.",
+        "parameters": [
+          {
+            "name": "clickDate",
+            "in": "query",
+            "description": "Click date for filtering",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "commissionDate",
+            "in": "query",
+            "description": "Commission date for filtering",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "updateDate",
+            "in": "query",
+            "description": "Update date for filtering",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "campaignIds",
+            "in": "query",
+            "description": "Comma separated list of campaign IDs",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9,]+$"
+            }
+          },
+          {
+            "name": "merchantGroupIds",
+            "in": "query",
+            "description": "Comma separated list of merchant group IDs",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9,]+$"
+            }
+          },
+          {
+            "name": "programType",
+            "in": "query",
+            "description": "Type of program (CPA/CPC)",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CPC",
+                "CPA"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionsResponseModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SovrnProductModel": {
+        "type": "string",
+        "enum": [
+          "UNK",
+          "ORG",
+          "INS",
+          "WRA",
+          "RAC",
+          "RAL",
+          "CUP",
+          "TPA",
+          "PCR",
+          "TXT",
+          "SHG",
+          "PRF"
+        ]
+      },
+      "DeviceTypeModel": {
+        "type": "string",
+        "enum": [
+          "DSK",
+          "MBL",
+          "TBL",
+          "UKN"
+        ]
+      },
+      "ProductModel": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "example": 100.99
+          },
+          "quantity": {
+            "type": "number",
+            "example": 10
+          }
+        }
+      },
+      "LinkUtmInfoModel": {
+        "type": "object",
+        "properties": {
+          "utmSource": {
+            "type": "string"
+          },
+          "utmMedium": {
+            "type": "string"
+          },
+          "utmCampaign": {
+            "type": "string"
+          },
+          "utmTerm": {
+            "type": "string"
+          },
+          "utmContent": {
+            "type": "string"
+          }
+        }
+      },
+      "PageUtmInfoModel": {
+        "type": "object",
+        "properties": {
+          "utmSource": {
+            "type": "string"
+          },
+          "utmMedium": {
+            "type": "string"
+          },
+          "utmCampaign": {
+            "type": "string"
+          },
+          "utmTerm": {
+            "type": "string"
+          },
+          "utmContent": {
+            "type": "string"
+          }
+        }
+      },
+      "TransactionsResponseModel": {
+        "type": "object",
+        "properties": {
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionModel"
+            }
+          }
+        }
+      },
+      "TransactionModel": {
+        "type": "object",
+        "properties": {
+          "revenueId": {
+            "type": "number"
+          },
+          "clickSid": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "number",
+            "format": "integer"
+          },
+          "commissionId": {
+            "type": "string"
+          },
+          "merchantGroupId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "merchantGroupName": {
+            "type": "string"
+          },
+          "campaignId": {
+            "type": "number",
+            "format": "integer"
+          },
+          "campaignName": {
+            "type": "string"
+          },
+          "clickDate": {
+            "type": "string"
+          },
+          "commissionDate": {
+            "type": "string"
+          },
+          "updateDate": {
+            "type": "string"
+          },
+          "publisherRevenue": {
+            "type": "number"
+          },
+          "orderValue": {
+            "type": "number"
+          },
+          "cuid": {
+            "type": "string"
+          },
+          "linkUtmInfo": {
+            "$ref": "#/components/schemas/LinkUtmInfoModel"
+          },
+          "pageUtmInfo": {
+            "$ref": "#/components/schemas/PageUtmInfoModel"
+          },
+          "destinationUrl": {
+            "type": "string"
+          },
+          "pageUrl": {
+            "type": "string"
+          },
+          "affProduct": {
+            "$ref": "#/components/schemas/SovrnProductModel"
+          },
+          "affProductSubType": {
+            "type": "string"
+          },
+          "programType": {
+            "type": "string"
+          },
+          "networkName": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "deviceType": {
+            "$ref": "#/components/schemas/DeviceTypeModel"
+          },
+          "merchandise": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductModel"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "apiKey",
+        "name": "authorization",
+        "in": "header"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

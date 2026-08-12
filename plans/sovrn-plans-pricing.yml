@@ -1,0 +1,48 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.sovrn.com/llms.txt
+plan_count: 0
+model: revenue-share
+note: >-
+  Sovrn publishes no pricing page and no plan tiers. Its business model is inverted from a
+  metered API — publishers are paid BY Sovrn out of a revenue share on monetized ad
+  impressions and affiliate commissions, rather than paying for API calls. Signing up for a
+  free Sovrn Platform account and getting a campaign approved is what grants API access;
+  there is no paid tier, no quota to buy and no overage. The only published monetary terms
+  are payout thresholds, recorded below because they are the closest thing to a commercial
+  contract Sovrn puts in public.
+probed:
+- url: https://www.sovrn.com/pricing/
+  status: 404
+- url: https://www.sovrn.com/plans
+  status: 404
+- url: https://www.sovrn.com/commerce/pricing
+  status: 404
+- url: https://www.sovrn.com/llms.txt
+  status: 200
+  note: Full page index; contains no pricing or plans page.
+plans: []
+payout_terms:
+- id: minimum-payment-threshold
+  amount: 25
+  currency: USD
+  period: monthly
+  description: >-
+    A minimum earnings balance of $25 at the end of the month is required to receive a
+    payment. Balances below the threshold roll over into the following month.
+  source: https://knowledge.sovrn.com/kb/what-is-the-minimum-payment-threshold-for-sovrn
+- id: minimum-payment-threshold-wire
+  amount: 50
+  currency: USD
+  period: monthly
+  description: Minimum threshold when the preferred payment method is wire transfer.
+  source: https://knowledge.sovrn.com/kb/what-is-the-minimum-payment-threshold-for-sovrn
+access:
+  signup: https://platform.sovrn.com/account/signup
+  free_account: true
+  api_gate: >-
+    Commerce API access requires an approved campaign. Sovrn reviews campaigns only after
+    affiliate links are installed and real clicks have been generated, so the API is
+    reachable before approval for link building but the Link Check API is not usable until
+    the campaign is approved.
+  source: https://knowledge.sovrn.com/kb/api-onboarding-guide-for-commerce

@@ -1,0 +1,176 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/*.yml
+docs: https://developer.sovrn.com/reference/campaigns
+format: vendor-envelope
+rfc9457: false
+note: >-
+  Sovrn does not use RFC 9457 problem+json anywhere. The Commerce APIs return a Google-JSON
+  style envelope — a top-level `error.errors[]` array of {reason, message, locationType,
+  location} alongside duplicated `code` and `message` fields — which is the only machine-
+  readable error contract Sovrn publishes, and it is only schematized on the Campaigns API.
+  Every other spec declares its 4xx/5xx responses with a prose description and no schema and
+  no media type, so an agent cannot parse them without hitting them first. There is no
+  documented error-code registry and no stable error `type` URI.
+envelope:
+  media_type: application/json
+  shape: |
+    {
+      "error": {
+        "errors": [
+          {
+            "reason": "invalidCredentials",
+            "message": "…",
+            "locationType": "parameter",
+            "location": "secret"
+          }
+        ]
+      },
+      "code": 401,
+      "message": "…"
+    }
+  fields:
+  - name: error.errors[].reason
+    type: string
+    description: Machine-readable reason token. Observed values are limited to those below.
+  - name: error.errors[].message
+    type: string
+  - name: error.errors[].locationType
+    type: string
+    description: Where the offending value came from, e.g. "parameter".
+  - name: error.errors[].location
+    type: string
+    description: Name of the offending parameter, e.g. "secret".
+  - name: code
+    type: integer
+    description: Duplicates the HTTP status.
+  - name: message
+    type: string
+    description: Duplicates error.errors[0].message.
+  schematized_on:
+  - openapi/sovrn-commerce-campaigns-openapi.yml
+reasons:
+- reason: invalidCredentials
+  status: 401
+  message: >-
+    Authorization secret is missing or invalid. This can be found at
+    https://publishers.viglink.com/account and can be sent as a parameter or Authorization
+    header
+  remediation: >-
+    Send the Commerce Secret Key in the Authorization header as `secret {SECRET_KEY}`,
+    including the literal word "secret" and a space. Keys are per site — confirm the key
+    belongs to the campaign being queried.
+  source_operation: openapi/sovrn-commerce-campaigns-openapi.yml#campaigns
+- reason: internalServerError
+  status: 500
+  message: An unexpected error occurred, but we are looking into it
+  remediation: Retry with backoff; Sovrn does not publish an incident-correlation id.
+  source_operation: openapi/sovrn-commerce-campaigns-openapi.yml#campaigns
+problems:
+- status: 400
+  title: Bad request
+  description: Required information is missing or invalid, or a query parameter failed validation.
+  schema: false
+  source_operations:
+  - openapi/sovrn-commerce-reports-openapi.yml#GET /reports/{cuids,links,merchandise,merchants,merchantsbydate,networks,pages}
+  - openapi/sovrn-merchant-summaries-openapi.yml#POST /summaries
+  - openapi/sovrn-merchant-summaries-openapi.yml#GET /summaries/delta
+  - openapi/sovrn-product-coupons-openapi.yml#GET /product
+  - openapi/sovrn-price-comparisons-openapi.yml#GET /sites/{site-api-key}/compare/prices/{market}/by/accuracy
+  - openapi/sovrn-advertising-reporting-openapi.yml#GET /reporting/advertising/publishers/{publisherId}/
+  - openapi/sovrn-commerce-link-check-openapi.yml#link
+  - openapi/sovrn-commerce-bid-check-openapi.yml#getBid
+- status: 400
+  title: Invalid status value
+  description: Returned by the transactions report when a status filter value is not recognized.
+  schema: false
+  source_operations:
+  - openapi/sovrn-commerce-reports-openapi.yml#GET /reports/transactions
+- status: 401
+  title: Authorization information is missing or invalid
+  description: >-
+    No credential, wrong credential regime (Commerce Secret Key vs Advertising x-api-key),
+    or a regenerated key that has not been rolled out to callers.
+  schema: partial
+  remediation: See authentication/sovrn-authentication.yml — Sovrn runs two separate key regimes.
+  source_operations:
+  - openapi/sovrn-commerce-campaigns-openapi.yml#campaigns
+  - openapi/sovrn-commerce-reports-openapi.yml#GET /reports/*
+  - openapi/sovrn-merchant-summaries-openapi.yml#POST /summaries
+  - openapi/sovrn-merchant-summaries-openapi.yml#GET /summaries/delta
+  - openapi/sovrn-product-coupons-openapi.yml#GET /product
+  - openapi/sovrn-advertising-reporting-openapi.yml#GET /reporting/advertising/publishers/{publisherId}/
+  - openapi/sovrn-commerce-bid-check-openapi.yml#getBid
+- status: 403
+  title: Unauthorized
+  description: >-
+    Advertising reporting only. The key is valid but is not entitled to the requested
+    publisher's data.
+  schema: false
+  source_operations:
+  - openapi/sovrn-advertising-reporting-openapi.yml#GET /reporting/advertising/publishers/{publisherId}/
+- status: 404
+  title: Data not found
+  description: >-
+    Reported per resource with a resource-specific phrasing — "Merchant data not found",
+    "Links data not found", "Page data not found", "Merchandise data not found", "Network
+    data not found", "Resource not found", "User not found". Returned for an empty result
+    set as well as a genuinely unknown resource, so it is not safely distinguishable from
+    "no data in this window".
+  schema: false
+  source_operations:
+  - openapi/sovrn-commerce-reports-openapi.yml#GET /reports/*
+  - openapi/sovrn-merchant-summaries-openapi.yml#POST /summaries
+  - openapi/sovrn-merchant-summaries-openapi.yml#GET /summaries/delta
+  - openapi/sovrn-product-coupons-openapi.yml#GET /product
+- status: 429
+  title: Too many requests (rate limit exceeded)
+  description: >-
+    Declared only by the Merchant Group Summaries API, whose limit is 1 request per 10
+    seconds. No Retry-After or RateLimit-* header is documented. The Commerce reporting APIs
+    enforce a 1-request-per-60-second limit but do not declare a 429 response at all.
+  schema: false
+  remediation: Back off exponentially; see rate-limits/sovrn-rate-limits.yml.
+  source_operations:
+  - openapi/sovrn-merchant-summaries-openapi.yml#POST /summaries
+  - openapi/sovrn-merchant-summaries-openapi.yml#GET /summaries/delta
+- status: 500
+  title: Internal server error
+  description: 'Commerce envelope reason: internalServerError.'
+  schema: partial
+  source_operations:
+  - openapi/sovrn-commerce-campaigns-openapi.yml#campaigns
+  - openapi/sovrn-merchant-summaries-openapi.yml#POST /summaries
+  - openapi/sovrn-merchant-summaries-openapi.yml#GET /summaries/delta
+  - openapi/sovrn-product-coupons-openapi.yml#GET /product
+  - openapi/sovrn-advertising-reporting-openapi.yml#GET /reporting/advertising/publishers/{publisherId}/
+  - openapi/sovrn-commerce-bid-check-openapi.yml#getBid
+- status: 5XX
+  title: Unexpected error
+  description: >-
+    The Commerce Real-Time Reports spec declares a wildcard 5XX response rather than
+    enumerated statuses.
+  schema: false
+  source_operations:
+  - openapi/sovrn-commerce-reports-openapi.yml#GET /reports/*
+non_error_statuses:
+- status: 204
+  title: No content
+  description: Advertising reporting returns 204 when the query is valid but matches no data.
+  source_operations:
+  - openapi/sovrn-advertising-reporting-openapi.yml#GET /reporting/advertising/publishers/{publisherId}/
+- status: 304
+  title: Not modified
+  description: >-
+    Merchant Group Summaries delta returns 304 when nothing has changed since the supplied
+    timestamp — a real conditional-request contract, and the only cache-validation semantic
+    Sovrn publishes.
+  source_operations:
+  - openapi/sovrn-merchant-summaries-openapi.yml#GET /summaries/delta
+gaps:
+- No RFC 9457 / application/problem+json anywhere.
+- >-
+  Only the Campaigns API attaches a schema to its error responses; 14 of the other 16
+  operations declare 4xx/5xx with a prose description, no media type and no schema.
+- No published error-code registry, and no stable error `type` URI.
+- 404 is overloaded to mean both "unknown resource" and "empty result set".

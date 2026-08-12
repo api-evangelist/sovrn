@@ -1,0 +1,104 @@
+generated: '2026-08-12'
+method: searched
+source: https://developer.sovrn.com/docs/comparisons-automated-library
+docs:
+- https://developer.sovrn.com/docs/comparisons-automated-library
+- https://developer.sovrn.com/docs/server-side-rendering
+note: >-
+  Sovrn ships no server-side SDKs, but it does ship a client-side runtime: one CDN-hosted
+  JavaScript library (vglnk.js, the Sovrn Commerce JavaScript) that both rewrites outbound
+  links into affiliate links and renders price-comparison widgets in place. It is configured
+  declaratively through a global `vglnk` object rather than through an imported API.
+families:
+- name: Sovrn Commerce JavaScript
+  kind: loader
+  library: vglnk.js
+  script_url: //cdn.viglink.com/api/vglnk.js
+  registry: cdn
+  version: null
+  version_note: >-
+    The documented script tag is unpinned — it points at cdn.viglink.com/api/vglnk.js with no
+    version segment and no integrity hash, so it always floats to whatever Sovrn is currently
+    serving. A consumer cannot tell which build they are running, and neither can we. There
+    is no registry metadata endpoint for it (it is not on npm; an npm search for both "sovrn"
+    and "viglink" returns zero packages).
+  install: |
+    <script
+      src="//cdn.viglink.com/api/vglnk.js"
+      async
+      type="text/javascript"
+    ></script>
+  configuration: >-
+    A global `vglnk` object declared before the loader carries the site API key and any
+    feature configuration.
+  globals:
+  - name: window.__commercejs.fetchProductRecommendations()
+    description: >-
+      Re-runs product recommendation fetching after a client-side render. Documented for
+      Next.js App Router / SSR integrations where the library's automatic run happens before
+      hydration completes.
+    source: https://developer.sovrn.com/docs/server-side-rendering
+- name: Automated Price Comparisons
+  kind: embedded-widget
+  library: vglnk.js (automatedLibrary configuration)
+  description: >-
+    Dynamically inserts price-comparison widgets into pages that already contain product
+    links, using CSS selectors to find the product card, the destination URL and the
+    insertion point. No markup changes are required beyond the selectors.
+  demo: https://comparisons.sovrn.com/pages/demo-automated-library.html
+  backing_api: openapi/sovrn-price-comparisons-openapi.yml
+  configuration_options:
+  - name: selector
+    type: string
+    description: CSS selector for the target element, usually the product card.
+  - name: urlSelector
+    type: string
+    required: false
+    description: >-
+      CSS selector for the element carrying the external product URL, usually an <a> tag.
+      URLs must be direct, non-affiliated links to brands.
+  - name: widgetPlacementSelector
+    type: string
+    description: CSS selector for where the widget is inserted.
+  - name: widgetSwap
+    type: string
+    description: Insertion mode relative to the placement element (e.g. inside).
+  - name: geolocation
+    type: boolean
+  - name: widgetType
+    type: string
+    example: price-comparison
+  - name: templateId
+    type: string
+    example: table1
+  init_example: |
+    <script type="text/javascript">
+        var vglnk = {
+            key: <api key>,
+            automatedLibrary: {
+                selector: '.card',
+                urlSelector: '.card-title a',
+                widgetPlacementSelector: '.widgetDisplay',
+                widgetSwap: 'inside',
+                geolocation: false,
+                widgetType: 'price-comparison',
+                templateId: 'table1'
+            }
+        };
+        (function (d, t) {
+            var s = d.createElement(t);
+            s.type = 'text/javascript'; s.async = true;
+            s.src = '//cdn.viglink.com/api/vglnk.js';
+            var r = d.getElementsByTagName(t)[0];
+            r.parentNode.insertBefore(s, r);
+        }(document, 'script'));
+    </script>
+  validation: >-
+    All configuration parameters are checked for validity; the library throws a descriptive
+    error to the browser console when an option is invalid.
+frameworks:
+- name: Next.js
+  guidance: >-
+    Call window.__commercejs.fetchProductRecommendations() from a client-component useEffect
+    once the page has fully hydrated.
+  source: https://developer.sovrn.com/docs/server-side-rendering

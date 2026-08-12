@@ -1,0 +1,114 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/*.yml + https://developer.sovrn.com/
+note: >-
+  Derived from the eight OpenAPI definitions Sovrn publishes plus its developer and legal
+  surfaces. Sovrn publishes NO security or compliance certifications — no SOC 2, ISO 27001,
+  PCI DSS, HIPAA or FedRAMP appears on its Trust Center, which is a legal and privacy hub
+  rather than an assurance page — so no Compliance pointer is emitted from this file.
+standards:
+- id: openapi-3
+  conforms: true
+  evidence: >-
+    Eight OpenAPI definitions published inside the Sovrn Developer Center reference pages;
+    versions range from 3.0.0 to 3.1.0.
+- id: openapi-3.1
+  conforms: partial
+  evidence: >-
+    Two of eight definitions declare openapi 3.1.0 (Campaigns, Link Check); five declare
+    3.0.0/3.0.3. The estate is not on one version of the specification.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere. Errors use a Google-JSON style envelope
+    (error.errors[] + code + message), and only the Campaigns API attaches a schema to it.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in any spec and no OAuth documented anywhere.
+- id: openid-connect
+  conforms: false
+  evidence: >-
+    /.well-known/openid-configuration 404s on every Sovrn host. The three /.well-known/*
+    paths that return 200 on platform.sovrn.com are the SPA catch-all HTML shell.
+- id: api-keys
+  conforms: true
+  evidence: >-
+    Two documented API-key regimes — Commerce `Authorization: secret {key}` and Advertising
+    `x-api-key` — declared as apiKey securitySchemes in six of eight specs.
+- id: mcp
+  conforms: true
+  evidence: >-
+    Hosted Commerce MCP server at https://mcp.sovrn.com/commerce (beta), documented with a
+    client configuration block and a 14-entry tool/prompt/resource table. tools/list responds
+    over JSON-RPC 2.0 (HTTP 401 unauthenticated).
+- id: agent-skills-discovery
+  conforms: true
+  evidence: >-
+    developer.sovrn.com serves /.well-known/agent-skills/index.json against
+    https://schemas.agentskills.io/discovery/0.2.0/schema.json, advertised in a
+    rel="agent-skills" Link header, with one skill-md skill and a sha256 digest.
+- id: llms-txt
+  conforms: true
+  evidence: >-
+    Three published llms.txt files — www.sovrn.com (Yoast-generated), developer.sovrn.com
+    (ReadMe-generated, indexes every reference page as .md) and knowledge.sovrn.com.
+- id: rfc9116-security-txt
+  conforms: partial
+  evidence: >-
+    https://www.sovrn.com/.well-known/security.txt is served with Contact, Policy, Canonical
+    and Preferred-Languages, but its Expires field reads 2025-10-14 — the document is expired
+    under RFC 9116 and has not been refreshed.
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: >-
+    developer.sovrn.com advertises rel="api-catalog" pointing at
+    /.well-known/api-catalog in its response Link header, but that URL returns 404. The
+    discovery link is published; the document behind it is not.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support and no deprecation policy published.
+- id: rfc9111-conditional-requests
+  conforms: partial
+  evidence: >-
+    Merchant Group Summaries supports If-None-Match with a 304 response and a `since`
+    delta parameter. No other Sovrn API publishes cache validation.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    No event, streaming or webhook surface is documented on any Sovrn developer or knowledge
+    surface, so there is nothing for an AsyncAPI to describe. Not a gap — an absent surface.
+- id: json-api
+  conforms: false
+  evidence: Responses are plain JSON objects; no JSON:API document structure.
+- id: iab-tcf
+  conforms: true
+  evidence: >-
+    Bid Check accepts gdprApplies and gdprConsent (IAB TCF) query parameters on the bid
+    request.
+- id: iab-us-privacy-ccpa
+  conforms: true
+  evidence: Bid Check accepts a ccpaConsent query parameter.
+- id: iab-gpp
+  conforms: true
+  evidence: Bid Check accepts a gppConsent (Global Privacy Platform) query parameter.
+- id: openrtb
+  conforms: unknown
+  evidence: >-
+    Sovrn operates an omnichannel programmatic Ad Exchange and maintains forks of Prebid.js
+    and prebid-server in its GitHub organization, which implies OpenRTB on the exchange side,
+    but Sovrn publishes no OpenRTB endpoint contract in its developer center. Recorded as
+    unknown rather than asserted.
+- id: gdpr
+  conforms: claimed
+  evidence: >-
+    Publishes Standard Contractual Clauses and Data Processing Addenda as both data importer
+    and exporter at https://www.sovrn.com/trust-center/.
+- id: ccpa
+  conforms: claimed
+  evidence: >-
+    Publishes CCPA metrics and opt-out rights at
+    https://www.sovrn.com/privacy-policy/ccpa-metrics/.
+certifications: []
+certifications_note: >-
+  None published. The Trust Center carries legal agreements, privacy policies and service
+  policies only — no audit report, no certification, no subprocessor security attestation.

@@ -1,38 +1,46 @@
 aid: sovrn
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: free
+  onboarding: self-service
   trial: false
   try_now: false
-  public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  public: true
+  label: Free with account
+  confidence: medium
+  source:
+  - https://platform.sovrn.com/account/signup
+  - https://developer.sovrn.com/docs/authorization
+  - https://knowledge.sovrn.com/kb/api-onboarding-guide-for-commerce
+  generated: '2026-08-12'
+  method: searched
+  note: >-
+    No priced plans exist. A free Sovrn Platform account issues API keys; Commerce API access
+    additionally requires an approved campaign, which Sovrn reviews only after affiliate
+    links are installed and real clicks have flowed. Sovrn pays publishers a revenue share
+    rather than charging for API calls.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sovrn.png
 name: Sovrn
 description: >-
-  Sovrn is an advertising technology and content monetization company that helps
-  online publishers, advertisers, and creators earn revenue from their websites and
-  audiences. Its platform spans Ad Exchange (an omnichannel programmatic demand
-  pipeline connecting publisher inventory to buyers and DSPs), Signal (ad-inventory
-  and yield optimization), Commerce (affiliate and commerce-content monetization,
-  formerly VigLink, with access to 50,000+ merchants), and Data solutions for
-  first-party data activation. Sovrn is headquartered in Boulder, Colorado. This API
-  Evangelist profile was created from a venture portfolio lead and enriched from
-  Sovrn's public security, legal, and status surfaces; no public developer portal or
-  OpenAPI was discoverable at enrichment time.
+  Sovrn is an advertising technology and content monetization company that helps online
+  publishers, advertisers, and creators earn revenue from their websites and audiences. Its
+  platform spans Ad Exchange (an omnichannel programmatic demand pipeline connecting publisher
+  inventory to buyers and DSPs), Signal (ad-inventory and yield optimization), Commerce
+  (affiliate and commerce-content monetization, formerly VigLink, with access to tens of
+  thousands of merchants), and Data solutions for first-party data activation. Sovrn publishes
+  a ReadMe-hosted developer center at developer.sovrn.com carrying eight OpenAPI definitions
+  across seventeen operations — affiliate link checking, real-time bid pricing on clicks,
+  campaign management, real-time commission reporting, merchant rate summaries, product
+  recommendations, price comparisons, promo codes, and Ad Exchange performance reporting —
+  plus a beta hosted Commerce MCP server at mcp.sovrn.com/commerce, an Agent Skills discovery
+  document, and llms.txt files on three hosts. Sovrn is headquartered in Boulder, Colorado.
 url: https://raw.githubusercontent.com/api-evangelist/sovrn/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - foundry-group
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-12'
 tags:
 - Company
 - Adtech
@@ -43,7 +51,227 @@ tags:
 - Publishers
 - Commerce
 - Data
-apis: []
+- Reporting
+- Product Data
+- Agent Native
+apis:
+- name: Sovrn Commerce Link Check API
+  description: >-
+    Check whether a destination URL can be monetized by Sovrn Commerce, get its estimated
+    earnings per click, and receive the optimized affiliate URL to use in its place. Supports
+    a geo override for affiliation testing plus a fallback URL and bid floor.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - affiliate-marketing
+  - link-monetization
+  - commerce
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-commerce-link-check-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-commerce-link-check-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+- name: Sovrn Commerce Bid Check API
+  description: >-
+    Real-time bid on a single click. Returns either a bid win (pricing model CPC or CPA,
+    expected earnings per click net of revenue share, the Sovrn redirect URL and a
+    millisecond expiry) or a no-fill, so a publisher can decide whether to route traffic
+    through Sovrn before sending the user. Accepts IAB TCF, CCPA and GPP consent strings.
+  humanURL: https://developer.sovrn.com/reference/getbid
+  baseURL: https://api.viglink.com
+  tags:
+  - affiliate-marketing
+  - real-time-bidding
+  - commerce
+  - programmatic
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-commerce-bid-check-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-commerce-bid-check-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+- name: Sovrn Commerce Campaigns API
+  description: >-
+    List the campaigns (sites) on a Sovrn Commerce account or search them by name or
+    campaignId, returning each campaign's id, public API key, approval status, category,
+    platform and application type. Supports JSON and XML output and a JSON-P callback.
+  humanURL: https://developer.sovrn.com/reference/campaigns
+  baseURL: https://rest.viglink.com/api
+  tags:
+  - affiliate-marketing
+  - account-management
+  - commerce
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-commerce-campaigns-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-commerce-campaigns-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+- name: Sovrn Commerce Real-Time Reports API
+  description: >-
+    Eight endpoints returning affiliate commission performance in real time, each aggregating
+    the same event set on a different dimension — individual transactions, merchants,
+    merchants by date, links, pages, merchandise, networks and publisher-defined CUIDs.
+    Metrics include revenue, clicks, sales, actions, conversion rate and EPC, filterable by
+    click/commission/update date, campaign, merchant group, country, device type and both
+    link-level and page-level UTM parameters.
+  humanURL: https://developer.sovrn.com/reference/get_reports-transactions
+  baseURL: https://viglink.io/v1
+  tags:
+  - affiliate-marketing
+  - reporting
+  - analytics
+  - commerce
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-commerce-reports-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-commerce-reports-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+- name: Sovrn Commerce Merchant Group Summaries API
+  description: >-
+    Retrieve the merchants a Commerce account is approved to work with, including
+    geo-specific commission rates, rate formats, average EPC and order value,
+    preferred-status flags and per-merchant domains. Filterable by name, group id, domain,
+    geo, program type and category, with page/pageSize pagination, and paired with a delta
+    endpoint that returns only merchants changed since a timestamp and supports
+    If-None-Match / 304.
+  humanURL: https://developer.sovrn.com/reference/post_summaries
+  baseURL: https://viglink.io/merchants/rates
+  tags:
+  - affiliate-marketing
+  - merchant-data
+  - commerce
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-merchant-summaries-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-merchant-summaries-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+- name: Sovrn Commerce Product Recommendation API
+  description: >-
+    Returns products tailored to a piece of content. Callers pass their content plus optional
+    filters such as price range or preferred merchants and receive a curated product list with
+    sale and retail price, discount rate, stock status, affiliatability and a deep link.
+    Responses are cached on the caller-supplied pageUrl key.
+  humanURL: https://developer.sovrn.com/reference/get_product_recommendations
+  baseURL: https://shopping-gallery.prd-commerce.sovrnservices.com
+  tags:
+  - product-data
+  - recommendations
+  - commerce
+  - ai
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-product-recommendations-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-product-recommendations-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+- name: Sovrn Commerce Price Comparisons (Product Affiliate) API
+  description: >-
+    Compare prices for the same product across merchants in a given market, ranked by match
+    accuracy, returning merchant identity and logo, deep link, images, sale and retail price,
+    discount rate, affiliatability and EPC. Also rendered client-side by the Automated
+    Comparisons JavaScript library.
+  humanURL: https://developer.sovrn.com/reference/product-affiliate-api
+  baseURL: https://comparisons.sovrn.com/api/affiliate/v3.5
+  tags:
+  - product-data
+  - price-comparison
+  - commerce
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-price-comparisons-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-price-comparisons-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+- name: Sovrn Commerce Product Promo Codes API
+  description: >-
+    Retrieve ranked, product-specific promo codes with verification status — code, affiliated
+    URL, original price, price with the code applied, currency, verified flag and timestamp —
+    alongside merchant identity and the current verification-scan state.
+  humanURL: https://developer.sovrn.com/reference/get_product
+  baseURL: https://viglink.io/coupons
+  tags:
+  - product-data
+  - promo-codes
+  - commerce
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-product-coupons-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-product-coupons-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+- name: Sovrn Advertising Performance Reporting API
+  description: >-
+    Custom reporting over Sovrn Ad Exchange performance across web, connected TV and mobile
+    app inventory. Requires start, end, metrics, dimensions and granularity on every request,
+    with hour, day and month granularities carrying different history depths and per-request
+    windows. Authenticated with an account-level x-api-key, separate from the Commerce
+    credential.
+  humanURL: https://developer.sovrn.com/reference/custom-reporting
+  baseURL: https://api.sovrn.com
+  tags:
+  - advertising
+  - programmatic
+  - reporting
+  - analytics
+  - ctv
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-advertising-reporting-openapi.yml
+  - type: Overlay
+    url: overlays/sovrn-advertising-reporting-overlay.yaml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- name: Sovrn Commerce MCP Server
+  description: >-
+    Hosted, beta Model Context Protocol server exposing Sovrn Commerce affiliate data,
+    campaigns and products to AI clients — twelve tools covering price search, link checking,
+    product recommendations and eight reporting cuts, plus a setup prompt and a campaigns
+    resource. Authenticated with the same Commerce Secret Key as the REST APIs; rate limits
+    are inherited per tool from the backing API.
+  humanURL: https://developer.sovrn.com/docs/mcp
+  baseURL: https://mcp.sovrn.com/commerce
+  tags:
+  - mcp
+  - agent-native
+  - affiliate-marketing
+  - commerce
+  properties:
+  - type: MCPServer
+    url: mcp/sovrn-mcp.yml
+  - type: MCPServer
+    url: https://mcp.sovrn.com/commerce
+  - type: ToolCrosswalk
+    url: mcp/sovrn-tool-crosswalk.yml
+  - type: Documentation
+    url: https://developer.sovrn.com/docs/mcp
+  - type: Examples
+    url: https://developer.sovrn.com/docs/mcp-demos
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -52,6 +280,14 @@ maintainers:
 common:
 - type: Website
   url: https://www.sovrn.com
+- type: DeveloperPortal
+  url: https://developer.sovrn.com/
+- type: Documentation
+  url: https://developer.sovrn.com/
+- type: APIReference
+  url: https://developer.sovrn.com/reference/campaigns
+- type: GettingStarted
+  url: https://knowledge.sovrn.com/kb/api-onboarding-guide-for-commerce
 - type: Blog
   url: https://www.sovrn.com/blog/
 - type: Support
@@ -60,6 +296,10 @@ common:
   url: https://github.com/sovrn
 - type: StatusPage
   url: https://status.sovrn.com/
+- type: SignUp
+  url: https://platform.sovrn.com/account/signup
+- type: Login
+  url: https://platform.sovrn.com/
 - type: TrustCenter
   url: https://www.sovrn.com/trust-center/
 - type: PrivacyPolicy
@@ -78,8 +318,30 @@ common:
   url: security/sovrn-domain-security.yml
 - type: Lifecycle
   url: lifecycle/sovrn-lifecycle.yml
+- type: Authentication
+  url: authentication/sovrn-authentication.yml
+- type: Conventions
+  url: conventions/sovrn-conventions.yml
+- type: ErrorCatalog
+  url: errors/sovrn-problem-types.yml
+- type: Conformance
+  url: conformance/sovrn-conformance.yml
+- type: DataModel
+  url: data-model/sovrn-data-model.yml
+- type: RateLimits
+  url: rate-limits/sovrn-rate-limits.yml
+- type: Plans
+  url: plans/sovrn-plans-pricing.yml
+- type: Components
+  url: components/sovrn-components.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/sovrn-llms.txt
+- type: LLMsTxt
+  url: https://developer.sovrn.com/llms.txt
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-12'
   status: enriched
-  artifacts_added: 5
+  artifacts_added: 58
   pass: local-v1

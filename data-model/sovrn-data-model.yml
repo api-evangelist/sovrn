@@ -1,0 +1,191 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/*.yml
+docs: https://developer.sovrn.com/
+note: >-
+  Derived from the component schemas and id-reference fields in the eight OpenAPI definitions
+  Sovrn publishes. There is no single canonical object model — each service defines its own
+  shape for the same real-world thing, and the same entity carries a different key name in
+  each. Merchant is the clearest case: `merchantGroupId` in reporting, `groupId` in merchant
+  summaries, `group_id` in promo codes and a bare `id` in price comparisons. An integrator
+  joining across Sovrn products has to normalise these by hand.
+entities:
+- name: Campaign
+  aka: [site]
+  description: >-
+    A publisher property enrolled in Sovrn Commerce. The unit of approval, of API-key issue
+    and of reporting attribution.
+  id_field: campaignId
+  fields: [campaignId, apiKey, name, approvalStatus, category, platform, applicationType]
+  source: openapi/sovrn-commerce-campaigns-openapi.yml#campaigns
+- name: Transaction
+  aka: [commission event, revenue event]
+  description: >-
+    A single commission event — one click that converted. The most granular object Sovrn
+    exposes and the join key between clicks, links, pages and merchants.
+  id_field: revenueId
+  fields: [revenueId, clickSid, accountId, commissionId, merchantGroupId, merchantGroupName,
+    campaignId, campaignName, clickDate, commissionDate, updateDate, publisherRevenue,
+    orderValue, cuid, linkUtmInfo, pageUtmInfo, destinationUrl, pageUrl, affProduct,
+    affProductSubType, programType, networkName, country, deviceType, merchandise]
+  source: openapi/sovrn-commerce-reports-openapi.yml#/components/schemas/TransactionModel
+- name: MerchantGroup
+  aka: [merchant, advertiser, brand]
+  description: >-
+    A merchant Sovrn can affiliate with, grouped across its domains and networks. Carries the
+    commission rates, EPC and approval terms a publisher is working under.
+  id_field: groupId
+  id_aliases: [merchantGroupId, group_id, id]
+  fields: [groupId, name, description, terms, sovrnPreferred, logoImageUrl, category, sovrn]
+  source: openapi/sovrn-merchant-summaries-openapi.yml#/components/schemas/MerchantGroupSummaryResponse
+- name: MerchantRate
+  description: >-
+    The commission rate in force for a merchant, per geography and per action, with a rate
+    format and the action it pays on.
+  fields: [currentRate, rateFormat, action, details]
+  source: openapi/sovrn-merchant-summaries-openapi.yml#/components/schemas/MerchantRateDto
+- name: NetworkSummary
+  description: >-
+    Per-merchant performance split by pricing model — CPA (geo, averageEpc,
+    averageOrderValue, calculatedCommissionRate, rates, domains) and CPC (calculatedEpc).
+  fields: [CPA, CPC]
+  source: openapi/sovrn-merchant-summaries-openapi.yml#/components/schemas/NetworkSummary
+- name: Product
+  description: >-
+    A purchasable item, returned by price comparisons, product recommendations and inside
+    transaction merchandise. Three different field sets describe it across the three services.
+  id_field: id
+  id_aliases: [productId]
+  fields: [id, name, merchant, deeplink, image, thumbnail, currency, salePrice, retailPrice,
+    discountRate, affiliatable, epc]
+  variants:
+  - source: openapi/sovrn-price-comparisons-openapi.yml#/components/schemas/Product
+    fields: [id, name, merchant, deeplink, image, thumbnail, currency, salePrice, retailPrice,
+      discountRate, affiliatable, epc]
+  - source: openapi/sovrn-product-recommendations-openapi.yml#POST /ai-orchestration/products
+    fields: [id, name, imageURL, thumbnailURL, currency, salePrice, retailPrice, discountRate,
+      inStock, affiliatable, deepLink]
+    note: >-
+      Same concept, different casing and naming — imageURL/thumbnailURL/deepLink here versus
+      image/thumbnail/deeplink in price comparisons, plus an inStock field the other lacks.
+  - source: openapi/sovrn-commerce-reports-openapi.yml#/components/schemas/ProductModel
+    fields: [productId, productName, price, quantity]
+- name: Coupon
+  aka: [promo code]
+  description: A ranked, product-specific promo code with a verification state and expected price effect.
+  id_field: id
+  fields: [id, code, affiliated_url, original_price, price_with_code, currency, verified,
+    verified_at, code_description]
+  source: openapi/sovrn-product-coupons-openapi.yml#/components/schemas/Coupon
+- name: Link
+  aka: [affiliate link, monetized URL]
+  description: >-
+    A destination URL wrapped for affiliation. Link Check returns whether a URL is
+    affiliatable and its estimated earnings per click; Bid Check returns a live bid on the
+    click instead of the historical estimate.
+  fields: [url, optimized, affiliatable, competitive, optimizable, eepc]
+  source: openapi/sovrn-commerce-link-check-openapi.yml#link
+- name: Bid
+  description: >-
+    A real-time valuation of one click. BidWin carries affiliated, pricing, eepc, the
+    monetized url and expireInMs; BidNoFill carries affiliated only. The expireInMs field is
+    the one time-bound object in the model — a bid is a perishable quote.
+  fields: [affiliated, pricing, eepc, url, expireInMs]
+  source: openapi/sovrn-commerce-bid-check-openapi.yml#getBid
+- name: CUID
+  description: >-
+    Caller-defined click identifier. Not an entity Sovrn owns — the publisher mints it — but
+    it is a first-class reporting dimension with its own endpoint.
+  id_field: cuid
+  source: openapi/sovrn-commerce-reports-openapi.yml#GET /reports/cuids
+- name: UtmInfo
+  description: >-
+    UTM attribution captured twice per transaction — once for the link (linkUtmInfo) and once
+    for the page (pageUtmInfo) — each with utmSource, utmMedium, utmCampaign, utmTerm,
+    utmContent.
+  source: openapi/sovrn-commerce-reports-openapi.yml#/components/schemas/LinkUtmInfoModel
+- name: ReportRollup
+  description: >-
+    The shared aggregate shape behind every Commerce report — BaseResponseModel (revenue,
+    clicks, sales, actions, conversionRate, epc), wrapped by each endpoint as {data, totals}.
+    This is the only genuinely shared schema in the Sovrn estate.
+  fields: [revenue, clicks, sales, actions, conversionRate, epc]
+  source: openapi/sovrn-commerce-reports-openapi.yml#/components/schemas/BaseResponseModel
+relationships:
+- from: Transaction
+  to: Campaign
+  type: belongs_to
+  via: campaignId
+- from: Transaction
+  to: MerchantGroup
+  type: belongs_to
+  via: merchantGroupId
+- from: Transaction
+  to: CUID
+  type: has_one
+  via: cuid
+- from: Transaction
+  to: Product
+  type: has_many
+  via: merchandise
+- from: Transaction
+  to: UtmInfo
+  type: has_one
+  via: linkUtmInfo
+- from: Transaction
+  to: UtmInfo
+  type: has_one
+  via: pageUtmInfo
+- from: Campaign
+  to: Link
+  type: has_many
+  via: apiKey
+  note: The campaign's API key is what signs a link, so links are addressed through it.
+- from: MerchantGroup
+  to: MerchantRate
+  type: has_many
+  via: rates
+- from: MerchantGroup
+  to: NetworkSummary
+  type: has_one
+  via: sovrn
+- from: Product
+  to: MerchantGroup
+  type: belongs_to
+  via: merchant
+- from: Coupon
+  to: MerchantGroup
+  type: belongs_to
+  via: merchant.group_id
+- from: Link
+  to: Bid
+  type: has_one
+  via: url
+  note: Bid Check values the same destination URL that Link Check affiliates.
+- from: ReportRollup
+  to: Transaction
+  type: has_many
+  via: aggregation
+  note: >-
+    Every /reports/* endpoint is the same transaction set aggregated on a different
+    dimension — merchant, merchant+date, link, page, merchandise, network or cuid.
+id_naming_divergence:
+- concept: merchant
+  names: [merchantGroupId, groupId, group_id, id]
+  services: [commerce-reports, merchant-summaries, product-coupons, price-comparisons]
+- concept: product image
+  names: [image, imageURL]
+  services: [price-comparisons, product-recommendations]
+- concept: affiliate destination
+  names: [deeplink, deepLink, affiliated_url, optimized, url]
+  services: [price-comparisons, product-recommendations, product-coupons, link-check, bid-check]
+gaps:
+- >-
+  No shared components library across services — every spec redefines Merchant and Product
+  rather than referencing one schema.
+- >-
+  Advertising performance reporting (api.sovrn.com) shares no entity with the Commerce model
+  at all; it is a separate product line with its own dimensions and its own credential.
+- >-
+  The Campaigns API returns its payload only as a string example, with no schema, so Campaign
+  fields above are read from the published example rather than a declared model.

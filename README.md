@@ -42,6 +42,28 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Sovrn is a company surfaced as a portfolio company of foundry-group and added to the API Evangelist network as a stub for enrichment. Sector: adtech. This profile is a lead awaiting the enrichment pipeline.
+Sovrn is an advertising technology and content monetization company in Boulder, Colorado, serving
+publishers, creators and advertisers across Ad Exchange, Signal, Commerce (formerly VigLink) and Data.
 
-Backed by: foundry-group — https://www.sovrn.com
+This profile is built from Sovrn's public developer surface at
+[developer.sovrn.com](https://developer.sovrn.com/) — a ReadMe-hosted developer center carrying
+**eight OpenAPI definitions across seventeen operations**, harvested here into `openapi/` with the
+per-operation originals in `openapi/_original/`:
+
+| API | Base | Ops |
+|---|---|---|
+| Commerce Link Check | `api.viglink.com/api` | 1 |
+| Commerce Bid Check | `api.viglink.com` | 1 |
+| Commerce Campaigns | `rest.viglink.com/api` | 1 |
+| Commerce Real-Time Reports | `viglink.io/v1` | 8 |
+| Merchant Group Summaries | `viglink.io/merchants/rates` | 2 |
+| Product Promo Codes | `viglink.io/coupons` | 1 |
+| Product Recommendations | `shopping-gallery.prd-commerce.sovrnservices.com` | 1 |
+| Price Comparisons | `comparisons.sovrn.com/api/affiliate/v3.5` | 1 |
+| Advertising Performance Reporting | `api.sovrn.com` | 1 |
+
+Sovrn also runs a beta hosted **Commerce MCP server** at `https://mcp.sovrn.com/commerce` (14 tools,
+prompts and resources; `tools/list` is auth-gated), publishes an **Agent Skills** discovery document at
+`developer.sovrn.com/.well-known/agent-skills/index.json`, and serves **llms.txt** on three hosts.
+
+Sector: adtech. Backed by: foundry-group — https://www.sovrn.com

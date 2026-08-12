@@ -1,0 +1,1541 @@
+openapi: 3.0.3
+info:
+  title: Sovrn Commerce Real-Time Reports API
+  version: '20230630'
+  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer
+    Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block
+    were merged into one document by API Evangelist; operation content is unmodified.
+  x-source-title: Commerce Real-Time Reports
+servers:
+- url: https://viglink.io/v1
+security:
+- bearerAuth: []
+components:
+  schemas:
+    SovrnProductModel:
+      type: string
+      enum:
+      - UNK
+      - ORG
+      - INS
+      - WRA
+      - RAC
+      - RAL
+      - CUP
+      - TPA
+      - PCR
+      - TXT
+      - SHG
+      - PRF
+    DeviceTypeModel:
+      type: string
+      enum:
+      - DSK
+      - MBL
+      - TBL
+      - UKN
+    BaseResponseModel:
+      type: object
+      properties:
+        revenue:
+          type: number
+        clicks:
+          type: number
+        sales:
+          type: number
+        actions:
+          type: number
+        conversionRate:
+          type: number
+        epc:
+          type: number
+    CuidsResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                cuid:
+                  type: string
+        totals:
+          type: object
+          properties:
+            cuidsTotal:
+              type: number
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+    LinksResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                linkUrl:
+                  type: string
+                linkText:
+                  type: string
+        totals:
+          properties:
+            linkUrlTotal:
+              type: number
+            linkTextTotal:
+              type: number
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+    MerchandiseResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              productName:
+                type: string
+              merchantGroupName:
+                type: string
+              merchantGroupId:
+                type: integer
+                format: int64
+              revenue:
+                type: number
+              sales:
+                type: number
+              actions:
+                type: number
+        totals:
+          type: object
+          properties:
+            productNameTotal:
+              type: number
+            merchantGroupNameTotal:
+              type: number
+            merchantGroupIdsTotal:
+              type: number
+            revenueTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+    MerchantsResponseModel:
+      type: object
+      description: TSR Merchants response model
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                merchantGroupId:
+                  type: integer
+                  format: int64
+                merchantGroupName:
+                  type: string
+        totals:
+          type: object
+          properties:
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+            merchantGroupIdsTotal:
+              type: number
+            merchantGroupNameTotal:
+              type: number
+    MerchantsByDateResponseModel:
+      type: object
+      description: TSR Merchants By Date response model
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                date:
+                  type: string
+                merchantGroupId:
+                  type: integer
+                  format: int64
+                merchantGroupName:
+                  type: string
+        totals:
+          type: object
+          properties:
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+            merchantGroupIdsTotal:
+              type: number
+            merchantGroupNameTotal:
+              type: number
+    NetworkResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                networkName:
+                  type: string
+        totals:
+          properties:
+            networkNameTotal:
+              type: number
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+    PagesResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                pageUrl:
+                  type: string
+                pageviews:
+                  type: number
+                rpm:
+                  type: number
+        totals:
+          type: object
+          properties:
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+            ctrTotal:
+              type: number
+            rpmTotal:
+              type: number
+            pageUrlTotal:
+              type: number
+            pageviewsTotal:
+              type: number
+    ProductModel:
+      type: object
+      properties:
+        productId:
+          type: string
+        productName:
+          type: string
+        price:
+          type: number
+          format: float
+          example: 100.99
+        quantity:
+          type: number
+          example: 10
+    LinkUtmInfoModel:
+      type: object
+      properties:
+        utmSource:
+          type: string
+        utmMedium:
+          type: string
+        utmCampaign:
+          type: string
+        utmTerm:
+          type: string
+        utmContent:
+          type: string
+    PageUtmInfoModel:
+      type: object
+      properties:
+        utmSource:
+          type: string
+        utmMedium:
+          type: string
+        utmCampaign:
+          type: string
+        utmTerm:
+          type: string
+        utmContent:
+          type: string
+    TransactionsResponseModel:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionModel'
+    TransactionModel:
+      type: object
+      properties:
+        revenueId:
+          type: number
+        clickSid:
+          type: string
+        accountId:
+          type: number
+          format: integer
+        commissionId:
+          type: string
+        merchantGroupId:
+          type: integer
+          format: int64
+        merchantGroupName:
+          type: string
+        campaignId:
+          type: number
+          format: integer
+        campaignName:
+          type: string
+        clickDate:
+          type: string
+        commissionDate:
+          type: string
+        updateDate:
+          type: string
+        publisherRevenue:
+          type: number
+        orderValue:
+          type: number
+        cuid:
+          type: string
+        linkUtmInfo:
+          $ref: '#/components/schemas/LinkUtmInfoModel'
+        pageUtmInfo:
+          $ref: '#/components/schemas/PageUtmInfoModel'
+        destinationUrl:
+          type: string
+        pageUrl:
+          type: string
+        affProduct:
+          $ref: '#/components/schemas/SovrnProductModel'
+        affProductSubType:
+          type: string
+        programType:
+          type: string
+        networkName:
+          type: string
+        country:
+          type: string
+        deviceType:
+          $ref: '#/components/schemas/DeviceTypeModel'
+        merchandise:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductModel'
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: authorization
+      in: header
+paths:
+  /reports/cuids:
+    get:
+      tags:
+      - reports
+      summary: CUIDs
+      description: This endpoint is used to query aggregated performance metrics by CUID. This data can
+        be used to see individual CUID performance, your top performing CUIDs, actualized earnings, and
+        more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC.
+      parameters:
+      - name: clickDateStart
+        in: query
+        description: Start Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: clickDateEnd
+        in: query
+        description: End Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: subIds
+        in: query
+        description: Comma separated list of sub IDs
+        required: false
+        schema:
+          type: string
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: cuids
+        in: query
+        description: Comma separated list of CUIDs (custom tracking IDs)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageUtmSource
+        in: query
+        description: Comma seperated list of page UTM sources
+        required: false
+        schema:
+          type: string
+      - name: pageUtmMedium
+        in: query
+        description: Comma seperated list of page UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: pageUtmCampaign
+        in: query
+        description: Comma seperated list of page UTM campaings
+        required: false
+        schema:
+          type: string
+      - name: pageUtmTerm
+        in: query
+        description: Comma seperated list of page UTM terms
+        required: false
+        schema:
+          type: string
+      - name: pageUtmContent
+        in: query
+        description: Comma seperated list of page UTM contents
+        required: false
+        schema:
+          type: string
+      - name: linkUtmSource
+        in: query
+        description: Comma seperated list of link UTM sources
+        required: false
+        schema:
+          type: string
+      - name: linkUtmMedium
+        in: query
+        description: Comma seperated list of link UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: linkUtmCampaign
+        in: query
+        description: Comma seperated list of link UTM campaigns
+        required: false
+        schema:
+          type: string
+      - name: linkUtmTerm
+        in: query
+        description: Comma seperated list of link UTM terms
+        required: false
+        schema:
+          type: string
+      - name: linkUtmContent
+        in: query
+        description: Comma seperated list of link UTM contents
+        required: false
+        schema:
+          type: string
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      - name: sovrnProduct
+        in: query
+        description: Sovrn Product
+        required: false
+        schema:
+          $ref: '#/components/schemas/SovrnProductModel'
+      - name: deviceType
+        in: query
+        description: Type of device
+        required: false
+        schema:
+          $ref: '#/components/schemas/DeviceTypeModel'
+      - name: country
+        in: query
+        description: Two-letter ISO country code
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CuidsResponseModel'
+        '400':
+          description: Bad request
+        '401':
+          description: Authorization information is missing or invalid
+        '404':
+          description: Page data not found
+        5XX:
+          description: Unexpected error
+  /reports/links:
+    get:
+      tags:
+      - reports
+      summary: Links
+      description: This endpoint is used to query aggregated performance metrics by Link. This data can
+        be used to see individual merchant link performance, your top performing merchant links, actualized
+        earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion
+        Rate and EPC.
+      parameters:
+      - name: clickDateStart
+        in: query
+        description: Start Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: clickDateEnd
+        in: query
+        description: End Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: subIds
+        in: query
+        description: Comma separated list of Comma separated list of sub IDs
+        required: false
+        schema:
+          type: string
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: cuids
+        in: query
+        description: Comma separated list of CUIDs (custom tracking IDs)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageUtmSource
+        in: query
+        description: Comma seperated list of page UTM sources
+        required: false
+        schema:
+          type: string
+      - name: pageUtmMedium
+        in: query
+        description: Comma seperated list of page UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: pageUtmCampaign
+        in: query
+        description: Comma seperated list of page UTM campaings
+        required: false
+        schema:
+          type: string
+      - name: pageUtmTerm
+        in: query
+        description: Comma seperated list of page UTM terms
+        required: false
+        schema:
+          type: string
+      - name: pageUtmContent
+        in: query
+        description: Comma seperated list of page UTM contents
+        required: false
+        schema:
+          type: string
+      - name: linkUtmSource
+        in: query
+        description: Comma seperated list of link UTM sources
+        required: false
+        schema:
+          type: string
+      - name: linkUtmMedium
+        in: query
+        description: Comma seperated list of link UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: linkUtmCampaign
+        in: query
+        description: Comma seperated list of link UTM campaigns
+        required: false
+        schema:
+          type: string
+      - name: linkUtmTerm
+        in: query
+        description: Comma seperated list of link UTM terms
+        required: false
+        schema:
+          type: string
+      - name: linkUtmContent
+        in: query
+        description: Comma seperated list of link UTM contents
+        required: false
+        schema:
+          type: string
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      - name: sovrnProduct
+        in: query
+        description: Sovrn Product
+        required: false
+        schema:
+          $ref: '#/components/schemas/SovrnProductModel'
+      - name: deviceType
+        in: query
+        description: Type of device
+        required: false
+        schema:
+          $ref: '#/components/schemas/DeviceTypeModel'
+      - name: country
+        in: query
+        description: Two-letter ISO country code
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinksResponseModel'
+        '400':
+          description: Bad request
+        '401':
+          description: Authorization information is missing or invalid
+        '404':
+          description: Links data not found
+        5XX:
+          description: Unexpected error
+  /reports/merchandise:
+    get:
+      tags:
+      - reports
+      summary: Merchandise
+      description: This endpoint is used to query aggregated performance metrics by Merchandise. This
+        data can be used to see individual product performance, your top performing products, actualized
+        earnings, and more, all in real-time. Metrics include Revenue, Sales, and Actions.
+      parameters:
+      - name: clickDateStart
+        in: query
+        description: Start Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: clickDateEnd
+        in: query
+        description: End Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: subIds
+        in: query
+        description: Comma separated list of sub IDs
+        required: false
+        schema:
+          type: string
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: cuids
+        in: query
+        description: Comma separated list of CUIDs (custom tracking IDs)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageUtmSource
+        in: query
+        description: Comma seperated list of page UTM sources
+        required: false
+        schema:
+          type: string
+      - name: pageUtmMedium
+        in: query
+        description: Comma seperated list of page UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: pageUtmCampaign
+        in: query
+        description: Comma seperated list of page UTM campaings
+        required: false
+        schema:
+          type: string
+      - name: pageUtmTerm
+        in: query
+        description: Comma seperated list of page UTM terms
+        required: false
+        schema:
+          type: string
+      - name: pageUtmContent
+        in: query
+        description: Comma seperated list of page UTM contents
+        required: false
+        schema:
+          type: string
+      - name: linkUtmSource
+        in: query
+        description: Comma seperated list of link UTM sources
+        required: false
+        schema:
+          type: string
+      - name: linkUtmMedium
+        in: query
+        description: Comma seperated list of link UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: linkUtmCampaign
+        in: query
+        description: Comma seperated list of link UTM campaigns
+        required: false
+        schema:
+          type: string
+      - name: linkUtmTerm
+        in: query
+        description: Comma seperated list of link UTM terms
+        required: false
+        schema:
+          type: string
+      - name: linkUtmContent
+        in: query
+        description: Comma seperated list of link UTM contents
+        required: false
+        schema:
+          type: string
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      - name: sovrnProduct
+        in: query
+        description: Sovrn Product
+        required: false
+        schema:
+          $ref: '#/components/schemas/SovrnProductModel'
+      - name: deviceType
+        in: query
+        description: Type of device
+        required: false
+        schema:
+          $ref: '#/components/schemas/DeviceTypeModel'
+      - name: country
+        in: query
+        description: Two-letter ISO country code
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchandiseResponseModel'
+        '400':
+          description: Bad request
+        '401':
+          description: Authorization information is missing or invalid
+        '404':
+          description: Merchandise data not found
+        5XX:
+          description: Unexpected error
+  /reports/merchants:
+    get:
+      tags:
+      - reports
+      summary: Merchants
+      description: This endpoint is used to query aggregated performance metrics by Merchant. This data
+        can be used to see individual merchant performance, your top performing merchants, actualized
+        earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion
+        Rate and EPC.
+      parameters:
+      - name: clickDateStart
+        in: query
+        description: Start Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: clickDateEnd
+        in: query
+        description: End Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: subIds
+        in: query
+        description: Comma separated list of sub IDs
+        required: false
+        schema:
+          type: string
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: cuids
+        in: query
+        description: Comma separated list of CUIDs (custom tracking IDs)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageUtmSource
+        in: query
+        description: Comma seperated list of page UTM sources
+        required: false
+        schema:
+          type: string
+      - name: pageUtmMedium
+        in: query
+        description: Comma seperated list of page UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: pageUtmCampaign
+        in: query
+        description: Comma seperated list of page UTM campaings
+        required: false
+        schema:
+          type: string
+      - name: pageUtmTerm
+        in: query
+        description: Comma seperated list of page UTM terms
+        required: false
+        schema:
+          type: string
+      - name: pageUtmContent
+        in: query
+        description: Comma seperated list of page UTM contents
+        required: false
+        schema:
+          type: string
+      - name: linkUtmSource
+        in: query
+        description: Comma seperated list of link UTM sources
+        required: false
+        schema:
+          type: string
+      - name: linkUtmMedium
+        in: query
+        description: Comma seperated list of link UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: linkUtmCampaign
+        in: query
+        description: Comma seperated list of link UTM campaigns
+        required: false
+        schema:
+          type: string
+      - name: linkUtmTerm
+        in: query
+        description: Comma seperated list of link UTM terms
+        required: false
+        schema:
+          type: string
+      - name: linkUtmContent
+        in: query
+        description: Comma seperated list of link UTM contents
+        required: false
+        schema:
+          type: string
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      - name: sovrnProduct
+        in: query
+        description: Sovrn Product
+        required: false
+        schema:
+          $ref: '#/components/schemas/SovrnProductModel'
+      - name: deviceType
+        in: query
+        description: Type of device
+        required: false
+        schema:
+          $ref: '#/components/schemas/DeviceTypeModel'
+      - name: country
+        in: query
+        description: Two-letter ISO country code
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantsResponseModel'
+        '400':
+          description: Bad request
+        '401':
+          description: Authorization information is missing or invalid
+        '404':
+          description: Merchant data not found
+        5XX:
+          description: Unexpected error
+  /reports/merchantsbydate:
+    get:
+      tags:
+      - reports
+      summary: Merchants By Date
+      description: This endpoint is used to query aggregated performance metrics by Merchant and Date.
+        This data can be used to see individual merchant performance by day, your top performing merchants,
+        actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions,
+        Conversion Rate and EPC.
+      parameters:
+      - name: clickDateStart
+        in: query
+        description: Start Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: clickDateEnd
+        in: query
+        description: End Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: subIds
+        in: query
+        description: Comma separated list of Comma separated list of sub IDs
+        required: false
+        schema:
+          type: string
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: cuids
+        in: query
+        description: Comma separated list of CUIDs (custom tracking IDs)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageUtmSource
+        in: query
+        description: Comma seperated list of page UTM sources
+        required: false
+        schema:
+          type: string
+      - name: pageUtmMedium
+        in: query
+        description: Comma seperated list of page UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: pageUtmCampaign
+        in: query
+        description: Comma seperated list of page UTM campaings
+        required: false
+        schema:
+          type: string
+      - name: pageUtmTerm
+        in: query
+        description: Comma seperated list of page UTM terms
+        required: false
+        schema:
+          type: string
+      - name: pageUtmContent
+        in: query
+        description: Comma seperated list of page UTM contents
+        required: false
+        schema:
+          type: string
+      - name: linkUtmSource
+        in: query
+        description: Comma seperated list of link UTM sources
+        required: false
+        schema:
+          type: string
+      - name: linkUtmMedium
+        in: query
+        description: Comma seperated list of link UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: linkUtmCampaign
+        in: query
+        description: Comma seperated list of link UTM campaigns
+        required: false
+        schema:
+          type: string
+      - name: linkUtmTerm
+        in: query
+        description: Comma seperated list of link UTM terms
+        required: false
+        schema:
+          type: string
+      - name: linkUtmContent
+        in: query
+        description: Comma seperated list of link UTM contents
+        required: false
+        schema:
+          type: string
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      - name: sovrnProduct
+        in: query
+        description: Sovrn Product
+        required: false
+        schema:
+          $ref: '#/components/schemas/SovrnProductModel'
+      - name: deviceType
+        in: query
+        description: Type of device
+        required: false
+        schema:
+          $ref: '#/components/schemas/DeviceTypeModel'
+      - name: country
+        in: query
+        description: Two-letter ISO country code
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantsByDateResponseModel'
+        '400':
+          description: Bad request
+        '401':
+          description: Authorization information is missing or invalid
+        '404':
+          description: Merchant data not found
+        5XX:
+          description: Unexpected error
+  /reports/networks:
+    get:
+      tags:
+      - reports
+      summary: Networks
+      description: This endpoint is used to query aggregated performance metrics by Network. This data
+        can be used to see connected Network performance, your top performing Networks, actualized earnings,
+        and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions and EPC.
+      parameters:
+      - name: clickDateStart
+        in: query
+        description: Start Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: clickDateEnd
+        in: query
+        description: End Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: subIds
+        in: query
+        description: Comma separated list of sub IDs
+        required: false
+        schema:
+          type: string
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: cuids
+        in: query
+        description: Comma separated list of CUIDs (custom tracking IDs)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageUtmSource
+        in: query
+        description: Comma seperated list of page UTM sources
+        required: false
+        schema:
+          type: string
+      - name: pageUtmMedium
+        in: query
+        description: Comma seperated list of page UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: pageUtmCampaign
+        in: query
+        description: Comma seperated list of page UTM campaings
+        required: false
+        schema:
+          type: string
+      - name: pageUtmTerm
+        in: query
+        description: Comma seperated list of page UTM terms
+        required: false
+        schema:
+          type: string
+      - name: pageUtmContent
+        in: query
+        description: Comma seperated list of page UTM contents
+        required: false
+        schema:
+          type: string
+      - name: linkUtmSource
+        in: query
+        description: Comma seperated list of link UTM sources
+        required: false
+        schema:
+          type: string
+      - name: linkUtmMedium
+        in: query
+        description: Comma seperated list of link UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: linkUtmCampaign
+        in: query
+        description: Comma seperated list of link UTM campaigns
+        required: false
+        schema:
+          type: string
+      - name: linkUtmTerm
+        in: query
+        description: Comma seperated list of link UTM terms
+        required: false
+        schema:
+          type: string
+      - name: linkUtmContent
+        in: query
+        description: Comma seperated list of link UTM contents
+        required: false
+        schema:
+          type: string
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      - name: sovrnProduct
+        in: query
+        description: Sovrn Product
+        required: false
+        schema:
+          $ref: '#/components/schemas/SovrnProductModel'
+      - name: deviceType
+        in: query
+        description: Type of device
+        required: false
+        schema:
+          $ref: '#/components/schemas/DeviceTypeModel'
+      - name: country
+        in: query
+        description: Two-letter ISO country code
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkResponseModel'
+        '400':
+          description: Bad request
+        '401':
+          description: Authorization information is missing or invalid
+        '404':
+          description: Network data not found
+        5XX:
+          description: Unexpected error
+  /reports/pages:
+    get:
+      tags:
+      - reports
+      summary: Pages
+      description: This endpoint is used to query aggregated performance metrics by Page. This data can
+        be used to see individual page performance, your top performing pages, actualized earnings, and
+        more, all in real-time. Metrics include Pageviews, RPM, Revenue, Clicks, Sales, Actions, Conversion
+        Rate and EPC.
+      parameters:
+      - name: clickDateStart
+        in: query
+        description: Start Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: clickDateEnd
+        in: query
+        description: End Date
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: subIds
+        in: query
+        description: Comma separated list of sub IDs
+        required: false
+        schema:
+          type: string
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: cuids
+        in: query
+        description: Comma separated list of CUIDs (custom tracking IDs)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: pageUtmSource
+        in: query
+        description: Comma seperated list of page UTM sources
+        required: false
+        schema:
+          type: string
+      - name: pageUtmMedium
+        in: query
+        description: Comma seperated list of page UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: pageUtmCampaign
+        in: query
+        description: Comma seperated list of page UTM campaings
+        required: false
+        schema:
+          type: string
+      - name: pageUtmTerm
+        in: query
+        description: Comma seperated list of page UTM terms
+        required: false
+        schema:
+          type: string
+      - name: pageUtmContent
+        in: query
+        description: Comma seperated list of page UTM contents
+        required: false
+        schema:
+          type: string
+      - name: linkUtmSource
+        in: query
+        description: Comma seperated list of link UTM sources
+        required: false
+        schema:
+          type: string
+      - name: linkUtmMedium
+        in: query
+        description: Comma seperated list of link UTM mediums
+        required: false
+        schema:
+          type: string
+      - name: linkUtmCampaign
+        in: query
+        description: Comma seperated list of link UTM campaigns
+        required: false
+        schema:
+          type: string
+      - name: linkUtmTerm
+        in: query
+        description: Comma seperated list of link UTM terms
+        required: false
+        schema:
+          type: string
+      - name: linkUtmContent
+        in: query
+        description: Comma seperated list of link UTM contents
+        required: false
+        schema:
+          type: string
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      - name: sovrnProduct
+        in: query
+        description: Sovrn Product
+        required: false
+        schema:
+          $ref: '#/components/schemas/SovrnProductModel'
+      - name: deviceType
+        in: query
+        description: Type of device
+        required: false
+        schema:
+          $ref: '#/components/schemas/DeviceTypeModel'
+      - name: country
+        in: query
+        description: Two-letter ISO country code
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Z]{2}$
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagesResponseModel'
+        '400':
+          description: Bad request
+        '401':
+          description: Authorization information is missing or invalid
+        '404':
+          description: Page data not found
+        5XX:
+          description: Unexpected error
+  /reports/transactions:
+    get:
+      tags:
+      - reports
+      summary: Transactions
+      description: This endpoint is used to query all commission events (transactions) that have occurred
+        or been updated on a specified date. This data can be used to see individual link performance,
+        actualized earnings, individual site performance and more, all in real-time.
+      parameters:
+      - name: clickDate
+        in: query
+        description: Click date for filtering
+        required: false
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: commissionDate
+        in: query
+        description: Commission date for filtering
+        required: false
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: updateDate
+        in: query
+        description: Update date for filtering
+        required: false
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: campaignIds
+        in: query
+        description: Comma separated list of campaign IDs
+        required: false
+        explode: true
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: merchantGroupIds
+        in: query
+        description: Comma separated list of merchant group IDs
+        required: false
+        explode: true
+        schema:
+          type: string
+          pattern: ^[0-9,]+$
+      - name: programType
+        in: query
+        description: Type of program (CPA/CPC)
+        required: false
+        explode: true
+        schema:
+          type: string
+          enum:
+          - CPC
+          - CPA
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponseModel'
+        '400':
+          description: Invalid status value

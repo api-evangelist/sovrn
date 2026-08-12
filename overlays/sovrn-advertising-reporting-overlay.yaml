@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sovrn Advertising Performance Reporting API
+  version: 1.0.0
+extends: openapi/sovrn-advertising-reporting-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance and the runtime facts Sovrn documents in prose but not
+    in the spec.
+  update:
+    x-apievangelist-source: https://developer.sovrn.com/
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-note: OpenAPI harvested verbatim from the definition Sovrn embeds in its own developer-center
+      reference pages. Operations sharing this info/servers block were merged into one document; operation
+      content is unmodified.
+    x-authentication: 'Advertising API key: x-api-key: {prefix}.{uuid}'
+    x-authentication-artifact: authentication/sovrn-authentication.yml
+    x-conventions-artifact: conventions/sovrn-conventions.yml
+    x-error-catalog-artifact: errors/sovrn-problem-types.yml
+- target: $.tags
+  description: Declare a tag for this service; Sovrn's published definitions carry no tags at all.
+  update:
+  - name: advertising-reporting
+    description: Sovrn Advertising Performance Reporting API operations.
+- target: $.paths.*.*
+  description: Tag every operation so the estate can be grouped; no operation in Sovrn's published definitions
+    is tagged.
+  update:
+    tags:
+    - advertising-reporting

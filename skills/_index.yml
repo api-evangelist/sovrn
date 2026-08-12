@@ -1,0 +1,50 @@
+generated: '2026-08-12'
+method: generated
+source: openapi/*.yml + https://developer.sovrn.com/
+note: >-
+  One provider-published skill (searched, saved verbatim) plus five generated skills, one per
+  marquee Sovrn flow. Every step is grounded in an operationId or METHOD + path that exists
+  verbatim in the OpenAPI definitions Sovrn publishes in its own developer center.
+skills:
+- file: sovrn-read-the-docs.md
+  name: read-the-docs
+  method: searched
+  source: https://developer.sovrn.com/.well-known/agent-skills/read-the-docs/SKILL.md
+  discovery: https://developer.sovrn.com/.well-known/agent-skills/index.json
+  digest: sha256:a5cad4d5abd2ce63dd1e313eab48aed84e49e69a9968be6a49f70c52ba975da1
+  note: >-
+    Published by Sovrn itself against the Agent Skills discovery 0.2.0 schema and advertised
+    in a rel="agent-skills" Link header on developer.sovrn.com. Saved verbatim.
+- file: sovrn-monetize-a-destination-url.md
+  name: Monetize a destination URL with Sovrn Commerce
+  method: generated
+  api: openapi/sovrn-commerce-link-check-openapi.yml
+  operations: [campaigns, link]
+- file: sovrn-price-a-click-with-bid-check.md
+  name: Price a click with Sovrn Commerce Bid Check
+  method: generated
+  api: openapi/sovrn-commerce-bid-check-openapi.yml
+  operations: [getBid]
+- file: sovrn-pull-commerce-performance.md
+  name: Pull Sovrn Commerce performance data
+  method: generated
+  api: openapi/sovrn-commerce-reports-openapi.yml
+  operations: ['GET /reports/transactions', 'GET /reports/merchants', 'GET /reports/merchantsbydate',
+    'GET /reports/links', 'GET /reports/pages', 'GET /reports/merchandise',
+    'GET /reports/networks', 'GET /reports/cuids']
+- file: sovrn-sync-approved-merchants.md
+  name: Sync your approved Sovrn merchants and rates
+  method: generated
+  api: openapi/sovrn-merchant-summaries-openapi.yml
+  operations: ['POST /summaries', 'GET /summaries/delta']
+- file: sovrn-build-shoppable-content.md
+  name: Build shoppable content with Sovrn product data
+  method: generated
+  api: openapi/sovrn-product-recommendations-openapi.yml
+  operations: [get_product_recommendations, 'GET /sites/{site-api-key}/compare/prices/{market}/by/accuracy',
+    'GET /product']
+- file: sovrn-pull-advertising-performance.md
+  name: Pull Sovrn Ad Exchange performance data
+  method: generated
+  api: openapi/sovrn-advertising-reporting-openapi.yml
+  operations: ['GET /reporting/advertising/publishers/{publisherId}/']

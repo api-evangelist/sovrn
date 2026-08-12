@@ -1,0 +1,147 @@
+generated: '2026-08-12'
+method: derived
+source: mcp/sovrn-mcp.yml + openapi/*.yml
+note: >-
+  Binds each published Commerce MCP tool to the Sovrn REST operation that backs it. The live
+  tools/list manifest is auth-gated (HTTP 401 invalid_token), so the binding is made by name
+  and documented semantics rather than by comparing inputSchemas — confidence is recorded
+  honestly per row. Where a backing operation has no operationId in Sovrn's published
+  OpenAPI, the row identifies it by METHOD + path instead.
+surfaces:
+  openapi:
+  - file: openapi/sovrn-commerce-reports-openapi.yml
+    server: https://viglink.io/v1
+  - file: openapi/sovrn-commerce-campaigns-openapi.yml
+    server: https://rest.viglink.com/api
+  - file: openapi/sovrn-commerce-link-check-openapi.yml
+    server: https://api.viglink.com/api
+  - file: openapi/sovrn-commerce-bid-check-openapi.yml
+    server: https://api.viglink.com
+  - file: openapi/sovrn-merchant-summaries-openapi.yml
+    server: https://viglink.io/merchants/rates
+  - file: openapi/sovrn-product-coupons-openapi.yml
+    server: https://viglink.io/coupons
+  - file: openapi/sovrn-product-recommendations-openapi.yml
+    server: https://shopping-gallery.prd-commerce.sovrnservices.com
+  - file: openapi/sovrn-price-comparisons-openapi.yml
+    server: https://comparisons.sovrn.com/api/affiliate/v3.5
+  - file: openapi/sovrn-advertising-reporting-openapi.yml
+    server: https://api.sovrn.com
+  graphql: null
+  mcp:
+    url: https://mcp.sovrn.com/commerce
+    gated: true
+    probe_status: 401
+crosswalk:
+- tool: trx_Transactions
+  category: reporting
+  rest: ['GET /reports/transactions']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: trx_Merchants
+  category: reporting
+  rest: ['GET /reports/merchants']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: trx_Merchants_By_Date
+  category: reporting
+  rest: ['GET /reports/merchantsbydate']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: trx_Links
+  category: reporting
+  rest: ['GET /reports/links']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: trx_Pages
+  category: reporting
+  rest: ['GET /reports/pages']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: trx_Merchandise
+  category: reporting
+  rest: ['GET /reports/merchandise']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: trx_Networks
+  category: reporting
+  rest: ['GET /reports/networks']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: trx_CUIDs
+  category: reporting
+  rest: ['GET /reports/cuids']
+  spec: openapi/sovrn-commerce-reports-openapi.yml
+  binding: rest
+  confidence: high
+- tool: link_check_link
+  category: links
+  rest: [link]
+  spec: openapi/sovrn-commerce-link-check-openapi.yml
+  binding: rest
+  confidence: high
+- tool: rec_recommend_products
+  category: products
+  rest: [get_product_recommendations]
+  spec: openapi/sovrn-product-recommendations-openapi.yml
+  binding: rest
+  confidence: high
+- tool: comp_search_prices
+  category: products
+  rest: ['GET /sites/{site-api-key}/compare/prices/{market}/by/accuracy']
+  spec: openapi/sovrn-price-comparisons-openapi.yml
+  binding: rest
+  confidence: medium
+  note: >-
+    Mapped by the comp_ prefix and the "Search affiliated product prices" description onto
+    the Product Affiliate (Price Comparisons) API, the only published price-search endpoint.
+    The operation has no operationId in the spec and the tool schema is gated, so the
+    parameter-level match is unverified.
+- tool: get_campaigns
+  category: account
+  kind: resource
+  rest: [campaigns]
+  spec: openapi/sovrn-commerce-campaigns-openapi.yml
+  binding: rest
+  confidence: high
+mcp_only:
+- tool: trx_Sources
+  reason: >-
+    Sovrn publishes /reports/transactions, merchants, merchantsbydate, links, pages,
+    merchandise, networks and cuids in the Commerce Real-Time Reports reference, but no
+    per-source reporting endpoint. The MCP tool exposes a grouping the public REST reference
+    does not.
+- tool: setup_commerce_workflow
+  kind: prompt
+  reason: MCP prompt that initializes the workflow environment; not a REST operation.
+rest_only:
+- capability: bid-check
+  operations: [getBid]
+  spec: openapi/sovrn-commerce-bid-check-openapi.yml
+  note: Real-time bid on click traffic; no Commerce MCP tool published for it.
+- capability: merchant-group-summaries
+  operations: ['POST /summaries', 'GET /summaries/delta']
+  spec: openapi/sovrn-merchant-summaries-openapi.yml
+- capability: product-promo-codes
+  operations: ['GET /product']
+  spec: openapi/sovrn-product-coupons-openapi.yml
+- capability: advertising-performance-reporting
+  operations: ['GET /reporting/advertising/publishers/{publisherId}/']
+  spec: openapi/sovrn-advertising-reporting-openapi.yml
+  note: >-
+    Ad Exchange (advertising) reporting, a different product line from Commerce, with its own
+    x-api-key auth. Outside the Commerce MCP surface entirely.
+coverage:
+  tools_named: 14
+  tools_bound: 12
+  mcp_only: 2
+  rest_operations_total: 17
+  rest_operations_with_tool: 12
+  rest_only: 5

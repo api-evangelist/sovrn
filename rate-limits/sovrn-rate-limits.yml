@@ -1,0 +1,112 @@
+generated: '2026-08-12'
+method: searched
+source: https://developer.sovrn.com/reference/get_reports-transactions
+docs:
+- https://developer.sovrn.com/reference/get_reports-transactions
+- https://developer.sovrn.com/reference/post_summaries
+- https://developer.sovrn.com/reference/get_product_recommendations
+- https://developer.sovrn.com/reference/product-affiliate-api
+- https://developer.sovrn.com/docs/mcp
+limit_count: 5
+note: >-
+  Sovrn publishes an explicit rate limit on nearly every Commerce API reference page, and the
+  limits vary by two orders of magnitude between products — 1 request per 60 seconds on
+  real-time reporting versus 100 requests per second on price comparisons. What Sovrn does
+  NOT publish anywhere is a response-header contract: no X-RateLimit-*, no RateLimit-*, no
+  documented Retry-After. Only the Merchant Group Summaries API documents the 429 status at
+  all. An agent therefore has the number but no runtime signal, and has to infer exhaustion
+  from a bare error.
+rate_limits:
+- id: commerce-real-time-reports
+  api: openapi/sovrn-commerce-reports-openapi.yml
+  scope: per-key
+  limit: 1
+  window: 60s
+  burst: null
+  operations:
+  - GET /reports/transactions
+  - GET /reports/merchants
+  - GET /reports/merchantsbydate
+  - GET /reports/links
+  - GET /reports/pages
+  - GET /reports/merchandise
+  - GET /reports/networks
+  - GET /reports/cuids
+  guidance: >-
+    Include a delay of at least 60 seconds between consecutive calls; when pulling data
+    across multiple months, leave a minimum 60-second gap between each request.
+  response_headers: []
+  exhaustion_status: null
+  source: https://developer.sovrn.com/reference/get_reports-transactions
+- id: merchant-group-summaries
+  api: openapi/sovrn-merchant-summaries-openapi.yml
+  scope: per-key
+  limit: 1
+  window: 10s
+  burst: null
+  operations:
+  - POST /summaries
+  - GET /summaries/delta
+  guidance: >-
+    Exceeding the rate can result in the API key being temporarily blocked or throttled.
+    Leave at least 10 seconds between calls, including while paginating.
+  response_headers: []
+  exhaustion_status: 429
+  exhaustion_description: Too many requests (rate limit exceeded)
+  source: https://developer.sovrn.com/reference/post_summaries
+- id: product-recommendations-key
+  api: openapi/sovrn-product-recommendations-openapi.yml
+  scope: per-key
+  limit: 30000
+  window: 5m
+  burst: null
+  guidance: The primary limit for most server-side use cases.
+  response_headers: []
+  exhaustion_status: null
+  source: https://developer.sovrn.com/reference/get_product_recommendations
+- id: product-recommendations-ip
+  api: openapi/sovrn-product-recommendations-openapi.yml
+  scope: per-ip
+  limit: 100
+  window: 5m
+  burst: null
+  guidance: >-
+    Can bite high-volume server-side implementations whose requests all egress from a single
+    IP (behind a proxy or load balancer).
+  response_headers: []
+  exhaustion_status: null
+  source: https://developer.sovrn.com/reference/get_product_recommendations
+- id: price-comparisons
+  api: openapi/sovrn-price-comparisons-openapi.yml
+  scope: per-account
+  limit: 100
+  window: 1s
+  burst: null
+  guidance: >-
+    100 requests per second across the entire Sovrn account. Sovrn recommends using a single
+    set of keys unless request counts must be separated by site.
+  response_headers: []
+  exhaustion_status: null
+  source: https://developer.sovrn.com/reference/product-affiliate-api
+mcp:
+  url: https://mcp.sovrn.com/commerce
+  enforced_by: the underlying Sovrn Commerce APIs, not the MCP server
+  scope: per tool, not global
+  note: >-
+    Sovrn's MCP documentation restates the same limits per tool — reporting/transaction tools
+    (trx_Transactions, trx_Merchants, trx_Links) at roughly 1 request per 60 seconds, search
+    and recommendation tools (comp_search_prices, rec_recommend_products) at multiple
+    requests per second — and advises exponential backoff on "too many request" responses.
+  source: https://developer.sovrn.com/docs/mcp
+undocumented:
+- api: openapi/sovrn-commerce-campaigns-openapi.yml
+  note: No rate limit published for the Campaign API.
+- api: openapi/sovrn-commerce-link-check-openapi.yml
+  note: No rate limit published for the Link Check API.
+- api: openapi/sovrn-commerce-bid-check-openapi.yml
+  note: No rate limit published for the Bid Check API.
+- api: openapi/sovrn-advertising-reporting-openapi.yml
+  note: >-
+    No request-rate limit published; the reference instead documents per-request data
+    windows (hour granularity 1-24 hours, day granularity up to 1 month, month granularity
+    up to 1 year).

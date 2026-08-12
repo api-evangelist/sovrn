@@ -1,0 +1,306 @@
+openapi: 3.0.0
+info:
+  title: Sovrn Commerce Bid Check API
+  version: 1.0.0
+  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer
+    Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block
+    were merged into one document by API Evangelist; operation content is unmodified.
+  x-source-title: Bid Check
+servers:
+- url: https://api.viglink.com
+  description: Production
+components:
+  schemas:
+    BidWin:
+      type: object
+      description: Returned when Sovrn returns a bid or offer for the click.
+      required:
+      - affiliated
+      - pricing
+      - eepc
+      - url
+      properties:
+        affiliated:
+          type: boolean
+          description: '`true` when Sovrn returns a bid or offer for the click.'
+          example: true
+        pricing:
+          type: string
+          description: 'Pricing model of the winning bid or offer. `CPC` is a real-time bid win. `CPA`
+            is returned when `includeCpa=true` and a CPA offer wins.
+
+            '
+          enum:
+          - CPC
+          - CPA
+          example: CPC
+        eepc:
+          type: number
+          format: float
+          description: 'Expected earnings per click, in USD. This value is returned after Sovrn''s revenue
+            share is deducted. For CPC bids, this is the rate you can earn by routing the click through
+            Sovrn before the bid expires. For CPA offers, this is the average amount Sovrn expects you
+            to earn per click and is not guaranteed for an individual click.
+
+            '
+          example: 0.05725
+        url:
+          type: string
+          format: uri
+          description: 'Sovrn redirect URL to use if you route the click through Sovrn. Visiting this
+            URL tracks the click and forwards the user to the destination URL.
+
+            '
+          example: https://redirect.viglink.com?u=https%3A%2F%2Fexample-merchant.com&key=YOUR_API_KEY
+        expireInMs:
+          type: integer
+          description: 'Length of time the returned bid is valid, in milliseconds. Returned for CPC wins
+            only. If you redirect the user after the bid expires, the click is still tracked and affiliated
+            through standard link optimization at the current market rate.
+
+            '
+          example: 250
+    BidNoFill:
+      type: object
+      description: 'Returned when there is no eligible bid, the destination URL is not monetizable, or
+        the available bid is below the submitted bid floor.
+
+        '
+      required:
+      - affiliated
+      properties:
+        affiliated:
+          type: boolean
+          description: '`false` when there is no eligible bid, the destination URL is not monetizable,
+            or the available bid is below the submitted `bidFloor`.
+
+            '
+          example: false
+paths:
+  /api/bid:
+    get:
+      summary: Bid Check
+      description: Get a real-time Sovrn bid on your click traffic.
+      operationId: getBid
+      parameters:
+      - name: key
+        in: query
+        required: true
+        description: 'Site Commerce API Key for the site or traffic source where the click originated.
+          Use the API Key that corresponds to the site, app, or traffic source sending the click so the
+          bid is evaluated and attributed correctly.
+
+          '
+        schema:
+          type: string
+        example: YOUR_API_KEY
+      - name: out
+        in: query
+        required: true
+        description: 'Destination URL for the click. This value must be URL-encoded when placed in the
+          query string.
+
+          '
+        schema:
+          type: string
+          format: uri
+        example: https://example-merchant.com
+      - name: ip
+        in: query
+        required: true
+        description: 'The real end user''s IP address. IPv4 and IPv6 are supported. Pass the end user''s
+          actual IP address, not the IP address of your server. This value must match the user who is
+          redirected through Sovrn for the bid to be valid.
+
+          '
+        schema:
+          type: string
+        example: 192.0.2.1
+      - name: userAgent
+        in: query
+        required: true
+        description: 'The real end user''s browser User-Agent string. Pass the end user''s actual User-Agent,
+          not the User-Agent of your server. This value must match the user who is redirected through
+          Sovrn for the bid to be valid. This value must be URL-encoded when placed in the query string.
+
+          '
+        schema:
+          type: string
+        example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)
+          Chrome/120.0.0.0 Safari/537.36
+      - name: referrerUrl
+        in: query
+        required: false
+        description: 'Page URL where the click originated. This value must be URL-encoded when placed
+          in the query string.
+
+          '
+        schema:
+          type: string
+          format: uri
+        example: https://example-publisher.com/article
+      - name: subId
+        in: query
+        required: false
+        description: 'Fully qualified SubID URL used to associate the click with a child campaign, placement,
+          domain, or publisher under the parent API Key. If the SubID does not already exist, Sovrn will
+          create it. This value must be URL-encoded when placed in the query string.
+
+          '
+        schema:
+          type: string
+          format: uri
+        example: https://example-publisher.com/placement/homepage
+      - name: bidFloor
+        in: query
+        required: false
+        description: 'Minimum acceptable bid, in USD, expressed as a decimal. For example, `0.01` means
+          one cent. When provided, bids below this value return `affiliated: false`. If omitted, no minimum
+          bid floor is applied.
+
+          '
+        schema:
+          type: number
+          format: float
+        example: 0.01
+      - name: includeCpa
+        in: query
+        required: false
+        description: 'When `true`, CPA offers are considered alongside CPC bids. If a CPA offer wins,
+          the response `pricing` will be `CPA`. If omitted, only CPC bids are considered.
+
+          '
+        schema:
+          type: boolean
+        example: false
+      - name: cuid
+        in: query
+        required: false
+        description: An identifier of your choosing used to associate the click with a user, page, campaign,
+          or event. Use only letters, numbers, hyphens, and underscores. Maximum 2048 characters.
+        schema:
+          type: string
+          maxLength: 2048
+          pattern: ^[A-Za-z0-9_-]+$
+        example: user_12345
+      - name: utm_source
+        in: query
+        required: false
+        description: Identifies the source of the traffic, such as a website, newsletter, or social platform.
+          Use only letters, numbers, hyphens, and underscores.
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+        example: newsletter
+      - name: utm_medium
+        in: query
+        required: false
+        description: Identifies the marketing medium, such as email, social, or banner. Use only letters,
+          numbers, hyphens, and underscores.
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+        example: email
+      - name: utm_campaign
+        in: query
+        required: false
+        description: Identifies the campaign name, promotion, or initiative. Use only letters, numbers,
+          hyphens, and underscores.
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+        example: black_friday_2025
+      - name: utm_term
+        in: query
+        required: false
+        description: Identifies paid search keywords or targeting terms. Use only letters, numbers, hyphens,
+          and underscores.
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+        example: running_shoes
+      - name: utm_content
+        in: query
+        required: false
+        description: Differentiates similar links or placements on the same page. Use only letters, numbers,
+          hyphens, and underscores.
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+        example: header
+      - name: gdprApplies
+        in: query
+        required: false
+        description: 'Indicates whether GDPR applies to the user. If omitted, Sovrn determines whether
+          GDPR applies based on the user''s IP address.
+
+          '
+        schema:
+          type: boolean
+        example: false
+      - name: gdprConsent
+        in: query
+        required: false
+        description: 'Raw GDPR consent string for the user, when applicable.
+
+          '
+        schema:
+          type: string
+        example: COwK7daOwK7daABABBENAPCgAAAAAAAAAAYgAAAAAAAA
+      - name: ccpaConsent
+        in: query
+        required: false
+        description: 'Raw CCPA consent string for the user, when applicable.
+
+          '
+        schema:
+          type: string
+        example: 1YNN
+      - name: gppConsent
+        in: query
+        required: false
+        description: 'Raw GPP consent string for the user, when applicable.
+
+          '
+        schema:
+          type: string
+        example: DBABMA~CPXxRfAPXxRfAAfKABENB-CgAAAAAAAAAAYgAAAAAAAA
+      responses:
+        '200':
+          description: Success — bid response returned.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/BidWin'
+                - $ref: '#/components/schemas/BidNoFill'
+              examples:
+                cpcWin:
+                  summary: CPC win
+                  value:
+                    affiliated: true
+                    pricing: CPC
+                    eepc: 0.05725
+                    url: https://redirect.viglink.com?u=https%3A%2F%2Fexample-merchant.com&key=YOUR_API_KEY&prodOvrd=PRE&fbu=https%3A%2F%2Fexample-merchant.com&bf=0.01&redirClientIp=192.0.2.1&userAgent=Mozilla%2F5.0+%28Macintosh%3B+Intel+Mac+OS+X+10_15_7%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F120.0.0.0+Safari%2F537.36&sid=EXAMPLE_SID
+                    expireInMs: 250
+                cpaWin:
+                  summary: CPA win (includeCpa=true)
+                  value:
+                    affiliated: true
+                    pricing: CPA
+                    eepc: 0.016875
+                    url: https://redirect.viglink.com?u=https%3A%2F%2Fexample-merchant.com&key=YOUR_API_KEY&prodOvrd=PRE&fbu=https%3A%2F%2Fexample-merchant.com&bf=0.01&redirClientIp=192.0.2.1&userAgent=Mozilla%2F5.0+%28Macintosh%3B+Intel+Mac+OS+X+10_15_7%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F120.0.0.0+Safari%2F537.36
+                noFill:
+                  summary: No bid or not monetizable
+                  value:
+                    affiliated: false
+        '400':
+          description: 'Bad Request — one or more required fields are missing or malformed.
+
+            '
+        '401':
+          description: 'Unauthorized — the provided `key` is not a valid Commerce API Key.
+
+            '
+        '500':
+          description: Internal Server Error.

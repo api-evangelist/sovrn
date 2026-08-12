@@ -1,0 +1,130 @@
+generated: '2026-08-12'
+method: searched
+source: https://developer.sovrn.com/docs/authorization
+docs:
+- https://developer.sovrn.com/docs/authorization
+- https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+derived_from: openapi/*.yml
+note: >-
+  Sovrn runs two separate API-key regimes, one per product line, and they are not
+  interchangeable. Commerce (the former VigLink surface) authenticates with a per-site
+  Secret Key in an Authorization header using the literal prefix "secret " — the same
+  credential the Commerce MCP server takes. Advertising / Ad Exchange reporting
+  authenticates with an account-level key in an x-api-key header. There is no OAuth,
+  no OpenID Connect and no bearer-token flow on any published Sovrn API.
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows: []
+  regimes: 2
+regimes:
+- name: Commerce Secret Key
+  products: [Commerce, Commerce MCP]
+  scheme: apiKey
+  in: header
+  parameter: Authorization
+  format: 'secret {SECRET_KEY}'
+  note: >-
+    The word "secret" plus a space must precede the key value. Keys are per site (campaign),
+    not per account — different sites in one account carry different secret keys.
+  key_management:
+    console: https://platform.sovrn.com/commerce/settings
+    steps:
+    - Log in to the Sovrn Platform
+    - Go to Commerce Settings
+    - Under actions click the Key icon to view the API keys for that site
+    - If no secret key exists, click "generate secret key"
+    rotation: >-
+      A "regenerate" link invalidates the previous secret key immediately; every call using
+      the old key stops working until updated.
+  applies_to:
+  - openapi/sovrn-commerce-campaigns-openapi.yml
+  - openapi/sovrn-commerce-reports-openapi.yml
+  - openapi/sovrn-merchant-summaries-openapi.yml
+  - openapi/sovrn-product-coupons-openapi.yml
+  - openapi/sovrn-price-comparisons-openapi.yml
+  - mcp/sovrn-mcp.yml
+  unauthenticated_error:
+    status: 401
+    reason: invalidCredentials
+    message: >-
+      Authorization secret is missing or invalid. This can be found at
+      https://publishers.viglink.com/account and can be sent as a parameter or
+      Authorization header
+- name: Advertising API Key
+  products: [Ad Exchange, Advertising performance reporting]
+  scheme: apiKey
+  in: header
+  parameter: x-api-key
+  format: '{7-character prefix}.{32-character UUID}'
+  note: >-
+    Only the account owner can create or delete keys; there is no limit on the number of
+    keys and every key grants full access to all Advertising reporting data for the account.
+    The key value is displayed once at creation and cannot be retrieved afterwards.
+  key_management:
+    console: https://platform.sovrn.com/account/api-keys
+    rotation: Delete the key and create a new one; there is no in-place rotation.
+  applies_to:
+  - openapi/sovrn-advertising-reporting-openapi.yml
+- name: Campaign API key (query parameter)
+  products: [Commerce link building]
+  scheme: apiKey
+  in: query
+  parameter: key
+  note: >-
+    Affiliate link construction (sovrn.co?key=…&u=…) and the Link Check API take the
+    campaign's public API key as a URL parameter rather than a header. This is a link-signing
+    key, not the Secret Key, and is exposed in the rendered page by design.
+  applies_to:
+  - openapi/sovrn-commerce-link-check-openapi.yml
+  - openapi/sovrn-commerce-bid-check-openapi.yml
+schemes:
+- name: apiAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/sovrn-advertising-reporting-openapi.yml
+- name: sec0
+  type: apiKey
+  in: header
+  parameter: authorization
+  x-default: 'secret <secret key>'
+  sources:
+  - openapi/sovrn-commerce-campaigns-openapi.yml
+- name: bearerAuth
+  type: apiKey
+  in: header
+  parameter: authorization
+  note: >-
+    Named bearerAuth in the spec but declared as apiKey; the value is the Commerce Secret Key
+    with the "secret " prefix, not an RFC 6750 bearer token.
+  sources:
+  - openapi/sovrn-commerce-reports-openapi.yml
+- name: SecretKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Authorization header using the Secret Key scheme. Format: "secret {secret key}"'
+  sources:
+  - openapi/sovrn-merchant-summaries-openapi.yml
+  - openapi/sovrn-product-coupons-openapi.yml
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: authorization
+  sources:
+  - openapi/sovrn-price-comparisons-openapi.yml
+gaps:
+- >-
+  openapi/sovrn-commerce-link-check-openapi.yml and
+  openapi/sovrn-commerce-bid-check-openapi.yml declare no securitySchemes at all, even though
+  both require a campaign key as a query parameter.
+- >-
+  openapi/sovrn-product-recommendations-openapi.yml declares no securitySchemes, though the
+  docs describe an API-key rate-limit tier for it.
+- >-
+  Five different scheme names (sec0, bearerAuth, SecretKey, ApiKeyAuth, apiAuth) describe
+  what are really only two credentials. The naming is inconsistent across Sovrn's specs.

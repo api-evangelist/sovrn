@@ -1,0 +1,319 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Product Coupons API",
+    "version": "1.0.0",
+    "description": "Returns product-specific promo codes for a given retailer product URL. Responses include verified and unverified coupon codes, merchant metadata, and scan status indicating whether verification is in progress.\n"
+  },
+  "servers": [
+    {
+      "url": "https://viglink.io/coupons",
+      "description": "Product Coupons API"
+    }
+  ],
+  "paths": {
+    "/product": {
+      "get": {
+        "summary": "Product coupons by URL",
+        "description": "Returns verified and unverified coupon codes for a specific product URL, along with merchant information and verification status.\n",
+        "tags": [
+          "Product Coupons"
+        ],
+        "security": [
+          {
+            "SecretKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "description": "Site API key for the site requesting coupons.\n",
+            "schema": {
+              "type": "string"
+            },
+            "example": "b5d593ce9de90b8a324ca24e5fcc32af"
+          },
+          {
+            "name": "product_url",
+            "in": "query",
+            "required": true,
+            "description": "Original retailer product page URL. Must not be an affiliate or redirect URL.\n",
+            "schema": {
+              "type": "string",
+              "format": "url"
+            },
+            "example": "https://www.kiehls.com/3605970407964.html"
+          },
+          {
+            "name": "include_unverified",
+            "in": "query",
+            "required": false,
+            "description": "Whether to include unverified coupon codes after verified results. Defaults to true.\n",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "example": true
+          },
+          {
+            "name": "cuid",
+            "in": "query",
+            "required": false,
+            "description": "Custom identifier used to associate the click with a user, page, campaign, or event.\n",
+            "schema": {
+              "type": "string"
+            },
+            "example": "cuid152"
+          },
+          {
+            "name": "utm_source",
+            "in": "query",
+            "required": false,
+            "description": "Identifies the source of the traffic (e.g., website, newsletter, twitter).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "utm_medium",
+            "in": "query",
+            "required": false,
+            "description": "Identifies the marketing medium (e.g., email, social, banner).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "utm_campaign",
+            "in": "query",
+            "required": false,
+            "description": "Identifies the campaign name, promotion, or initiative.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "utm_term",
+            "in": "query",
+            "required": false,
+            "description": "Identifies paid search keywords or targeting terms.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "utm_content",
+            "in": "query",
+            "required": false,
+            "description": "Differentiates similar links or placements on the same page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved coupon code.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCouponsResponse"
+                },
+                "examples": {
+                  "unverifiedExample": {
+                    "summary": "Example response with unverified coupons",
+                    "value": {
+                      "merchant": {
+                        "domain": "kiehls.com",
+                        "group_id": 2528,
+                        "group_name": "Kiehl's",
+                        "logo_url": "https://images.viglink.com/merchant/logo/official/240x120/kiehl-s/922daea08e0d6b4e23cf16843bf89e5b5d68d367.png?url=http%3A%2F%2Fwww.viglink.com%2Fmerchants%2F2528.gif&text=Kiehl%27s&logoId=1633"
+                      },
+                      "scan": {
+                        "verification_active": false,
+                        "when_to_check_back": 3600
+                      },
+                      "coupons": [
+                        {
+                          "id": "0d5c0846d5430357e07820f153040c36",
+                          "code": "WELCOME20",
+                          "currency": "USD",
+                          "verified": true,
+                          "affiliated_url": "https://redirect.viglink.com/...",
+                          "original_price": 52,
+                          "price_with_code": 41.6,
+                          "verified_at": "2026-02-06T15:18:11.746Z",
+                          "code_description": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Resource not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "SecretKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Authorization header using the Secret Key scheme. Format: \"secret <SECRET_KEY>\".\n"
+      }
+    },
+    "schemas": {
+      "ProductCouponsResponse": {
+        "type": "object",
+        "required": [
+          "merchant",
+          "scan",
+          "coupons"
+        ],
+        "properties": {
+          "merchant": {
+            "$ref": "#/components/schemas/Merchant"
+          },
+          "scan": {
+            "$ref": "#/components/schemas/Scan"
+          },
+          "coupons": {
+            "type": "array",
+            "description": "Ranked list of coupon codes. Verified coupons appear first, followed by unverified codes.\n",
+            "items": {
+              "$ref": "#/components/schemas/Coupon"
+            }
+          }
+        }
+      },
+      "Merchant": {
+        "type": "object",
+        "required": [
+          "domain",
+          "group_id",
+          "group_name"
+        ],
+        "properties": {
+          "domain": {
+            "type": "string",
+            "example": "kiehls.com"
+          },
+          "group_id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 2528
+          },
+          "group_name": {
+            "type": "string",
+            "example": "Kiehl's"
+          },
+          "logo_url": {
+            "type": "string",
+            "format": "url",
+            "nullable": true
+          }
+        }
+      },
+      "Scan": {
+        "type": "object",
+        "required": [
+          "verification_active",
+          "when_to_check_back"
+        ],
+        "properties": {
+          "verification_active": {
+            "type": "boolean",
+            "description": "Indicates whether coupon verification is currently running.\n",
+            "example": false
+          },
+          "when_to_check_back": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Recommended delay (in seconds) before polling again.\n",
+            "example": 3600
+          }
+        }
+      },
+      "Coupon": {
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "affiliated_url",
+          "currency",
+          "verified"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sovrn coupon identifier.",
+            "example": "f556475089750904030e28ad62c6727f"
+          },
+          "code": {
+            "type": "string",
+            "description": "Promo code text.",
+            "example": "WELCOME20"
+          },
+          "affiliated_url": {
+            "type": "string",
+            "format": "url",
+            "description": "Affiliate redirect URL with tracking parameters applied.\n"
+          },
+          "original_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "description": "Original product price.",
+            "example": 52
+          },
+          "price_with_code": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "description": "Final price after applying the code. May be null while verification is in progress.\n",
+            "example": 41.6
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code.",
+            "example": "USD"
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "Whether the code has been verified to work.",
+            "example": true
+          },
+          "verified_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Timestamp when the code was last verified. May be null if not yet verified.\n",
+            "example": "2026-02-06T15:18:11.746Z"
+          },
+          "code_description": {
+            "type": "string",
+            "nullable": true,
+            "description": "Best-effort description of the promotion. May be null or inaccurate.\n"
+          }
+        }
+      }
+    }
+  }
+}

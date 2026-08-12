@@ -1,0 +1,112 @@
+generated: '2026-08-12'
+method: searched
+status: published
+source: https://developer.sovrn.com/docs/mcp
+docs: https://developer.sovrn.com/docs/mcp
+demos: https://developer.sovrn.com/docs/mcp-demos
+server:
+  name: Commerce MCP Server
+  transport: http
+  url: https://mcp.sovrn.com/commerce
+  release_stage: beta
+  authentication:
+    type: apiKey
+    in: header
+    name: Authorization
+    format: 'secret {SECRET_KEY}'
+    key_source: https://platform.sovrn.com/commerce/settings
+  client_config: |
+    {
+      "mcpServers": {
+        "Commerce MCP Server": {
+          "url": "https://mcp.sovrn.com/commerce",
+          "headers": {
+            "Authorization": "secret {SECRET_KEY}"
+          }
+        }
+      }
+    }
+probe:
+  method: POST tools/list (JSON-RPC 2.0)
+  url: https://mcp.sovrn.com/commerce
+  http_status: 401
+  body: '{"error": "invalid_token", "error_description": "Authentication failed. ..."}'
+  fetched: '2026-08-12'
+  note: >-
+    The live tools/list manifest is auth-gated, so per-tool inputSchema could not be read
+    anonymously. The tool set below is transcribed verbatim from the names, descriptions and
+    categories Sovrn publishes in its own Commerce MCP documentation table. Input schemas
+    require an authenticated introspection; the backing REST operation named in
+    mcp/sovrn-tool-crosswalk.yml carries the real parameter contract.
+rate_limits:
+  enforced_by: the underlying Sovrn Commerce APIs, not the MCP server
+  scope: per tool, not global across the Commerce MCP service
+  guidance:
+  - tools: [trx_Transactions, trx_Merchants, trx_Links]
+    limit: 1 request per 60 seconds
+  - tools: [comp_search_prices, rec_recommend_products]
+    limit: multiple requests per second, endpoint dependent
+tools:
+- name: comp_search_prices
+  description: Search affiliated product prices
+  kind: tool
+- name: link_check_link
+  description: Validate or convert merchant URLs into affiliate links
+  kind: tool
+- name: rec_recommend_products
+  description: Return related or recommended products
+  kind: tool
+- name: trx_Transactions
+  description: Retrieve detailed transaction-level data
+  kind: tool
+- name: trx_Merchants
+  description: Aggregate reporting by merchant
+  kind: tool
+- name: trx_Merchants_By_Date
+  description: Merchant-level performance grouped by date
+  kind: tool
+- name: trx_Links
+  description: Transaction data grouped by link
+  kind: tool
+- name: trx_Pages
+  description: Transaction data grouped by page
+  kind: tool
+- name: trx_Merchandise
+  description: Product-level transaction and revenue data
+  kind: tool
+- name: trx_Sources
+  description: Transactions grouped by traffic source
+  kind: tool
+- name: trx_Networks
+  description: Transactions grouped by network
+  kind: tool
+- name: trx_CUIDs
+  description: Click or user-level analytics and attribution
+  kind: tool
+prompts:
+- name: setup_commerce_workflow
+  description: Initialize the Commerce MCP workflow environment
+resources:
+- name: get_campaigns
+  description: Retrieve active campaigns and metadata
+demo_workflows:
+- Affiliate Link Tools
+- Price Comparison Guides
+- Seasonal Shopping Guides
+- Product Roundups
+- Deal Alerts
+- Transaction Reporting
+- Conversion Optimization
+troubleshooting:
+- issue: Unauthorized
+  cause: Invalid or missing API key
+  resolution: Verify authorization header format
+- issue: No tools visible
+  cause: MCP configuration syntax error
+  resolution: Check JSON formatting and restart client
+- issue: Empty response
+  cause: Missing required date or filter parameter
+  resolution: Include at least one valid date field
+- issue: Rate limit triggered
+  cause: More than one call per 60 seconds
+  resolution: Apply delay between transaction calls

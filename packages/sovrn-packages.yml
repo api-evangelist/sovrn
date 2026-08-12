@@ -1,0 +1,51 @@
+generated: '2026-08-12'
+method: searched
+source: registry searches + https://developer.sovrn.com/
+package_count: 0
+official_sdk_count: 0
+note: >-
+  Sovrn publishes no first-party client library on any package registry. Its developer center
+  documents raw HTTP calls only — there is not a single SDK, code-sample-in-a-language, or
+  install line anywhere in the reference. The one distributable Sovrn ships is a
+  CDN-delivered browser script (vglnk.js), catalogued in components/sovrn-components.yml
+  rather than here because it has no registry, no package name and no version: the documented
+  script tag is unpinned, so consumers cannot tell which build they are running.
+  Because nothing was found, no Packages or SDKs pointer is written into apis.yml.
+registries_probed:
+- registry: npm
+  query: sovrn
+  endpoint: https://registry.npmjs.org/-/v1/search?text=sovrn
+  results: 0
+- registry: npm
+  query: viglink
+  endpoint: https://registry.npmjs.org/-/v1/search?text=viglink
+  results: 0
+- registry: pypi
+  query: sovrn
+  endpoint: https://pypi.org/pypi/sovrn/json
+  status: 404
+- registry: pypi
+  query: viglink
+  endpoint: https://pypi.org/pypi/viglink/json
+  status: 404
+- registry: pypi
+  query: sovrn-commerce
+  endpoint: https://pypi.org/pypi/sovrn-commerce/json
+  status: 404
+source_repositories:
+  github_org: https://github.com/sovrn
+  first_party_client_libraries: 0
+  note: >-
+    The Sovrn GitHub organization holds six public repositories and none of them is a Sovrn
+    API client. Four are Prebid ecosystem forks (Prebid.js, prebid-server,
+    prebid-server-java, prebid.github.io) reflecting Sovrn's header-bidding work, one is a
+    release-to-jira GitHub Action, and one is brickhouse, a set of Hive UDFs last touched in
+    2015. The github.com/viglink organization is empty.
+  repositories:
+  - {name: Prebid.js, language: JavaScript, updated: '2026-02-12', first_party_sdk: false}
+  - {name: prebid-server, language: Go, updated: '2025-07-02', first_party_sdk: false}
+  - {name: prebid.github.io, language: HTML, updated: '2025-07-02', first_party_sdk: false}
+  - {name: prebid-server-java, language: Java, updated: '2024-10-01', first_party_sdk: false}
+  - {name: release-to-jira, language: null, updated: '2024-08-08', first_party_sdk: false}
+  - {name: brickhouse, language: Java, updated: '2015-12-09', first_party_sdk: false}
+packages: []

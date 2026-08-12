@@ -1,12 +1,71 @@
-generated: '2026-07-21'
+generated: '2026-08-12'
 method: searched
-source: https://status.sovrn.com/
+source: https://developer.sovrn.com/llms.txt
 status_page: https://status.sovrn.com/
-versioning: null          # no public API versioning policy discovered
-deprecation: null         # no public deprecation / Sunset-header policy discovered
-sla: null
-notes: >-
-  Sovrn publishes a public status page for its platform (Ad Exchange, Signal,
-  Commerce). No public developer portal, API reference, or versioning/deprecation
-  policy was discoverable at enrichment time, so only the status surface is captured.
+versioning:
+  scheme: mixed
+  consistent: false
+  docs: https://developer.sovrn.com/
+  versioned:
+  - api: openapi/sovrn-commerce-reports-openapi.yml
+    scheme: uri-path
+    current: v1
+    server: https://viglink.io/v1
+  - api: openapi/sovrn-price-comparisons-openapi.yml
+    scheme: uri-path
+    current: v3.5
+    server: https://comparisons.sovrn.com/api/affiliate/v3.5
+  unversioned:
+  - openapi/sovrn-commerce-campaigns-openapi.yml
+  - openapi/sovrn-commerce-link-check-openapi.yml
+  - openapi/sovrn-commerce-bid-check-openapi.yml
+  - openapi/sovrn-merchant-summaries-openapi.yml
+  - openapi/sovrn-product-coupons-openapi.yml
+  - openapi/sovrn-product-recommendations-openapi.yml
+  - openapi/sovrn-advertising-reporting-openapi.yml
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No deprecation policy, no Sunset/Deprecation header support (RFC 8594) and no end-of-life
+    schedule is published for any Sovrn API. The one deprecation signal available is inside
+    the specs themselves: `deprecated: false` is carried on operations, and none is currently
+    set true.
+changelog:
+  url: null
+  probed:
+  - url: https://developer.sovrn.com/changelog
+    status: 404
+  note: >-
+    The Sovrn Developer Center runs on ReadMe, which ships a changelog surface, but Sovrn has
+    not enabled it — /changelog 404s and the ReadMe-generated llms.txt lists no changelog
+    entries. Per-page `updatedAt` timestamps in the reference markdown are the only dated
+    change signal, and they range from 2025-03-20 to 2026-02-18.
+  page_updated_at:
+    earliest: '2025-03-20'
+    latest: '2026-02-18'
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment. Commercial terms sit in the Master Services Agreement
+    at https://www.sovrn.com/legal/msa/.
+release_stages:
+- surface: Commerce MCP Server
+  stage: beta
+  url: https://mcp.sovrn.com/commerce
+  source: https://developer.sovrn.com/docs/mcp
+- surface: Commerce Bid Check API
+  stage: general-availability
+  launched: '2026-07-08'
+  source: https://www.sovrn.com/blog/sovrn-launches-commerce-bid-check/
+partial_availability:
+  api: openapi/sovrn-advertising-reporting-openapi.yml
+  note: >-
+    The Advertising performance reporting reference flags a set of metrics and dimensions as
+    "temporarily unavailable" — requests, requestsWithBid, fill rate, zoneId, zoneSize,
+    zoneName — without a restoration date. Historical depth is also uneven: hour granularity
+    covers 45 days, day covers 2 years, month reaches back to January 2017, but most
+    dimensions only exist from 2022.
+  source: https://developer.sovrn.com/reference/custom-reporting
 deprecated_operations: []

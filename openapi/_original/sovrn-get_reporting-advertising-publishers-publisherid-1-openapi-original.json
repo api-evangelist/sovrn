@@ -1,0 +1,213 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Adv Custom API",
+    "description": "NodeJS Fastify API for analytics and reporting data",
+    "version": "2.70.7"
+  },
+  "components": {
+    "securitySchemes": {
+      "apiAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    }
+  },
+  "paths": {
+    "/reporting/advertising/publishers/{publisherId}/": {
+      "get": {
+        "tags": [
+          "reporting"
+        ],
+        "description": "Get custom reporting data for a publisher",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "start",
+            "required": true,
+            "description": "The start date, in ISO-8601 format (yyyy-mm-DDTHH:MM:ssZ), of the time range, inclusive"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "end",
+            "required": true,
+            "description": "The end date, in ISO-8601 format (yyyy-mm-DDTHH:MM:ssZ), of the time range, exclusive"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "metrics",
+            "required": true,
+            "description": "A comma-separated list of metrics to use in the report query"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "dimensions",
+            "required": true,
+            "description": "A comma-separated list of dimensions to use in the report query"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "granularity",
+            "required": true,
+            "description": "The level of granularity for returned data. Possible values are \"hour\", \"day\", \"month\"."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "domain",
+            "required": false,
+            "description": "A comma-separated list of domain names used to filter results"
+          },
+          {
+            "in": "query",
+            "name": "bundleId",
+            "schema": {
+              "type": "string"
+            },
+            "description": "A comma-separated list of bundle IDs used to filter results"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "auction",
+            "required": false,
+            "description": "A comma-separated list of auction types used to filter results. Possible values are \"googleOb\", \"amazonTam\", \"waterfall\", \"headerBidding\", \"serverToServer\", \"nimbus\", \"springserve\", \"publica\", \"bidmachine\""
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "publisherId",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "propertyType",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The property type by which to filter the results by. Possible values are \"web\" or \"app\""
+          }
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "apiAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Custom report data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Custom report data"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Requested data is not available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Requested data is not available",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required information is missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Required information is missing or invalid",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication information is missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Authentication information is missing or invalid",
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Unauthorized",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Unexpected server error",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.sovrn.com",
+      "description": "API server"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://github.com/sovrn-insider/minerva/blob/main/README.md",
+    "description": "Github Repo"
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

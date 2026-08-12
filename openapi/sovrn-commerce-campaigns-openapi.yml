@@ -1,0 +1,158 @@
+openapi: 3.1.0
+info:
+  title: Sovrn Commerce Campaigns API
+  version: '1.0'
+  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer
+    Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block
+    were merged into one document by API Evangelist; operation content is unmodified.
+  x-source-title: rest
+servers:
+- url: https://rest.viglink.com/api
+security:
+- sec0: []
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: authorization
+      x-default: secret <secret key>
+paths:
+  /account/campaigns/{search}:
+    get:
+      summary: Campaign API
+      description: Use this endpoint to get a list of your campaigns, or search for a specific campaign
+        by name or campaignId.
+      operationId: campaigns
+      parameters:
+      - name: search
+        in: path
+        description: Search by campaign name or campaignId
+        schema:
+          type: string
+          default: PRIMARY
+        required: true
+      - name: format
+        in: query
+        description: 'Lowercase format of response: json or xml'
+        schema:
+          type: string
+          default: json
+      - name: callback
+        in: query
+        description: JSON-P callback method name
+        schema:
+          type: string
+          default: 'NULL'
+      - name: rowsPerPage
+        in: query
+        description: The total number of records to return per page
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: page
+        in: query
+        description: When results are greater than rowsPerPage, allows you to grab the next page of results
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "\n{\n    \"campaigns\":[\n        {\n            \"campaignId\":9876543,\n \
+                    \           \"apiKey\":\"098f6bcd4621d373cade4e832627b4f6\",\n            \"name\"\
+                    :\"PRIMARY\",\n            \"approvalStatus\":\"Approved\",\n            \"category\"\
+                    :\"Sports & Fitness\",\n            \"platform\":\"WordPress\",\n            \"applicationType\"\
+                    :\"Blog\"\n        },\n        {\n            \"campaignId\":9876544,\n          \
+                    \  \"apiKey\":\"fb469d7ef430b0baf0cab6c436e70375\",\n            \"name\":\"apparelblog.com\"\
+                    ,\n            \"approvalStatus\":\"Approved\",\n            \"category\":\"Apparel\
+                    \ & Accessories\",\n            \"platform\":\"WordPress\",\n            \"applicationType\"\
+                    :\"Blog\"\n        },\n    ]\n}\n"
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"error\": {\n        \"errors\": [\n            {\n                \"\
+                    reason\": \"invalidCredentials\",\n                \"message\": \"Authorization secret\
+                    \ is missing or invalid. This can be found at https://publishers.viglink.com/account\
+                    \ and can be sent as a parameter or Authorization header\",\n                \"locationType\"\
+                    : \"parameter\",\n                \"location\": \"secret\"\n            }\n      \
+                    \  ]\n    },\n    \"code\": 401,\n    \"message\": \"Authorization secret is missing\
+                    \ or invalid. This can be found at https://publishers.viglink.com/account and can\
+                    \ be sent as a parameter or Authorization header\"\n}"
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            reason:
+                              type: string
+                              example: invalidCredentials
+                            message:
+                              type: string
+                              example: Authorization secret is missing or invalid. This can be found at
+                                https://publishers.viglink.com/account and can be sent as a parameter
+                                or Authorization header
+                            locationType:
+                              type: string
+                              example: parameter
+                            location:
+                              type: string
+                              example: secret
+                  code:
+                    type: integer
+                    example: 401
+                    default: 0
+                  message:
+                    type: string
+                    example: Authorization secret is missing or invalid. This can be found at https://publishers.viglink.com/account
+                      and can be sent as a parameter or Authorization header
+        '500':
+          description: '500'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"error\": {\n        \"errors\": [\n            {\n                \"\
+                    reason\": \"internalServerError\",\n                \"message\": \"An unexpected error\
+                    \ occurred, but we are looking into it\"\n            }\n        ]\n    },\n    \"\
+                    code\": 500,\n    \"message\": \"An unexpected error occurred, but we are looking\
+                    \ into it\"\n}"
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            reason:
+                              type: string
+                              example: internalServerError
+                            message:
+                              type: string
+                              example: An unexpected error occurred, but we are looking into it
+                  code:
+                    type: integer
+                    example: 500
+                    default: 0
+                  message:
+                    type: string
+                    example: An unexpected error occurred, but we are looking into it
+      deprecated: false

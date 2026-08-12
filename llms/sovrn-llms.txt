@@ -1,0 +1,31 @@
+# Sovrn Developer Center Documentation
+
+> The Sovrn Developer center for APIs and configuration
+
+## Guides
+- [Authorization](https://developer.sovrn.com/docs/authorization.md)
+- [Automated Comparisons](https://developer.sovrn.com/docs/comparisons-automated-library.md)
+- [Server-side Rendering](https://developer.sovrn.com/docs/server-side-rendering.md)
+- [MCP (Model Context Protocol) Beta ](https://developer.sovrn.com/docs/mcp.md): Commerce MCP connects your affiliate data, campaigns, and products directly to your AI tools.
+- [Demo prompts](https://developer.sovrn.com/docs/mcp-demos.md): These prebuilt demo prompts showcase how to combine Commerce MCP tools into useful content or data workflows.
+
+## API Reference
+- [Campaigns](https://developer.sovrn.com/reference/campaigns.md): Use this endpoint to get a list of your campaigns, or search for a specific campaign by name or campaignId.
+- [Link Check](https://developer.sovrn.com/reference/link.md): Get information on whether a specific URL can be monetized
+- [Bid Check](https://developer.sovrn.com/reference/getbid.md): Get a real-time Sovrn bid on your click traffic.
+- [Building Affiliate Links](https://developer.sovrn.com/reference/building-affiliate-links.md): How to create Sovrn affiliate Links by wrapping destination URLs
+- [Transactions](https://developer.sovrn.com/reference/get_reports-transactions.md): This endpoint is used to query all commission events (transactions) that have occurred or been updated on a specified date. This data can be used to see individual link performance, actualized earnings, individual site performance and more, all in real-time.
+- [Merchants](https://developer.sovrn.com/reference/get_reports-merchants.md): This endpoint is used to query aggregated performance metrics by Merchant. This data can be used to see individual merchant performance, your top performing merchants, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC.
+- [Merchants By Date](https://developer.sovrn.com/reference/get_reports-merchantsbydate.md): This endpoint is used to query aggregated performance metrics by Merchant and Date. This data can be used to see individual merchant performance by day, your top performing merchants, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC.
+- [Links](https://developer.sovrn.com/reference/get_reports-links.md): This endpoint is used to query aggregated performance metrics by Link. This data can be used to see individual merchant link performance, your top performing merchant links, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC.
+- [Pages](https://developer.sovrn.com/reference/get_reports-pages.md): This endpoint is used to query aggregated performance metrics by Page. This data can be used to see individual page performance, your top performing pages, actualized earnings, and more, all in real-time. Metrics include Pageviews, RPM, Revenue, Clicks, Sales, Actions, Conversion Rate and EPC.
+- [Merchandise](https://developer.sovrn.com/reference/get_reports-merchandise.md): This endpoint is used to query aggregated performance metrics by Merchandise. This data can be used to see individual product performance, your top performing products, actualized earnings, and more, all in real-time. Metrics include Revenue, Sales, and Actions.
+- [Networks](https://developer.sovrn.com/reference/get_reports-networks.md): This endpoint is used to query aggregated performance metrics by Network. This data can be used to see connected Network performance, your top performing Networks, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions and EPC.
+- [CUIDs](https://developer.sovrn.com/reference/get_reports-cuids.md): This endpoint is used to query aggregated performance metrics by CUID. This data can be used to see individual CUID performance, your top performing CUIDs, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC.
+- [Approved Merchants](https://developer.sovrn.com/reference/post_summaries.md): This endpoint is used to retrieve all approved merchants you can work with, including geo-specific rates and performance metrics.
+- [Merchant Updates](https://developer.sovrn.com/reference/get_summaries-delta.md): This endpoint retrieves only the updated merchants since your last query, including geo-specific rates and performance metrics.
+- [Product Recommendation](https://developer.sovrn.com/reference/get_product_recommendations.md): This endpoint provides product recommendations tailored to your content. Pass in your content along with optional filters like price range or preferred merchants, and receive a curated list of relevant products.
+- [Price Comparisons](https://developer.sovrn.com/reference/product-affiliate-api.md)
+- [Product Promo Codes](https://developer.sovrn.com/reference/get_product.md): Retrieve ranked, product-specific promo codes with verification status.
+- [Advertising performance reporting API](https://developer.sovrn.com/reference/custom-reporting.md): This API retrieves web, CTV and mobile app performance data.
+- [/reporting/advertising/publishers/{publisherId}/](https://developer.sovrn.com/reference/get_reporting-advertising-publishers-publisherid-1.md): Get custom reporting data for a publisher

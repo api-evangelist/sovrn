@@ -1,0 +1,268 @@
+openapi: 3.0.0
+info:
+  title: Sovrn Commerce Price Comparisons (Product Affiliate) API
+  version: v3.5
+  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer
+    Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block
+    were merged into one document by API Evangelist; operation content is unmodified.
+  x-source-title: Product Affiliate API
+servers:
+- url: https://comparisons.sovrn.com/api/affiliate/v3.5
+security:
+- ApiKeyAuth: []
+components:
+  parameters:
+    SiteApiKey:
+      name: site-api-key
+      in: path
+      required: true
+      description: The unique identifier of the publishers site.
+      schema:
+        type: string
+    Market:
+      name: market
+      in: path
+      required: true
+      description: "The market where to perform the search. Read the market section for the list of supported\
+        \ markets.\nFor example: 'usd_en' for the US market. \n"
+      schema:
+        type: string
+    OptionalBarcode:
+      name: barcode
+      in: query
+      required: false
+      description: 'The barcode of the product to search, can be one of: UPC,EAN,GTIN,ISBN,ASIN.'
+      schema:
+        type: string
+    OptionalPlainlink:
+      name: plainlink
+      in: query
+      required: false
+      description: 'The link of the product web page in a merchant''s site.
+
+        **Note**: the link must be plain, if you provide a tracked link the service may not work.
+
+        '
+      schema:
+        type: string
+    OptionalSearchKeywords:
+      name: search-keywords
+      in: query
+      required: false
+      description: 'List of keywords to search in the product name, **separated by space**.
+
+        For example: ''Dickies hat red'' or ''iPhone X''.
+
+        '
+      schema:
+        type: string
+    ExcludeKeywords:
+      name: exclude-keywords
+      in: query
+      required: false
+      description: 'List of keywords to exclude from the search, **separated by space**.
+
+        Any result matching any of the provided keywords will be stripped out from the results.
+
+        For example: ''Dickies hat red'' or ''iPhone 10''.
+
+        '
+      schema:
+        type: string
+    PriceRange:
+      name: price-range
+      in: query
+      required: false
+      description: 'Range of prices where the ''salePlace'' of the returned products should belong.
+
+        The range is defined in the form <min-price>-<max-price>, for example 20-30 or 19.9-26.8.
+
+        The star can be used to avoid to limit one side of the range, for example *-20 equals to 0-20
+        and 20-* will take all results with a sale price >= 20
+
+        **Note**: using \*-\* is the same as not defining any filter.
+
+        '
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: 'Limits the number of results, for example if limit=3 the service will return up to
+        3 products.
+
+        The products in the response will be those from the best performing merchants according to our
+        merchant-ranking system.
+
+        '
+      schema:
+        type: integer
+    Sid:
+      name: sid
+      in: query
+      required: false
+      description: 'Custom source ID to be used for tracking purposes. This will be the sovrn CUID.
+
+        Can contain only letters, digits, and the following punctuation characters: ''-'',''_'',''.'',''~''.
+
+        Cannot be longer than 32 characters.
+
+        '
+      schema:
+        type: string
+    EpcSort:
+      name: epc-sort
+      in: query
+      required: false
+      description: 'Sort results by EPC. If true the results will be sorted by EPC otherwise default sorting
+        will be used.
+
+        '
+      schema:
+        type: boolean
+  responses:
+    Error:
+      description: For any unexpected error a status code 500 will be returned.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: A Bad Request status code will be returned if provided parameters are malformed.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: authorization
+  schemas:
+    Error:
+      type: object
+      title: Error
+      properties:
+        message:
+          type: string
+          description: The error message
+      example:
+        message: An error message
+    Merchant:
+      type: object
+      title: Merchant
+      description: Internal representation of a merchant.
+      properties:
+        id:
+          type: integer
+          example: 8767
+          description: The unique identifier of the merchant within the system.
+        name:
+          type: string
+          example: Asda George
+          description: Human readable name of the merchant.
+        logo:
+          type: string
+          example: https://cdn.imgwzzmb.net/image/merchant/logo/aw/asda_george_88x31.jpeg
+          description: URL where to find the logo image of the merchant.
+      example:
+        id: 8767
+        name: Asda George
+        logo: https://cdn.imgwzzmb.net/image/merchant/logo/aw/asda_george_88x31.jpeg
+    Product:
+      type: object
+      title: Product
+      description: Represents an offer of a searched product, available in the given market and provided
+        by the specified merchant.
+      properties:
+        id:
+          type: integer
+          example: 2595306430
+          description: The unique identifier of the product within the system.
+        name:
+          type: string
+          example: Elizabeth Arden - '5Th Avenue' Eau De Parfum Spray
+          description: Human readable name of the product.
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+        deeplink:
+          type: string
+          example: https://redirect.viglink.com?u=CURCExYDFxwTQE9KB1RfQwNdABtUWFsbZjFQBlMBUVkGGAsRVFQ%3D&key=xxx&prodOvrd=PCR&opt=false&x=v1
+          description: The tracked link to the merchants web page of the product.
+        image:
+          type: string
+          example: https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95
+          description: A promotional image of the product.
+        thumbnail:
+          type: string
+          example: https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95
+          description: A promotional thumbnail of the product.
+        currency:
+          type: string
+          example: GBP
+          description: The currency of the related prices.
+        salePrice:
+          type: number
+          example: '30.00'
+          description: The sale price.
+        retailPrice:
+          type: number
+          example: '60.00'
+          description: The retail price.
+        discountRate:
+          type: number
+          example: '50.00'
+          description: The discount rate in %.
+        affiliatable:
+          type: boolean
+          example: true
+          description: If the product is affiliatable or not
+        epc:
+          type: number
+          example: '1.05'
+          description: The epc of the product
+      example:
+        id: 2595306430
+        name: Elizabeth Arden - '5Th Avenue' Eau De Parfum Spray
+        merchant:
+          id: 9262
+          name: Debenhams
+          logo: https://cdn.imgwzzmb.net/image/merchant/logo/cj/debenhams_88x31.png
+        deeplink: https://redirect.viglink.com?u=CURCExYDFxwTQE9KB1RfQwNdABtUWFsbZjFQBlMBUVkGGAsRVFQ%3D&key=xxx&prodOvrd=PCR&opt=false&x=v1
+        image: https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95
+        thumbnail: https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95
+        currency: GBP
+        salePrice: 30
+        retailPrice: 60
+        discountRate: 50
+        affiliatable: true
+        epc: 1.05
+paths:
+  /sites/{site-api-key}/compare/prices/{market}/by/accuracy:
+    get:
+      description: ''
+      parameters:
+      - $ref: '#/components/parameters/SiteApiKey'
+      - $ref: '#/components/parameters/Market'
+      - $ref: '#/components/parameters/OptionalBarcode'
+      - $ref: '#/components/parameters/OptionalPlainlink'
+      - $ref: '#/components/parameters/OptionalSearchKeywords'
+      - $ref: '#/components/parameters/ExcludeKeywords'
+      - $ref: '#/components/parameters/PriceRange'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Sid'
+      - $ref: '#/components/parameters/EpcSort'
+      responses:
+        '200':
+          description: The product matching the given criteria.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        default:
+          $ref: '#/components/responses/Error'

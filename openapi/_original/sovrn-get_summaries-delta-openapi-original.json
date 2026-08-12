@@ -1,0 +1,328 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Merchant Group Summaries API",
+    "version": "1.0.0",
+    "description": "API for retrieving merchant group rates summaries"
+  },
+  "servers": [
+    {
+      "url": "https://viglink.io/merchants/rates",
+      "description": "Merchant Group Summaries API"
+    }
+  ],
+  "paths": {
+    "/summaries/delta": {
+      "get": {
+        "summary": "Merchant Updates",
+        "description": "This endpoint retrieves only the updated merchants since your last query, including geo-specific rates and performance metrics.",
+        "tags": [
+          "Merchant Group Summaries"
+        ],
+        "security": [
+          {
+            "SecretKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "query",
+            "required": true,
+            "description": "ID of the user/campaign to view potential merchants for",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "The page number of results to view",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The page size of results to view",
+            "schema": {
+              "type": "integer",
+              "default": 1000
+            }
+          },
+          {
+            "name": "since",
+            "in": "query",
+            "required": false,
+            "description": "Required if 'If-None-Match' is not provided. Filter results updated since this datetime (ISO 8601 format). Note",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-04-01T00:00:00Z"
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "description": "Required if 'since' is not provided. ETag header for cache validation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Accept-Encoding",
+            "in": "header",
+            "required": false,
+            "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "gzip"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved merchant group summaries",
+            "headers": {
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "ETag for caching purposes"
+              },
+              "Last-Modified": {
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "description": "Timestamp of when the resource was last modified"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IOCollectionResponse"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "No changes since the specified timestamp",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "description": "Timestamp of when the resource was last modified"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request parameters"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "429": {
+            "description": "Too many requests (rate limit exceeded)"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "SecretKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Authorization header using the Secret Key scheme. Format: \"secret {secret key}\""
+      }
+    },
+    "schemas": {
+      "IOCollectionResponse": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MerchantGroupSummaryResponse"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "perPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MerchantGroupSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "terms": {
+            "type": "string"
+          },
+          "sovrnPreferred": {
+            "type": "boolean"
+          },
+          "logoImageUrl": {
+            "type": "string"
+          },
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CE",
+                "AU",
+                "FS",
+                "HB",
+                "RU",
+                "AE",
+                "SF",
+                "SH",
+                "TV",
+                "FI",
+                "PT",
+                "CM",
+                "BK",
+                "ED",
+                "OT",
+                "DT",
+                "MM",
+                "FD",
+                "HG",
+                "AG",
+                "CA",
+                "CB",
+                "EM",
+                "FB",
+                "FH",
+                "GM",
+                "JW",
+                "LF",
+                "MP",
+                "SP",
+                "HO",
+                "CP",
+                "UN"
+              ]
+            }
+          },
+          "sovrn": {
+            "$ref": "#/components/schemas/NetworkSummary"
+          }
+        }
+      },
+      "NetworkSummary": {
+        "type": "object",
+        "properties": {
+          "CPA": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CPASummary"
+            }
+          },
+          "CPC": {
+            "$ref": "#/components/schemas/CPCSummary"
+          }
+        }
+      },
+      "CPASummary": {
+        "type": "object",
+        "properties": {
+          "geo": {
+            "type": "string"
+          },
+          "averageEpc": {
+            "type": "number",
+            "format": "float"
+          },
+          "averageOrderValue": {
+            "type": "number",
+            "format": "float"
+          },
+          "calculatedCommissionRate": {
+            "type": "number",
+            "format": "float"
+          },
+          "rates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MerchantRateDto"
+            }
+          },
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CPCSummary": {
+        "type": "object",
+        "properties": {
+          "calculatedEpc": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "MerchantRateDto": {
+        "type": "object",
+        "properties": {
+          "currentRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "rateFormat": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

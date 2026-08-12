@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Sovrn Commerce Product Recommendation API
+  version: 0.1.0
+  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer
+    Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block
+    were merged into one document by API Evangelist; operation content is unmodified.
+  x-source-title: FastAPI
+servers:
+- url: https://shopping-gallery.prd-commerce.sovrnservices.com
+  description: Production Server
+paths:
+  /ai-orchestration/products:
+    post:
+      summary: Get Product Recommendations
+      operationId: get_product_recommendations
+      parameters:
+      - name: apiKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your Sovrn Commerce API key. Found in the Sovrn Platform under Site Settings or via
+          the Campaigns API.
+      - name: market
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Market in the format currency_language (e.g., usd_en). Inferred from IP if not provided.
+      - name: cuid
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Custom tracking ID for associating recommendations with a specific user, session,
+          or page.
+      - name: priceRange
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Price filter using "min-max" format, e.g., "20-50" or "*-25".
+      - name: includeMerchants
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated list of merchant IDs to include. Only one of includeMerchants or
+          excludeMerchants may be used.
+      - name: excludeMerchants
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated list of merchant IDs to exclude. Only one of includeMerchants or
+          excludeMerchants may be used.
+      - name: numProducts
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 4
+        description: 'Number of products to return. Default: 4, Max: 50.'
+      - name: pageUrl
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The URL or key of the content you want recommendations for. See the 'Caching' section
+          above for more information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Short descriptive title for the content (optional).
+                content:
+                  type: string
+                  description: The material you want to generate recommendations from. This can be full
+                    HTML from a page, plain text from an article, or even a short description of a product,
+                    user, or scenario.
+              required:
+              - content
+      responses:
+        '200':
+          description: A list of recommended products.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    imageURL:
+                      type: string
+                    thumbnailURL:
+                      type: string
+                    currency:
+                      type: string
+                    salePrice:
+                      type: number
+                    retailPrice:
+                      type: number
+                    discountRate:
+                      type: number
+                    inStock:
+                      type: boolean
+                    affiliatable:
+                      type: boolean
+                    deepLink:
+                      type: string
