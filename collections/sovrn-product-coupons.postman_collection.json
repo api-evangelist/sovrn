@@ -1,0 +1,522 @@
+{
+  "item": [
+    {
+      "id": "855c75fc-6edf-44ac-9636-7b48de4f68d6",
+      "name": "Product Coupons",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c9e80e6-bd7f-451f-85e0-f0da55b92a34",
+          "name": "Product coupons by URL",
+          "request": {
+            "name": "Product coupons by URL",
+            "description": {
+              "content": "Returns verified and unverified coupon codes for a specific product URL, along with merchant information and verification status.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Site API key for the site requesting coupons.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_url",
+                  "value": "<url>",
+                  "description": "(Required) Original retailer product page URL. Must not be an affiliate or redirect URL.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_unverified",
+                  "value": "true",
+                  "description": "Whether to include unverified coupon codes after verified results. Defaults to true.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "cuid",
+                  "value": "<string>",
+                  "description": "Custom identifier used to associate the click with a user, page, campaign, or event.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "utm_source",
+                  "value": "<string>",
+                  "description": "Identifies the source of the traffic (e.g., website, newsletter, twitter)."
+                },
+                {
+                  "disabled": false,
+                  "key": "utm_medium",
+                  "value": "<string>",
+                  "description": "Identifies the marketing medium (e.g., email, social, banner)."
+                },
+                {
+                  "disabled": false,
+                  "key": "utm_campaign",
+                  "value": "<string>",
+                  "description": "Identifies the campaign name, promotion, or initiative."
+                },
+                {
+                  "disabled": false,
+                  "key": "utm_term",
+                  "value": "<string>",
+                  "description": "Identifies paid search keywords or targeting terms."
+                },
+                {
+                  "disabled": false,
+                  "key": "utm_content",
+                  "value": "<string>",
+                  "description": "Differentiates similar links or placements on the same page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a7256c64-4edf-4ea9-973c-80787024775a",
+              "name": "Successfully retrieved coupon code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "b5d593ce9de90b8a324ca24e5fcc32af"
+                    },
+                    {
+                      "key": "product_url",
+                      "value": "https://www.kiehls.com/3605970407964.html"
+                    },
+                    {
+                      "key": "include_unverified",
+                      "value": "true"
+                    },
+                    {
+                      "key": "cuid",
+                      "value": "cuid152"
+                    },
+                    {
+                      "key": "utm_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_medium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_campaign",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_content",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchant\": {\n    \"domain\": \"kiehls.com\",\n    \"group_id\": 2528,\n    \"group_name\": \"Kiehl's\",\n    \"logo_url\": \"https://images.viglink.com/merchant/logo/official/240x120/kiehl-s/922daea08e0d6b4e23cf16843bf89e5b5d68d367.png?url=http%3A%2F%2Fwww.viglink.com%2Fmerchants%2F2528.gif&text=Kiehl%27s&logoId=1633\"\n  },\n  \"scan\": {\n    \"verification_active\": false,\n    \"when_to_check_back\": 3600\n  },\n  \"coupons\": [\n    {\n      \"id\": \"0d5c0846d5430357e07820f153040c36\",\n      \"code\": \"WELCOME20\",\n      \"currency\": \"USD\",\n      \"verified\": true,\n      \"affiliated_url\": \"https://redirect.viglink.com/...\",\n      \"original_price\": 52,\n      \"price_with_code\": 41.6,\n      \"verified_at\": \"2026-02-06T15:18:11.746Z\",\n      \"code_description\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c01b4a2f-4077-45fb-ad1a-7fcc9716b078",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "b5d593ce9de90b8a324ca24e5fcc32af"
+                    },
+                    {
+                      "key": "product_url",
+                      "value": "https://www.kiehls.com/3605970407964.html"
+                    },
+                    {
+                      "key": "include_unverified",
+                      "value": "true"
+                    },
+                    {
+                      "key": "cuid",
+                      "value": "cuid152"
+                    },
+                    {
+                      "key": "utm_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_medium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_campaign",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_content",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52bf43cf-e6d7-4de0-be27-cb7a694adebc",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "b5d593ce9de90b8a324ca24e5fcc32af"
+                    },
+                    {
+                      "key": "product_url",
+                      "value": "https://www.kiehls.com/3605970407964.html"
+                    },
+                    {
+                      "key": "include_unverified",
+                      "value": "true"
+                    },
+                    {
+                      "key": "cuid",
+                      "value": "cuid152"
+                    },
+                    {
+                      "key": "utm_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_medium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_campaign",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_content",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd2e7f2a-1fa1-4e93-9ec5-1e625f6893f2",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "b5d593ce9de90b8a324ca24e5fcc32af"
+                    },
+                    {
+                      "key": "product_url",
+                      "value": "https://www.kiehls.com/3605970407964.html"
+                    },
+                    {
+                      "key": "include_unverified",
+                      "value": "true"
+                    },
+                    {
+                      "key": "cuid",
+                      "value": "cuid152"
+                    },
+                    {
+                      "key": "utm_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_medium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_campaign",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_content",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e8229b1-7846-41a8-9d08-b33e458c69df",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "b5d593ce9de90b8a324ca24e5fcc32af"
+                    },
+                    {
+                      "key": "product_url",
+                      "value": "https://www.kiehls.com/3605970407964.html"
+                    },
+                    {
+                      "key": "include_unverified",
+                      "value": "true"
+                    },
+                    {
+                      "key": "cuid",
+                      "value": "cuid152"
+                    },
+                    {
+                      "key": "utm_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_medium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_campaign",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utm_content",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://viglink.io/coupons",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "408d54ec-bb2a-42ee-ac9e-cdc2f242796f",
+    "name": "Sovrn Commerce Product Promo Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Commerce Bid Check API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bid Check",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.viglink.com/api/bid",
+        "params": [
+          {
+            "name": "key",
+            "value": "YOUR_API_KEY",
+            "type": "query",
+            "description": "Site Commerce API Key for the site or traffic source where the click originated. Use the API Key that corresponds to the site, app, or traffic source sending the click so the bid is evaluated and attributed correctly.\n"
+          },
+          {
+            "name": "out",
+            "value": "https://example-merchant.com",
+            "type": "query",
+            "description": "Destination URL for the click. This value must be URL-encoded when placed in the query string.\n"
+          },
+          {
+            "name": "ip",
+            "value": "192.0.2.1",
+            "type": "query",
+            "description": "The real end user's IP address. IPv4 and IPv6 are supported. Pass the end user's actual IP address, not the IP address of your server. This value must match the user who is redirected through Sovrn for the bid to be valid.\n"
+          },
+          {
+            "name": "userAgent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "type": "query",
+            "description": "The real end user's browser User-Agent string. Pass the end user's actual User-Agent, not the User-Agent of your server. This value must match the user who is redirected through Sovrn for the bid to be valid. This value must be URL-encoded when placed in the query string.\n"
+          },
+          {
+            "name": "referrerUrl",
+            "value": "https://example-publisher.com/article",
+            "type": "query",
+            "description": "Page URL where the click originated. This value must be URL-encoded when placed in the query string.\n"
+          },
+          {
+            "name": "subId",
+            "value": "https://example-publisher.com/placement/homepage",
+            "type": "query",
+            "description": "Fully qualified SubID URL used to associate the click with a child campaign, placement, domain, or publisher under the parent API Key. If the SubID does not already exist, Sovrn will create it. This value must be URL-encoded when placed in the query string.\n"
+          },
+          {
+            "name": "bidFloor",
+            "value": "0.01",
+            "type": "query",
+            "description": "Minimum acceptable bid, in USD, expressed as a decimal. For example, `0.01` means one cent. When provided, bids below this value return `affiliated: false`. If omitted, no minimum bid floor is applied.\n"
+          },
+          {
+            "name": "includeCpa",
+            "value": "false",
+            "type": "query",
+            "description": "When `true`, CPA offers are considered alongside CPC bids. If a CPA offer wins, the response `pricing` will be `CPA`. If omitted, only CPC bids are considered.\n"
+          },
+          {
+            "name": "cuid",
+            "value": "user_12345",
+            "type": "query",
+            "description": "An identifier of your choosing used to associate the click with a user, page, campaign, or event. Use only letters, numbers, hyphens, and underscores. Maximum 2048 characters."
+          },
+          {
+            "name": "utm_source",
+            "value": "newsletter",
+            "type": "query",
+            "description": "Identifies the source of the traffic, such as a website, newsletter, or social platform. Use only letters, numbers, hyphens, and underscores."
+          },
+          {
+            "name": "utm_medium",
+            "value": "email",
+            "type": "query",
+            "description": "Identifies the marketing medium, such as email, social, or banner. Use only letters, numbers, hyphens, and underscores."
+          },
+          {
+            "name": "utm_campaign",
+            "value": "black_friday_2025",
+            "type": "query",
+            "description": "Identifies the campaign name, promotion, or initiative. Use only letters, numbers, hyphens, and underscores."
+          },
+          {
+            "name": "utm_term",
+            "value": "running_shoes",
+            "type": "query",
+            "description": "Identifies paid search keywords or targeting terms. Use only letters, numbers, hyphens, and underscores."
+          },
+          {
+            "name": "utm_content",
+            "value": "header",
+            "type": "query",
+            "description": "Differentiates similar links or placements on the same page. Use only letters, numbers, hyphens, and underscores."
+          },
+          {
+            "name": "gdprApplies",
+            "value": "false",
+            "type": "query",
+            "description": "Indicates whether GDPR applies to the user. If omitted, Sovrn determines whether GDPR applies based on the user's IP address.\n"
+          },
+          {
+            "name": "gdprConsent",
+            "value": "COwK7daOwK7daABABBENAPCgAAAAAAAAAAYgAAAAAAAA",
+            "type": "query",
+            "description": "Raw GDPR consent string for the user, when applicable.\n"
+          },
+          {
+            "name": "ccpaConsent",
+            "value": "1YNN",
+            "type": "query",
+            "description": "Raw CCPA consent string for the user, when applicable.\n"
+          },
+          {
+            "name": "gppConsent",
+            "value": "DBABMA~CPXxRfAPXxRfAAfKABENB-CgAAAAAAAAAAYgAAAAAAAA",
+            "type": "query",
+            "description": "Raw GPP consent string for the user, when applicable.\n"
+          }
+        ]
+      },
+      "docs": "Get a real-time Sovrn bid on your click traffic."
+    }
+  ],
+  "bundled": true
+}

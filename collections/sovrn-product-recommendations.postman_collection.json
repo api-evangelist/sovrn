@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "bd43a988-22dc-4885-8166-a5513fdb8af1",
+      "name": "Get Product Recommendations",
+      "request": {
+        "name": "Get Product Recommendations",
+        "description": {},
+        "url": {
+          "path": [
+            "ai-orchestration",
+            "products"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "apiKey",
+              "value": "<string>",
+              "description": "(Required) Your Sovrn Commerce API key. Found in the Sovrn Platform under Site Settings or via the Campaigns API."
+            },
+            {
+              "disabled": false,
+              "key": "market",
+              "value": "<string>",
+              "description": "Market in the format currency_language (e.g., usd_en). Inferred from IP if not provided."
+            },
+            {
+              "disabled": false,
+              "key": "cuid",
+              "value": "<string>",
+              "description": "Custom tracking ID for associating recommendations with a specific user, session, or page."
+            },
+            {
+              "disabled": false,
+              "key": "priceRange",
+              "value": "<string>",
+              "description": "Price filter using \"min-max\" format, e.g., \"20-50\" or \"*-25\"."
+            },
+            {
+              "disabled": false,
+              "key": "includeMerchants",
+              "value": "<string>",
+              "description": "Comma separated list of merchant IDs to include. Only one of includeMerchants or excludeMerchants may be used."
+            },
+            {
+              "disabled": false,
+              "key": "excludeMerchants",
+              "value": "<string>",
+              "description": "Comma separated list of merchant IDs to exclude. Only one of includeMerchants or excludeMerchants may be used."
+            },
+            {
+              "disabled": false,
+              "key": "numProducts",
+              "value": "4",
+              "description": "Number of products to return. Default: 4, Max: 50."
+            },
+            {
+              "disabled": false,
+              "key": "pageUrl",
+              "value": "<string>",
+              "description": "(Required) The URL or key of the content you want recommendations for. See the 'Caching' section above for more information."
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"content\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "b7101779-574b-4b65-abe6-492065de102d",
+          "name": "A list of recommended products.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ai-orchestration",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "apiKey",
+                  "value": "<string>"
+                },
+                {
+                  "key": "market",
+                  "value": "<string>"
+                },
+                {
+                  "key": "cuid",
+                  "value": "<string>"
+                },
+                {
+                  "key": "priceRange",
+                  "value": "<string>"
+                },
+                {
+                  "key": "includeMerchants",
+                  "value": "<string>"
+                },
+                {
+                  "key": "excludeMerchants",
+                  "value": "<string>"
+                },
+                {
+                  "key": "numProducts",
+                  "value": "4"
+                },
+                {
+                  "key": "pageUrl",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": 5237,\n    \"name\": \"string\",\n    \"imageURL\": \"string\",\n    \"thumbnailURL\": \"string\",\n    \"currency\": \"string\",\n    \"salePrice\": 8081.268770535601,\n    \"retailPrice\": 3903.597642597864,\n    \"discountRate\": 3110.5529892562454,\n    \"inStock\": false,\n    \"affiliatable\": false,\n    \"deepLink\": \"string\"\n  },\n  {\n    \"id\": 8857,\n    \"name\": \"string\",\n    \"imageURL\": \"string\",\n    \"thumbnailURL\": \"string\",\n    \"currency\": \"string\",\n    \"salePrice\": 8907.554483351521,\n    \"retailPrice\": 4825.50069332967,\n    \"discountRate\": 436.18439138078946,\n    \"inStock\": false,\n    \"affiliatable\": false,\n    \"deepLink\": \"string\"\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://shopping-gallery.prd-commerce.sovrnservices.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2ee530c8-a8ce-4324-a141-38f6462b7910",
+    "name": "Sovrn Commerce Product Recommendation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.",
+      "type": "text/plain"
+    }
+  }
+}

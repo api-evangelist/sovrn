@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Commerce Link Check API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Link check API",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.viglink.com/api/link/",
+        "params": [
+          {
+            "name": "out",
+            "value": "",
+            "type": "query",
+            "description": "The URL to be tested for monetization"
+          },
+          {
+            "name": "key",
+            "value": "",
+            "type": "query",
+            "description": "Commerce Api Key. This is found by logging into your account at https://commerce.sovrn.com and navigating to Sites. The API key field for the domain you wish to use should be entered here."
+          },
+          {
+            "name": "optimize",
+            "value": "",
+            "type": "query",
+            "description": "Option on if the link can be optimized"
+          },
+          {
+            "name": "format",
+            "value": "",
+            "type": "query",
+            "description": "We should always use `json`"
+          },
+          {
+            "name": "geo",
+            "value": "",
+            "type": "query",
+            "description": "Country code that can be passed in for affiliation testing"
+          },
+          {
+            "name": "fbu",
+            "value": "",
+            "type": "query",
+            "description": "Fallback url to go if out url can't beat the bid floor"
+          },
+          {
+            "name": "bf",
+            "value": "",
+            "type": "query",
+            "description": "Bid floor for the fallback url"
+          }
+        ]
+      },
+      "docs": "Get information on whether a specific URL can be monetized"
+    }
+  ],
+  "bundled": true
+}

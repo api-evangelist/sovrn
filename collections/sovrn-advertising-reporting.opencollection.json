@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Advertising Performance Reporting API",
+    "version": "2.70.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /reporting/advertising/publishers/{publisherId}/",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sovrn.com/reporting/advertising/publishers/:publisherId/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date, in ISO-8601 format (yyyy-mm-DDTHH:MM:ssZ), of the time range, inclusive"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date, in ISO-8601 format (yyyy-mm-DDTHH:MM:ssZ), of the time range, exclusive"
+              },
+              {
+                "name": "metrics",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of metrics to use in the report query"
+              },
+              {
+                "name": "dimensions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of dimensions to use in the report query"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "The level of granularity for returned data. Possible values are \"hour\", \"day\", \"month\"."
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of domain names used to filter results"
+              },
+              {
+                "name": "bundleId",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of bundle IDs used to filter results"
+              },
+              {
+                "name": "auction",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of auction types used to filter results. Possible values are \"googleOb\", \"amazonTam\", \"waterfall\", \"headerBidding\", \"serverToServer\", \"nimbus\", \"springserve\", \"publica\", \"bidmachine\""
+              },
+              {
+                "name": "publisherId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "propertyType",
+                "value": "",
+                "type": "query",
+                "description": "The property type by which to filter the results by. Possible values are \"web\" or \"app\""
+              }
+            ]
+          },
+          "docs": "Get custom reporting data for a publisher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

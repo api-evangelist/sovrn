@@ -1,0 +1,1067 @@
+{
+  "item": [
+    {
+      "id": "f062f103-eb4e-4755-adab-7169243ea840",
+      "name": "Merchant Group Summaries",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30a3c7cf-0835-4eeb-a1e8-5c3274dc0b72",
+          "name": "Merchant Updates",
+          "request": {
+            "name": "Merchant Updates",
+            "description": {
+              "content": "This endpoint retrieves only the updated merchants since your last query, including geo-specific rates and performance metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "summaries",
+                "delta"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "campaignId",
+                  "value": "<long>",
+                  "description": "(Required) ID of the user/campaign to view potential merchants for"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number of results to view"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "1000",
+                  "description": "The page size of results to view"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "Required if 'If-None-Match' is not provided. Filter results updated since this datetime (ISO 8601 format). Note"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Required if 'since' is not provided. ETag header for cache validation",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                "key": "Accept-Encoding",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7d871808-f4d5-440a-91f4-b4d00cfcda96",
+              "name": "Successfully retrieved merchant group summaries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries",
+                    "delta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "since",
+                      "value": "2023-04-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Required if 'since' is not provided. ETag header for cache validation",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "ETag for caching purposes",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Timestamp of when the resource was last modified",
+                  "key": "Last-Modified",
+                  "value": "1954-03-22T14:23:05.880Z"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"groupId\": 8876,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"terms\": \"string\",\n      \"sovrnPreferred\": false,\n      \"logoImageUrl\": \"string\",\n      \"category\": [\n        \"OT\",\n        \"SF\"\n      ],\n      \"sovrn\": {\n        \"CPA\": [\n          {\n            \"geo\": \"string\",\n            \"averageEpc\": 5770.509549272871,\n            \"averageOrderValue\": 7342.704965022749,\n            \"calculatedCommissionRate\": 7714.9389659861745,\n            \"rates\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"domains\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"geo\": \"string\",\n            \"averageEpc\": 4824.357503519078,\n            \"averageOrderValue\": 6094.987895817418,\n            \"calculatedCommissionRate\": 7478.7608688247565,\n            \"rates\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"domains\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"CPC\": {\n          \"calculatedEpc\": 7459.889618396138\n        }\n      }\n    },\n    {\n      \"groupId\": 6938,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"terms\": \"string\",\n      \"sovrnPreferred\": false,\n      \"logoImageUrl\": \"string\",\n      \"category\": [\n        \"FS\",\n        \"MP\"\n      ],\n      \"sovrn\": {\n        \"CPA\": [\n          {\n            \"geo\": \"string\",\n            \"averageEpc\": 4510.768848253893,\n            \"averageOrderValue\": 8969.028903768809,\n            \"calculatedCommissionRate\": 6344.67451891257,\n            \"rates\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"domains\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"geo\": \"string\",\n            \"averageEpc\": 9898.416637459683,\n            \"averageOrderValue\": 3673.131353302903,\n            \"calculatedCommissionRate\": 4504.208573086921,\n            \"rates\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"domains\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"CPC\": {\n          \"calculatedEpc\": 5615.499960447146\n        }\n      }\n    }\n  ],\n  \"page\": 615,\n  \"perPage\": 7501,\n  \"totalItems\": 9939\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a251f91-f780-4eb7-b873-c1a7479f9e37",
+              "name": "No changes since the specified timestamp",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries",
+                    "delta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "since",
+                      "value": "2023-04-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Required if 'since' is not provided. ETag header for cache validation",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Timestamp of when the resource was last modified",
+                  "key": "Last-Modified",
+                  "value": "1954-03-22T14:23:05.880Z"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbacc259-2263-4c49-9734-bf94befc9af2",
+              "name": "Bad request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries",
+                    "delta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "since",
+                      "value": "2023-04-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Required if 'since' is not provided. ETag header for cache validation",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "406b55e1-f525-4ff1-8919-2bcb4d8e2c72",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries",
+                    "delta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "since",
+                      "value": "2023-04-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Required if 'since' is not provided. ETag header for cache validation",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32b018ee-4643-4cb0-ae31-775883260445",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries",
+                    "delta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "since",
+                      "value": "2023-04-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Required if 'since' is not provided. ETag header for cache validation",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "589b20d4-03f4-4ac0-afdb-1a5b7f3a8055",
+              "name": "Too many requests (rate limit exceeded)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries",
+                    "delta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "since",
+                      "value": "2023-04-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Required if 'since' is not provided. ETag header for cache validation",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dcc75785-e883-4730-9b43-36c9a836ddde",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries",
+                    "delta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "since",
+                      "value": "2023-04-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Required if 'since' is not provided. ETag header for cache validation",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf9abb42-f1ec-4d40-836a-2d7a19808dae",
+          "name": "Approved Merchants",
+          "request": {
+            "name": "Approved Merchants",
+            "description": {
+              "content": "This endpoint is used to retrieve all approved merchants you can work with, including geo-specific rates and performance metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "summaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "campaignId",
+                  "value": "<long>",
+                  "description": "(Required) ID of the user/campaign to view potential merchants for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                "key": "Accept-Encoding",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": 1,\n  \"pageSize\": 1000,\n  \"filters\": [\n    {\n      \"type\": \"<string>\",\n      \"values\": [\n        \"<integer>\",\n        \"<integer>\"\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"values\": [\n        \"<integer>\",\n        \"<integer>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6cd7a4b5-c4f6-48d1-a54a-5672fdca0a5b",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": [\n    {\n      \"type\": \"GROUP_ID\",\n      \"values\": [\n        34,\n        384\n      ]\n    },\n    {\n      \"type\": \"CATEGORY\",\n      \"values\": [\n        \"SF\",\n        \"CE\"\n      ]\n    },\n    {\n      \"type\": \"PROGRAM_TYPE\",\n      \"values\": [\n        \"CPA\"\n      ]\n    },\n    {\n      \"type\": \"GEO\",\n      \"values\": [\n        \"us\",\n        \"ca\"\n      ]\n    }\n  ],\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "ETag for caching purposes",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Timestamp of when the resource was last modified",
+                  "key": "Last-Modified",
+                  "value": "1954-03-22T14:23:05.880Z"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"groupId\": 12345,\n      \"name\": \"Merchant A\",\n      \"description\": \"Pet retailer\",\n      \"terms\": \"Standard terms apply\",\n      \"sovrnPreferred\": true,\n      \"logoImageUrl\": \"https://example.com/logo.png\",\n      \"category\": [\n        \"PT\",\n        \"AU\"\n      ],\n      \"sovrn\": {\n        \"CPA\": [\n          {\n            \"geo\": \"US\",\n            \"averageEpc\": 0.15,\n            \"averageOrderValue\": 75.5,\n            \"calculatedCommissionRate\": 0.08,\n            \"rates\": [\n              {\n                \"currentRate\": 8,\n                \"rateFormat\": \"PERCENTAGE\",\n                \"action\": \"Sale\",\n                \"details\": \"8% on all sales\"\n              }\n            ],\n            \"domains\": [\n              \"merchanta.com\"\n            ]\n          }\n        ],\n        \"CPC\": {\n          \"calculatedEpc\": 0.25\n        }\n      }\n    }\n  ],\n  \"page\": 1,\n  \"perPage\": 20,\n  \"totalItems\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c7baec8-e88f-4c46-a1f2-3b470b0eb70a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": [\n    {\n      \"type\": \"GROUP_ID\",\n      \"values\": [\n        34,\n        384\n      ]\n    },\n    {\n      \"type\": \"CATEGORY\",\n      \"values\": [\n        \"SF\",\n        \"CE\"\n      ]\n    },\n    {\n      \"type\": \"PROGRAM_TYPE\",\n      \"values\": [\n        \"CPA\"\n      ]\n    },\n    {\n      \"type\": \"GEO\",\n      \"values\": [\n        \"us\",\n        \"ca\"\n      ]\n    }\n  ],\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "796470ad-d24f-4852-8cf6-4a4eff0854d1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": [\n    {\n      \"type\": \"GROUP_ID\",\n      \"values\": [\n        34,\n        384\n      ]\n    },\n    {\n      \"type\": \"CATEGORY\",\n      \"values\": [\n        \"SF\",\n        \"CE\"\n      ]\n    },\n    {\n      \"type\": \"PROGRAM_TYPE\",\n      \"values\": [\n        \"CPA\"\n      ]\n    },\n    {\n      \"type\": \"GEO\",\n      \"values\": [\n        \"us\",\n        \"ca\"\n      ]\n    }\n  ],\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "107f4d71-e62b-4eb8-99ad-e20951cba2c0",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": [\n    {\n      \"type\": \"GROUP_ID\",\n      \"values\": [\n        34,\n        384\n      ]\n    },\n    {\n      \"type\": \"CATEGORY\",\n      \"values\": [\n        \"SF\",\n        \"CE\"\n      ]\n    },\n    {\n      \"type\": \"PROGRAM_TYPE\",\n      \"values\": [\n        \"CPA\"\n      ]\n    },\n    {\n      \"type\": \"GEO\",\n      \"values\": [\n        \"us\",\n        \"ca\"\n      ]\n    }\n  ],\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddcb2f6b-e976-45d4-a3d3-c1d5a2c0d870",
+              "name": "Too many requests (rate limit exceeded)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": [\n    {\n      \"type\": \"GROUP_ID\",\n      \"values\": [\n        34,\n        384\n      ]\n    },\n    {\n      \"type\": \"CATEGORY\",\n      \"values\": [\n        \"SF\",\n        \"CE\"\n      ]\n    },\n    {\n      \"type\": \"PROGRAM_TYPE\",\n      \"values\": [\n        \"CPA\"\n      ]\n    },\n    {\n      \"type\": \"GEO\",\n      \"values\": [\n        \"us\",\n        \"ca\"\n      ]\n    }\n  ],\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9d88a82-977f-4b50-9024-db4272c71da6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the optional encoding (compression) algorithm the client can understand",
+                    "key": "Accept-Encoding",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": [\n    {\n      \"type\": \"GROUP_ID\",\n      \"values\": [\n        34,\n        384\n      ]\n    },\n    {\n      \"type\": \"CATEGORY\",\n      \"values\": [\n        \"SF\",\n        \"CE\"\n      ]\n    },\n    {\n      \"type\": \"PROGRAM_TYPE\",\n      \"values\": [\n        \"CPA\"\n      ]\n    },\n    {\n      \"type\": \"GEO\",\n      \"values\": [\n        \"us\",\n        \"ca\"\n      ]\n    }\n  ],\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://viglink.io/merchants/rates",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1f44e326-c9c5-4127-8a1c-13f7de0c3203",
+    "name": "Sovrn Commerce Merchant Group Summaries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.",
+      "type": "text/plain"
+    }
+  }
+}

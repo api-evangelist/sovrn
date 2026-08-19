@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Commerce Merchant Group Summaries API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Group Summaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Merchant Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/merchants/rates/summaries/delta",
+            "headers": [
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the user/campaign to view potential merchants for"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of results to view"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size of results to view"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Required if 'If-None-Match' is not provided. Filter results updated since this datetime (ISO 8601 format). Note"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves only the updated merchants since your last query, including geo-specific rates and performance metrics."
+        },
+        {
+          "info": {
+            "name": "Approved Merchants",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://viglink.io/merchants/rates/summaries",
+            "headers": [
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the user/campaign to view potential merchants for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is used to retrieve all approved merchants you can work with, including geo-specific rates and performance metrics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

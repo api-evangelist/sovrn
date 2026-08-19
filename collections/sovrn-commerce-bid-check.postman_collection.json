@@ -1,0 +1,584 @@
+{
+  "item": [
+    {
+      "id": "c1f24c32-3092-4e44-8e48-243e6500fd52",
+      "name": "Bid Check",
+      "request": {
+        "name": "Bid Check",
+        "description": {
+          "content": "Get a real-time Sovrn bid on your click traffic.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "api",
+            "bid"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "key",
+              "value": "<string>",
+              "description": "(Required) Site Commerce API Key for the site or traffic source where the click originated. Use the API Key that corresponds to the site, app, or traffic source sending the click so the bid is evaluated and attributed correctly.\n"
+            },
+            {
+              "disabled": false,
+              "key": "out",
+              "value": "<uri>",
+              "description": "(Required) Destination URL for the click. This value must be URL-encoded when placed in the query string.\n"
+            },
+            {
+              "disabled": false,
+              "key": "ip",
+              "value": "<string>",
+              "description": "(Required) The real end user's IP address. IPv4 and IPv6 are supported. Pass the end user's actual IP address, not the IP address of your server. This value must match the user who is redirected through Sovrn for the bid to be valid.\n"
+            },
+            {
+              "disabled": false,
+              "key": "userAgent",
+              "value": "<string>",
+              "description": "(Required) The real end user's browser User-Agent string. Pass the end user's actual User-Agent, not the User-Agent of your server. This value must match the user who is redirected through Sovrn for the bid to be valid. This value must be URL-encoded when placed in the query string.\n"
+            },
+            {
+              "disabled": false,
+              "key": "referrerUrl",
+              "value": "<uri>",
+              "description": "Page URL where the click originated. This value must be URL-encoded when placed in the query string.\n"
+            },
+            {
+              "disabled": false,
+              "key": "subId",
+              "value": "<uri>",
+              "description": "Fully qualified SubID URL used to associate the click with a child campaign, placement, domain, or publisher under the parent API Key. If the SubID does not already exist, Sovrn will create it. This value must be URL-encoded when placed in the query string.\n"
+            },
+            {
+              "disabled": false,
+              "key": "bidFloor",
+              "value": "<float>",
+              "description": "Minimum acceptable bid, in USD, expressed as a decimal. For example, `0.01` means one cent. When provided, bids below this value return `affiliated: false`. If omitted, no minimum bid floor is applied.\n"
+            },
+            {
+              "disabled": false,
+              "key": "includeCpa",
+              "value": "<boolean>",
+              "description": "When `true`, CPA offers are considered alongside CPC bids. If a CPA offer wins, the response `pricing` will be `CPA`. If omitted, only CPC bids are considered.\n"
+            },
+            {
+              "disabled": false,
+              "key": "cuid",
+              "value": "<string>",
+              "description": "An identifier of your choosing used to associate the click with a user, page, campaign, or event. Use only letters, numbers, hyphens, and underscores. Maximum 2048 characters."
+            },
+            {
+              "disabled": false,
+              "key": "utm_source",
+              "value": "<string>",
+              "description": "Identifies the source of the traffic, such as a website, newsletter, or social platform. Use only letters, numbers, hyphens, and underscores."
+            },
+            {
+              "disabled": false,
+              "key": "utm_medium",
+              "value": "<string>",
+              "description": "Identifies the marketing medium, such as email, social, or banner. Use only letters, numbers, hyphens, and underscores."
+            },
+            {
+              "disabled": false,
+              "key": "utm_campaign",
+              "value": "<string>",
+              "description": "Identifies the campaign name, promotion, or initiative. Use only letters, numbers, hyphens, and underscores."
+            },
+            {
+              "disabled": false,
+              "key": "utm_term",
+              "value": "<string>",
+              "description": "Identifies paid search keywords or targeting terms. Use only letters, numbers, hyphens, and underscores."
+            },
+            {
+              "disabled": false,
+              "key": "utm_content",
+              "value": "<string>",
+              "description": "Differentiates similar links or placements on the same page. Use only letters, numbers, hyphens, and underscores."
+            },
+            {
+              "disabled": false,
+              "key": "gdprApplies",
+              "value": "<boolean>",
+              "description": "Indicates whether GDPR applies to the user. If omitted, Sovrn determines whether GDPR applies based on the user's IP address.\n"
+            },
+            {
+              "disabled": false,
+              "key": "gdprConsent",
+              "value": "<string>",
+              "description": "Raw GDPR consent string for the user, when applicable.\n"
+            },
+            {
+              "disabled": false,
+              "key": "ccpaConsent",
+              "value": "<string>",
+              "description": "Raw CCPA consent string for the user, when applicable.\n"
+            },
+            {
+              "disabled": false,
+              "key": "gppConsent",
+              "value": "<string>",
+              "description": "Raw GPP consent string for the user, when applicable.\n"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "fa9eeb65-dd23-4b0b-a6f9-5bfdfeb7491d",
+          "name": "Success — bid response returned.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "api",
+                "bid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "YOUR_API_KEY"
+                },
+                {
+                  "key": "out",
+                  "value": "https://example-merchant.com"
+                },
+                {
+                  "key": "ip",
+                  "value": "192.0.2.1"
+                },
+                {
+                  "key": "userAgent",
+                  "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                },
+                {
+                  "key": "referrerUrl",
+                  "value": "https://example-publisher.com/article"
+                },
+                {
+                  "key": "subId",
+                  "value": "https://example-publisher.com/placement/homepage"
+                },
+                {
+                  "key": "bidFloor",
+                  "value": "0.01"
+                },
+                {
+                  "key": "includeCpa",
+                  "value": "false"
+                },
+                {
+                  "key": "cuid",
+                  "value": "user_12345"
+                },
+                {
+                  "key": "utm_source",
+                  "value": "newsletter"
+                },
+                {
+                  "key": "utm_medium",
+                  "value": "email"
+                },
+                {
+                  "key": "utm_campaign",
+                  "value": "black_friday_2025"
+                },
+                {
+                  "key": "utm_term",
+                  "value": "running_shoes"
+                },
+                {
+                  "key": "utm_content",
+                  "value": "header"
+                },
+                {
+                  "key": "gdprApplies",
+                  "value": "false"
+                },
+                {
+                  "key": "gdprConsent",
+                  "value": "COwK7daOwK7daABABBENAPCgAAAAAAAAAAYgAAAAAAAA"
+                },
+                {
+                  "key": "ccpaConsent",
+                  "value": "1YNN"
+                },
+                {
+                  "key": "gppConsent",
+                  "value": "DBABMA~CPXxRfAPXxRfAAfKABENB-CgAAAAAAAAAAYgAAAAAAAA"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"affiliated\": true,\n  \"pricing\": \"CPC\",\n  \"eepc\": 0.05725,\n  \"url\": \"https://redirect.viglink.com?u=https%3A%2F%2Fexample-merchant.com&key=YOUR_API_KEY&prodOvrd=PRE&fbu=https%3A%2F%2Fexample-merchant.com&bf=0.01&redirClientIp=192.0.2.1&userAgent=Mozilla%2F5.0+%28Macintosh%3B+Intel+Mac+OS+X+10_15_7%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F120.0.0.0+Safari%2F537.36&sid=EXAMPLE_SID\",\n  \"expireInMs\": 250\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "5a282a65-7b69-4c4c-8ecf-b2ac76be1c77",
+          "name": "Bad Request — one or more required fields are missing or malformed.\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "api",
+                "bid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "YOUR_API_KEY"
+                },
+                {
+                  "key": "out",
+                  "value": "https://example-merchant.com"
+                },
+                {
+                  "key": "ip",
+                  "value": "192.0.2.1"
+                },
+                {
+                  "key": "userAgent",
+                  "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                },
+                {
+                  "key": "referrerUrl",
+                  "value": "https://example-publisher.com/article"
+                },
+                {
+                  "key": "subId",
+                  "value": "https://example-publisher.com/placement/homepage"
+                },
+                {
+                  "key": "bidFloor",
+                  "value": "0.01"
+                },
+                {
+                  "key": "includeCpa",
+                  "value": "false"
+                },
+                {
+                  "key": "cuid",
+                  "value": "user_12345"
+                },
+                {
+                  "key": "utm_source",
+                  "value": "newsletter"
+                },
+                {
+                  "key": "utm_medium",
+                  "value": "email"
+                },
+                {
+                  "key": "utm_campaign",
+                  "value": "black_friday_2025"
+                },
+                {
+                  "key": "utm_term",
+                  "value": "running_shoes"
+                },
+                {
+                  "key": "utm_content",
+                  "value": "header"
+                },
+                {
+                  "key": "gdprApplies",
+                  "value": "false"
+                },
+                {
+                  "key": "gdprConsent",
+                  "value": "COwK7daOwK7daABABBENAPCgAAAAAAAAAAYgAAAAAAAA"
+                },
+                {
+                  "key": "ccpaConsent",
+                  "value": "1YNN"
+                },
+                {
+                  "key": "gppConsent",
+                  "value": "DBABMA~CPXxRfAPXxRfAAfKABENB-CgAAAAAAAAAAYgAAAAAAAA"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "e0467849-c795-4446-8c79-8ccead63901e",
+          "name": "Unauthorized — the provided `key` is not a valid Commerce API Key.\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "api",
+                "bid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "YOUR_API_KEY"
+                },
+                {
+                  "key": "out",
+                  "value": "https://example-merchant.com"
+                },
+                {
+                  "key": "ip",
+                  "value": "192.0.2.1"
+                },
+                {
+                  "key": "userAgent",
+                  "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                },
+                {
+                  "key": "referrerUrl",
+                  "value": "https://example-publisher.com/article"
+                },
+                {
+                  "key": "subId",
+                  "value": "https://example-publisher.com/placement/homepage"
+                },
+                {
+                  "key": "bidFloor",
+                  "value": "0.01"
+                },
+                {
+                  "key": "includeCpa",
+                  "value": "false"
+                },
+                {
+                  "key": "cuid",
+                  "value": "user_12345"
+                },
+                {
+                  "key": "utm_source",
+                  "value": "newsletter"
+                },
+                {
+                  "key": "utm_medium",
+                  "value": "email"
+                },
+                {
+                  "key": "utm_campaign",
+                  "value": "black_friday_2025"
+                },
+                {
+                  "key": "utm_term",
+                  "value": "running_shoes"
+                },
+                {
+                  "key": "utm_content",
+                  "value": "header"
+                },
+                {
+                  "key": "gdprApplies",
+                  "value": "false"
+                },
+                {
+                  "key": "gdprConsent",
+                  "value": "COwK7daOwK7daABABBENAPCgAAAAAAAAAAYgAAAAAAAA"
+                },
+                {
+                  "key": "ccpaConsent",
+                  "value": "1YNN"
+                },
+                {
+                  "key": "gppConsent",
+                  "value": "DBABMA~CPXxRfAPXxRfAAfKABENB-CgAAAAAAAAAAYgAAAAAAAA"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "4b5f079a-6bce-4877-b908-0bdb78345763",
+          "name": "Internal Server Error.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "api",
+                "bid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "YOUR_API_KEY"
+                },
+                {
+                  "key": "out",
+                  "value": "https://example-merchant.com"
+                },
+                {
+                  "key": "ip",
+                  "value": "192.0.2.1"
+                },
+                {
+                  "key": "userAgent",
+                  "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                },
+                {
+                  "key": "referrerUrl",
+                  "value": "https://example-publisher.com/article"
+                },
+                {
+                  "key": "subId",
+                  "value": "https://example-publisher.com/placement/homepage"
+                },
+                {
+                  "key": "bidFloor",
+                  "value": "0.01"
+                },
+                {
+                  "key": "includeCpa",
+                  "value": "false"
+                },
+                {
+                  "key": "cuid",
+                  "value": "user_12345"
+                },
+                {
+                  "key": "utm_source",
+                  "value": "newsletter"
+                },
+                {
+                  "key": "utm_medium",
+                  "value": "email"
+                },
+                {
+                  "key": "utm_campaign",
+                  "value": "black_friday_2025"
+                },
+                {
+                  "key": "utm_term",
+                  "value": "running_shoes"
+                },
+                {
+                  "key": "utm_content",
+                  "value": "header"
+                },
+                {
+                  "key": "gdprApplies",
+                  "value": "false"
+                },
+                {
+                  "key": "gdprConsent",
+                  "value": "COwK7daOwK7daABABBENAPCgAAAAAAAAAAYgAAAAAAAA"
+                },
+                {
+                  "key": "ccpaConsent",
+                  "value": "1YNN"
+                },
+                {
+                  "key": "gppConsent",
+                  "value": "DBABMA~CPXxRfAPXxRfAAfKABENB-CgAAAAAAAAAAYgAAAAAAAA"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.viglink.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "13bad1a8-e927-476e-a2e8-4b8a1360ef1f",
+    "name": "Sovrn Commerce Bid Check API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.",
+      "type": "text/plain"
+    }
+  }
+}

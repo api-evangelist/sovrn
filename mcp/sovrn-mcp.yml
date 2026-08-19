@@ -13,38 +13,33 @@ server:
     type: apiKey
     in: header
     name: Authorization
-    format: 'secret {SECRET_KEY}'
+    format: secret {SECRET_KEY}
     key_source: https://platform.sovrn.com/commerce/settings
-  client_config: |
-    {
-      "mcpServers": {
-        "Commerce MCP Server": {
-          "url": "https://mcp.sovrn.com/commerce",
-          "headers": {
-            "Authorization": "secret {SECRET_KEY}"
-          }
-        }
-      }
-    }
+  client_config: "{\n  \"mcpServers\": {\n    \"Commerce MCP Server\": {\n      \"url\": \"https://mcp.sovrn.com/commerce\"\
+    ,\n      \"headers\": {\n        \"Authorization\": \"secret {SECRET_KEY}\"\n      }\n    }\n  }\n\
+    }\n"
 probe:
   method: POST tools/list (JSON-RPC 2.0)
   url: https://mcp.sovrn.com/commerce
   http_status: 401
   body: '{"error": "invalid_token", "error_description": "Authentication failed. ..."}'
   fetched: '2026-08-12'
-  note: >-
-    The live tools/list manifest is auth-gated, so per-tool inputSchema could not be read
-    anonymously. The tool set below is transcribed verbatim from the names, descriptions and
-    categories Sovrn publishes in its own Commerce MCP documentation table. Input schemas
-    require an authenticated introspection; the backing REST operation named in
-    mcp/sovrn-tool-crosswalk.yml carries the real parameter contract.
+  note: The live tools/list manifest is auth-gated, so per-tool inputSchema could not be read anonymously.
+    The tool set below is transcribed verbatim from the names, descriptions and categories Sovrn publishes
+    in its own Commerce MCP documentation table. Input schemas require an authenticated introspection;
+    the backing REST operation named in mcp/sovrn-tool-crosswalk.yml carries the real parameter contract.
 rate_limits:
   enforced_by: the underlying Sovrn Commerce APIs, not the MCP server
   scope: per tool, not global across the Commerce MCP service
   guidance:
-  - tools: [trx_Transactions, trx_Merchants, trx_Links]
+  - tools:
+    - trx_Transactions
+    - trx_Merchants
+    - trx_Links
     limit: 1 request per 60 seconds
-  - tools: [comp_search_prices, rec_recommend_products]
+  - tools:
+    - comp_search_prices
+    - rec_recommend_products
     limit: multiple requests per second, endpoint dependent
 tools:
 - name: comp_search_prices
@@ -110,3 +105,10 @@ troubleshooting:
 - issue: Rate limit triggered
   cause: More than one call per 60 seconds
   resolution: Apply delay between transaction calls
+deployment:
+  mode: remote
+  endpoint: https://mcp.sovrn.com/commerce
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

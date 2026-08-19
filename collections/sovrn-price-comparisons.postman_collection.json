@@ -1,0 +1,434 @@
+{
+  "item": [
+    {
+      "id": "d3a0b1f0-134c-4be7-ac7f-8a2496a70088",
+      "name": "/sites/:site-api-key/compare/prices/:market/by/accuracy",
+      "request": {
+        "name": "/sites/:site-api-key/compare/prices/:market/by/accuracy",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "sites",
+            ":site-api-key",
+            "compare",
+            "prices",
+            ":market",
+            "by",
+            "accuracy"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "barcode",
+              "value": "<string>",
+              "description": "The barcode of the product to search, can be one of: UPC,EAN,GTIN,ISBN,ASIN."
+            },
+            {
+              "disabled": false,
+              "key": "plainlink",
+              "value": "<string>",
+              "description": "The link of the product web page in a merchant's site.\n**Note**: the link must be plain, if you provide a tracked link the service may not work.\n"
+            },
+            {
+              "disabled": false,
+              "key": "search-keywords",
+              "value": "<string>",
+              "description": "List of keywords to search in the product name, **separated by space**.\nFor example: 'Dickies hat red' or 'iPhone X'.\n"
+            },
+            {
+              "disabled": false,
+              "key": "exclude-keywords",
+              "value": "<string>",
+              "description": "List of keywords to exclude from the search, **separated by space**.\nAny result matching any of the provided keywords will be stripped out from the results.\nFor example: 'Dickies hat red' or 'iPhone 10'.\n"
+            },
+            {
+              "disabled": false,
+              "key": "price-range",
+              "value": "<string>",
+              "description": "Range of prices where the 'salePlace' of the returned products should belong.\nThe range is defined in the form <min-price>-<max-price>, for example 20-30 or 19.9-26.8.\nThe star can be used to avoid to limit one side of the range, for example *-20 equals to 0-20 and 20-* will take all results with a sale price >= 20\n**Note**: using \\*-\\* is the same as not defining any filter.\n"
+            },
+            {
+              "disabled": false,
+              "key": "limit",
+              "value": "<integer>",
+              "description": "Limits the number of results, for example if limit=3 the service will return up to 3 products.\nThe products in the response will be those from the best performing merchants according to our merchant-ranking system.\n"
+            },
+            {
+              "disabled": false,
+              "key": "sid",
+              "value": "<string>",
+              "description": "Custom source ID to be used for tracking purposes. This will be the sovrn CUID.\nCan contain only letters, digits, and the following punctuation characters: '-','_','.','~'.\nCannot be longer than 32 characters.\n"
+            },
+            {
+              "disabled": false,
+              "key": "epc-sort",
+              "value": "<boolean>",
+              "description": "Sort results by EPC. If true the results will be sorted by EPC otherwise default sorting will be used.\n"
+            }
+          ],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "site-api-key",
+              "description": "(Required) The unique identifier of the publishers site."
+            },
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "market",
+              "description": "(Required) The market where to perform the search. Read the market section for the list of supported markets.\nFor example: 'usd_en' for the US market. \n"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "9c197608-07ca-44c7-bc75-7dcd5f3fe1b4",
+          "name": "The product matching the given criteria.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sites",
+                ":site-api-key",
+                "compare",
+                "prices",
+                ":market",
+                "by",
+                "accuracy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "barcode",
+                  "value": "<string>"
+                },
+                {
+                  "key": "plainlink",
+                  "value": "<string>"
+                },
+                {
+                  "key": "search-keywords",
+                  "value": "<string>"
+                },
+                {
+                  "key": "exclude-keywords",
+                  "value": "<string>"
+                },
+                {
+                  "key": "price-range",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "sid",
+                  "value": "<string>"
+                },
+                {
+                  "key": "epc-sort",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "site-api-key",
+                  "description": "(Required) The unique identifier of the publishers site."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "market",
+                  "description": "(Required) The market where to perform the search. Read the market section for the list of supported markets.\nFor example: 'usd_en' for the US market. \n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": 2595306430,\n    \"name\": \"Elizabeth Arden - '5Th Avenue' Eau De Parfum Spray\",\n    \"merchant\": {\n      \"id\": 9262,\n      \"name\": \"Debenhams\",\n      \"logo\": \"https://cdn.imgwzzmb.net/image/merchant/logo/cj/debenhams_88x31.png\"\n    },\n    \"deeplink\": \"https://redirect.viglink.com?u=CURCExYDFxwTQE9KB1RfQwNdABtUWFsbZjFQBlMBUVkGGAsRVFQ%3D&key=xxx&prodOvrd=PCR&opt=false&x=v1\",\n    \"image\": \"https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95\",\n    \"thumbnail\": \"https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95\",\n    \"currency\": \"GBP\",\n    \"salePrice\": 30,\n    \"retailPrice\": 60,\n    \"discountRate\": 50,\n    \"affiliatable\": true,\n    \"epc\": 1.05\n  },\n  {\n    \"id\": 2595306430,\n    \"name\": \"Elizabeth Arden - '5Th Avenue' Eau De Parfum Spray\",\n    \"merchant\": {\n      \"id\": 9262,\n      \"name\": \"Debenhams\",\n      \"logo\": \"https://cdn.imgwzzmb.net/image/merchant/logo/cj/debenhams_88x31.png\"\n    },\n    \"deeplink\": \"https://redirect.viglink.com?u=CURCExYDFxwTQE9KB1RfQwNdABtUWFsbZjFQBlMBUVkGGAsRVFQ%3D&key=xxx&prodOvrd=PCR&opt=false&x=v1\",\n    \"image\": \"https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95\",\n    \"thumbnail\": \"https://debenhams.scene7.com/is/image/Debenhams/123096900299?wid=800&hei=800&qlt=95\",\n    \"currency\": \"GBP\",\n    \"salePrice\": 30,\n    \"retailPrice\": 60,\n    \"discountRate\": 50,\n    \"affiliatable\": true,\n    \"epc\": 1.05\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "194414ac-036c-4784-b251-c60004e3f344",
+          "name": "A Bad Request status code will be returned if provided parameters are malformed.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sites",
+                ":site-api-key",
+                "compare",
+                "prices",
+                ":market",
+                "by",
+                "accuracy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "barcode",
+                  "value": "<string>"
+                },
+                {
+                  "key": "plainlink",
+                  "value": "<string>"
+                },
+                {
+                  "key": "search-keywords",
+                  "value": "<string>"
+                },
+                {
+                  "key": "exclude-keywords",
+                  "value": "<string>"
+                },
+                {
+                  "key": "price-range",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "sid",
+                  "value": "<string>"
+                },
+                {
+                  "key": "epc-sort",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "site-api-key",
+                  "description": "(Required) The unique identifier of the publishers site."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "market",
+                  "description": "(Required) The market where to perform the search. Read the market section for the list of supported markets.\nFor example: 'usd_en' for the US market. \n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"message\": \"An error message\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "5c63e867-b378-4c49-969b-8d01e669ad20",
+          "name": "For any unexpected error a status code 500 will be returned.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sites",
+                ":site-api-key",
+                "compare",
+                "prices",
+                ":market",
+                "by",
+                "accuracy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "barcode",
+                  "value": "<string>"
+                },
+                {
+                  "key": "plainlink",
+                  "value": "<string>"
+                },
+                {
+                  "key": "search-keywords",
+                  "value": "<string>"
+                },
+                {
+                  "key": "exclude-keywords",
+                  "value": "<string>"
+                },
+                {
+                  "key": "price-range",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "sid",
+                  "value": "<string>"
+                },
+                {
+                  "key": "epc-sort",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "site-api-key",
+                  "description": "(Required) The unique identifier of the publishers site."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "market",
+                  "description": "(Required) The market where to perform the search. Read the market section for the list of supported markets.\nFor example: 'usd_en' for the US market. \n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"message\": \"An error message\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://comparisons.sovrn.com/api/affiliate/v3.5",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54050efa-f7ca-4a59-9526-4b11de9284d2",
+    "name": "Sovrn Commerce Price Comparisons (Product Affiliate) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.",
+      "type": "text/plain"
+    }
+  }
+}

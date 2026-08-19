@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Commerce Price Comparisons (Product Affiliate) API",
+    "version": "v3.5"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "authorization",
+      "value": "{{authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GET /sites/{site-api-key}/compare/prices/{market}/by/accuracy",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://comparisons.sovrn.com/api/affiliate/v3.5/sites/:site-api-key/compare/prices/:market/by/accuracy",
+        "params": [
+          {
+            "name": "site-api-key",
+            "value": "",
+            "type": "path",
+            "description": "The unique identifier of the publishers site."
+          },
+          {
+            "name": "market",
+            "value": "",
+            "type": "path",
+            "description": "The market where to perform the search. Read the market section for the list of supported markets.\nFor example: 'usd_en' for the US market. \n"
+          },
+          {
+            "name": "barcode",
+            "value": "",
+            "type": "query",
+            "description": "The barcode of the product to search, can be one of: UPC,EAN,GTIN,ISBN,ASIN."
+          },
+          {
+            "name": "plainlink",
+            "value": "",
+            "type": "query",
+            "description": "The link of the product web page in a merchant's site.\n**Note**: the link must be plain, if you provide a tracked link the service may not work.\n"
+          },
+          {
+            "name": "search-keywords",
+            "value": "",
+            "type": "query",
+            "description": "List of keywords to search in the product name, **separated by space**.\nFor example: 'Dickies hat red' or 'iPhone X'.\n"
+          },
+          {
+            "name": "exclude-keywords",
+            "value": "",
+            "type": "query",
+            "description": "List of keywords to exclude from the search, **separated by space**.\nAny result matching any of the provided keywords will be stripped out from the results.\nFor example: 'Dickies hat red' or 'iPhone 10'.\n"
+          },
+          {
+            "name": "price-range",
+            "value": "",
+            "type": "query",
+            "description": "Range of prices where the 'salePlace' of the returned products should belong.\nThe range is defined in the form <min-price>-<max-price>, for example 20-30 or 19.9-26.8.\nThe star can be used to avoid to limit one side of the range, for example *-20 equals to 0-20 and 20-* will take all results with a sale price >= 20\n**Note**: using \\*-\\* is the same as not defining any filter.\n"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "Limits the number of results, for example if limit=3 the service will return up to 3 products.\nThe products in the response will be those from the best performing merchants according to our merchant-ranking system.\n"
+          },
+          {
+            "name": "sid",
+            "value": "",
+            "type": "query",
+            "description": "Custom source ID to be used for tracking purposes. This will be the sovrn CUID.\nCan contain only letters, digits, and the following punctuation characters: '-','_','.','~'.\nCannot be longer than 32 characters.\n"
+          },
+          {
+            "name": "epc-sort",
+            "value": "",
+            "type": "query",
+            "description": "Sort results by EPC. If true the results will be sorted by EPC otherwise default sorting will be used.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "bundled": true
+}

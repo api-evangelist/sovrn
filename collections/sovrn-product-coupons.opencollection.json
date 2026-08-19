@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Commerce Product Promo Codes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Coupons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Product coupons by URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/coupons/product",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "b5d593ce9de90b8a324ca24e5fcc32af",
+                "type": "query",
+                "description": "Site API key for the site requesting coupons.\n"
+              },
+              {
+                "name": "product_url",
+                "value": "https://www.kiehls.com/3605970407964.html",
+                "type": "query",
+                "description": "Original retailer product page URL. Must not be an affiliate or redirect URL.\n"
+              },
+              {
+                "name": "include_unverified",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to include unverified coupon codes after verified results. Defaults to true.\n"
+              },
+              {
+                "name": "cuid",
+                "value": "cuid152",
+                "type": "query",
+                "description": "Custom identifier used to associate the click with a user, page, campaign, or event.\n"
+              },
+              {
+                "name": "utm_source",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the source of the traffic (e.g., website, newsletter, twitter)."
+              },
+              {
+                "name": "utm_medium",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the marketing medium (e.g., email, social, banner)."
+              },
+              {
+                "name": "utm_campaign",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the campaign name, promotion, or initiative."
+              },
+              {
+                "name": "utm_term",
+                "value": "",
+                "type": "query",
+                "description": "Identifies paid search keywords or targeting terms."
+              },
+              {
+                "name": "utm_content",
+                "value": "",
+                "type": "query",
+                "description": "Differentiates similar links or placements on the same page."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns verified and unverified coupon codes for a specific product URL, along with merchant information and verification status.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

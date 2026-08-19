@@ -1,0 +1,1006 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Commerce Real-Time Reports API",
+    "version": "20230630"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "authorization",
+      "value": "{{authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CUIDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/cuids",
+            "params": [
+              {
+                "name": "clickDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "clickDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "End Date"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "subIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of sub IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "cuids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of CUIDs (custom tracking IDs)"
+              },
+              {
+                "name": "pageUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM sources"
+              },
+              {
+                "name": "pageUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM mediums"
+              },
+              {
+                "name": "pageUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM campaings"
+              },
+              {
+                "name": "pageUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM terms"
+              },
+              {
+                "name": "pageUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM contents"
+              },
+              {
+                "name": "linkUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM sources"
+              },
+              {
+                "name": "linkUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM mediums"
+              },
+              {
+                "name": "linkUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM campaigns"
+              },
+              {
+                "name": "linkUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM terms"
+              },
+              {
+                "name": "linkUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM contents"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              },
+              {
+                "name": "sovrnProduct",
+                "value": "",
+                "type": "query",
+                "description": "Sovrn Product"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "Type of device"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO country code"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query aggregated performance metrics by CUID. This data can be used to see individual CUID performance, your top performing CUIDs, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC."
+        },
+        {
+          "info": {
+            "name": "Links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/links",
+            "params": [
+              {
+                "name": "clickDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "clickDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "End Date"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "subIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Comma separated list of sub IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "cuids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of CUIDs (custom tracking IDs)"
+              },
+              {
+                "name": "pageUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM sources"
+              },
+              {
+                "name": "pageUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM mediums"
+              },
+              {
+                "name": "pageUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM campaings"
+              },
+              {
+                "name": "pageUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM terms"
+              },
+              {
+                "name": "pageUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM contents"
+              },
+              {
+                "name": "linkUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM sources"
+              },
+              {
+                "name": "linkUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM mediums"
+              },
+              {
+                "name": "linkUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM campaigns"
+              },
+              {
+                "name": "linkUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM terms"
+              },
+              {
+                "name": "linkUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM contents"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              },
+              {
+                "name": "sovrnProduct",
+                "value": "",
+                "type": "query",
+                "description": "Sovrn Product"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "Type of device"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO country code"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query aggregated performance metrics by Link. This data can be used to see individual merchant link performance, your top performing merchant links, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC."
+        },
+        {
+          "info": {
+            "name": "Merchandise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/merchandise",
+            "params": [
+              {
+                "name": "clickDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "clickDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "End Date"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "subIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of sub IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "cuids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of CUIDs (custom tracking IDs)"
+              },
+              {
+                "name": "pageUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM sources"
+              },
+              {
+                "name": "pageUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM mediums"
+              },
+              {
+                "name": "pageUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM campaings"
+              },
+              {
+                "name": "pageUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM terms"
+              },
+              {
+                "name": "pageUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM contents"
+              },
+              {
+                "name": "linkUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM sources"
+              },
+              {
+                "name": "linkUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM mediums"
+              },
+              {
+                "name": "linkUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM campaigns"
+              },
+              {
+                "name": "linkUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM terms"
+              },
+              {
+                "name": "linkUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM contents"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              },
+              {
+                "name": "sovrnProduct",
+                "value": "",
+                "type": "query",
+                "description": "Sovrn Product"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "Type of device"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO country code"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query aggregated performance metrics by Merchandise. This data can be used to see individual product performance, your top performing products, actualized earnings, and more, all in real-time. Metrics include Revenue, Sales, and Actions."
+        },
+        {
+          "info": {
+            "name": "Merchants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/merchants",
+            "params": [
+              {
+                "name": "clickDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "clickDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "End Date"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "subIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of sub IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "cuids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of CUIDs (custom tracking IDs)"
+              },
+              {
+                "name": "pageUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM sources"
+              },
+              {
+                "name": "pageUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM mediums"
+              },
+              {
+                "name": "pageUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM campaings"
+              },
+              {
+                "name": "pageUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM terms"
+              },
+              {
+                "name": "pageUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM contents"
+              },
+              {
+                "name": "linkUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM sources"
+              },
+              {
+                "name": "linkUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM mediums"
+              },
+              {
+                "name": "linkUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM campaigns"
+              },
+              {
+                "name": "linkUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM terms"
+              },
+              {
+                "name": "linkUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM contents"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              },
+              {
+                "name": "sovrnProduct",
+                "value": "",
+                "type": "query",
+                "description": "Sovrn Product"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "Type of device"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO country code"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query aggregated performance metrics by Merchant. This data can be used to see individual merchant performance, your top performing merchants, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC."
+        },
+        {
+          "info": {
+            "name": "Merchants By Date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/merchantsbydate",
+            "params": [
+              {
+                "name": "clickDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "clickDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "End Date"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "subIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Comma separated list of sub IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "cuids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of CUIDs (custom tracking IDs)"
+              },
+              {
+                "name": "pageUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM sources"
+              },
+              {
+                "name": "pageUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM mediums"
+              },
+              {
+                "name": "pageUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM campaings"
+              },
+              {
+                "name": "pageUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM terms"
+              },
+              {
+                "name": "pageUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM contents"
+              },
+              {
+                "name": "linkUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM sources"
+              },
+              {
+                "name": "linkUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM mediums"
+              },
+              {
+                "name": "linkUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM campaigns"
+              },
+              {
+                "name": "linkUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM terms"
+              },
+              {
+                "name": "linkUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM contents"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              },
+              {
+                "name": "sovrnProduct",
+                "value": "",
+                "type": "query",
+                "description": "Sovrn Product"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "Type of device"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO country code"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query aggregated performance metrics by Merchant and Date. This data can be used to see individual merchant performance by day, your top performing merchants, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions, Conversion Rate and EPC."
+        },
+        {
+          "info": {
+            "name": "Networks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/networks",
+            "params": [
+              {
+                "name": "clickDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "clickDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "End Date"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "subIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of sub IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "cuids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of CUIDs (custom tracking IDs)"
+              },
+              {
+                "name": "pageUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM sources"
+              },
+              {
+                "name": "pageUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM mediums"
+              },
+              {
+                "name": "pageUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM campaings"
+              },
+              {
+                "name": "pageUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM terms"
+              },
+              {
+                "name": "pageUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM contents"
+              },
+              {
+                "name": "linkUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM sources"
+              },
+              {
+                "name": "linkUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM mediums"
+              },
+              {
+                "name": "linkUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM campaigns"
+              },
+              {
+                "name": "linkUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM terms"
+              },
+              {
+                "name": "linkUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM contents"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              },
+              {
+                "name": "sovrnProduct",
+                "value": "",
+                "type": "query",
+                "description": "Sovrn Product"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "Type of device"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO country code"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query aggregated performance metrics by Network. This data can be used to see connected Network performance, your top performing Networks, actualized earnings, and more, all in real-time. Metrics include Revenue, Clicks, Sales, Actions and EPC."
+        },
+        {
+          "info": {
+            "name": "Pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/pages",
+            "params": [
+              {
+                "name": "clickDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "clickDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "End Date"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "subIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of sub IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "cuids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of CUIDs (custom tracking IDs)"
+              },
+              {
+                "name": "pageUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM sources"
+              },
+              {
+                "name": "pageUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM mediums"
+              },
+              {
+                "name": "pageUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM campaings"
+              },
+              {
+                "name": "pageUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM terms"
+              },
+              {
+                "name": "pageUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of page UTM contents"
+              },
+              {
+                "name": "linkUtmSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM sources"
+              },
+              {
+                "name": "linkUtmMedium",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM mediums"
+              },
+              {
+                "name": "linkUtmCampaign",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM campaigns"
+              },
+              {
+                "name": "linkUtmTerm",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM terms"
+              },
+              {
+                "name": "linkUtmContent",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of link UTM contents"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              },
+              {
+                "name": "sovrnProduct",
+                "value": "",
+                "type": "query",
+                "description": "Sovrn Product"
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "Type of device"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO country code"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query aggregated performance metrics by Page. This data can be used to see individual page performance, your top performing pages, actualized earnings, and more, all in real-time. Metrics include Pageviews, RPM, Revenue, Clicks, Sales, Actions, Conversion Rate and EPC."
+        },
+        {
+          "info": {
+            "name": "Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://viglink.io/v1/reports/transactions",
+            "params": [
+              {
+                "name": "clickDate",
+                "value": "",
+                "type": "query",
+                "description": "Click date for filtering"
+              },
+              {
+                "name": "commissionDate",
+                "value": "",
+                "type": "query",
+                "description": "Commission date for filtering"
+              },
+              {
+                "name": "updateDate",
+                "value": "",
+                "type": "query",
+                "description": "Update date for filtering"
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of campaign IDs"
+              },
+              {
+                "name": "merchantGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of merchant group IDs"
+              },
+              {
+                "name": "programType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program (CPA/CPC)"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to query all commission events (transactions) that have occurred or been updated on a specified date. This data can be used to see individual link performance, actualized earnings, individual site performance and more, all in real-time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

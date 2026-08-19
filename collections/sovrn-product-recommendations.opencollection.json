@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sovrn Commerce Product Recommendation API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get Product Recommendations",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://shopping-gallery.prd-commerce.sovrnservices.com/ai-orchestration/products",
+        "params": [
+          {
+            "name": "apiKey",
+            "value": "",
+            "type": "query",
+            "description": "Your Sovrn Commerce API key. Found in the Sovrn Platform under Site Settings or via the Campaigns API."
+          },
+          {
+            "name": "market",
+            "value": "",
+            "type": "query",
+            "description": "Market in the format currency_language (e.g., usd_en). Inferred from IP if not provided."
+          },
+          {
+            "name": "cuid",
+            "value": "",
+            "type": "query",
+            "description": "Custom tracking ID for associating recommendations with a specific user, session, or page."
+          },
+          {
+            "name": "priceRange",
+            "value": "",
+            "type": "query",
+            "description": "Price filter using \"min-max\" format, e.g., \"20-50\" or \"*-25\"."
+          },
+          {
+            "name": "includeMerchants",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated list of merchant IDs to include. Only one of includeMerchants or excludeMerchants may be used."
+          },
+          {
+            "name": "excludeMerchants",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated list of merchant IDs to exclude. Only one of includeMerchants or excludeMerchants may be used."
+          },
+          {
+            "name": "numProducts",
+            "value": "",
+            "type": "query",
+            "description": "Number of products to return. Default: 4, Max: 50."
+          },
+          {
+            "name": "pageUrl",
+            "value": "",
+            "type": "query",
+            "description": "The URL or key of the content you want recommendations for. See the 'Caching' section above for more information."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Get Product Recommendations"
+    }
+  ],
+  "bundled": true
+}

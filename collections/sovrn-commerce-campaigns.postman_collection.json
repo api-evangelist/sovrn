@@ -1,0 +1,318 @@
+{
+  "item": [
+    {
+      "id": "895ada40-341c-4faf-bb3b-caac24f277d6",
+      "name": "Campaign API",
+      "request": {
+        "name": "Campaign API",
+        "description": {
+          "content": "Use this endpoint to get a list of your campaigns, or search for a specific campaign by name or campaignId.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "account",
+            "campaigns",
+            ":search"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "format",
+              "value": "json",
+              "description": "Lowercase format of response: json or xml"
+            },
+            {
+              "disabled": false,
+              "key": "callback",
+              "value": "NULL",
+              "description": "JSON-P callback method name"
+            },
+            {
+              "disabled": false,
+              "key": "rowsPerPage",
+              "value": "100",
+              "description": "The total number of records to return per page"
+            },
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "<integer>",
+              "description": "When results are greater than rowsPerPage, allows you to grab the next page of results"
+            }
+          ],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "PRIMARY",
+              "key": "search",
+              "description": "(Required) Search by campaign name or campaignId"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "d6df4b1c-cb05-47f3-95b5-1ad94340a8d0",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "account",
+                "campaigns",
+                ":search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "json"
+                },
+                {
+                  "key": "callback",
+                  "value": "NULL"
+                },
+                {
+                  "key": "rowsPerPage",
+                  "value": "100"
+                },
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "PRIMARY",
+                  "key": "search",
+                  "description": "(Required) Search by campaign name or campaignId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"\\n{\\n    \\\"campaigns\\\":[\\n        {\\n            \\\"campaignId\\\":9876543,\\n            \\\"apiKey\\\":\\\"098f6bcd4621d373cade4e832627b4f6\\\",\\n            \\\"name\\\":\\\"PRIMARY\\\",\\n            \\\"approvalStatus\\\":\\\"Approved\\\",\\n            \\\"category\\\":\\\"Sports & Fitness\\\",\\n            \\\"platform\\\":\\\"WordPress\\\",\\n            \\\"applicationType\\\":\\\"Blog\\\"\\n        },\\n        {\\n            \\\"campaignId\\\":9876544,\\n            \\\"apiKey\\\":\\\"fb469d7ef430b0baf0cab6c436e70375\\\",\\n            \\\"name\\\":\\\"apparelblog.com\\\",\\n            \\\"approvalStatus\\\":\\\"Approved\\\",\\n            \\\"category\\\":\\\"Apparel & Accessories\\\",\\n            \\\"platform\\\":\\\"WordPress\\\",\\n            \\\"applicationType\\\":\\\"Blog\\\"\\n        },\\n    ]\\n}\\n\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3ae4e9d8-46e8-4edb-9f7f-0513017645c5",
+          "name": "401",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "account",
+                "campaigns",
+                ":search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "json"
+                },
+                {
+                  "key": "callback",
+                  "value": "NULL"
+                },
+                {
+                  "key": "rowsPerPage",
+                  "value": "100"
+                },
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "PRIMARY",
+                  "key": "search",
+                  "description": "(Required) Search by campaign name or campaignId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"error\\\": {\\n        \\\"errors\\\": [\\n            {\\n                \\\"reason\\\": \\\"invalidCredentials\\\",\\n                \\\"message\\\": \\\"Authorization secret is missing or invalid. This can be found at https://publishers.viglink.com/account and can be sent as a parameter or Authorization header\\\",\\n                \\\"locationType\\\": \\\"parameter\\\",\\n                \\\"location\\\": \\\"secret\\\"\\n            }\\n        ]\\n    },\\n    \\\"code\\\": 401,\\n    \\\"message\\\": \\\"Authorization secret is missing or invalid. This can be found at https://publishers.viglink.com/account and can be sent as a parameter or Authorization header\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "08cb07ac-8d51-4714-bd27-b1babd59f203",
+          "name": "500",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "account",
+                "campaigns",
+                ":search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "json"
+                },
+                {
+                  "key": "callback",
+                  "value": "NULL"
+                },
+                {
+                  "key": "rowsPerPage",
+                  "value": "100"
+                },
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "PRIMARY",
+                  "key": "search",
+                  "description": "(Required) Search by campaign name or campaignId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"error\\\": {\\n        \\\"errors\\\": [\\n            {\\n                \\\"reason\\\": \\\"internalServerError\\\",\\n                \\\"message\\\": \\\"An unexpected error occurred, but we are looking into it\\\"\\n            }\\n        ]\\n    },\\n    \\\"code\\\": 500,\\n    \\\"message\\\": \\\"An unexpected error occurred, but we are looking into it\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest.viglink.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "70f8e09b-770c-43b7-bfe8-27944bc32b3c",
+    "name": "Sovrn Commerce Campaigns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.",
+      "type": "text/plain"
+    }
+  }
+}
