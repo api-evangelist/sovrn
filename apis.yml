@@ -43,6 +43,19 @@ created: '2026-07-17'
 modified: '2026-08-12'
 tags:
 - Company
+- AdTech
+- Advertising
+- Monetization
+- Affiliate Marketing
+- Programmatic
+- Publishers
+- Commerce
+- Data
+- Reporting
+- Product Data
+- agent-native
+tags_raw:
+- Company
 - Adtech
 - Advertising
 - Monetization
@@ -63,6 +76,10 @@ apis:
   humanURL: https://developer.sovrn.com/reference/link
   baseURL: https://api.viglink.com/api
   tags:
+  - Affiliate Marketing
+  - link-monetization
+  - Commerce
+  tags_raw:
   - affiliate-marketing
   - link-monetization
   - commerce
@@ -84,6 +101,11 @@ apis:
   humanURL: https://developer.sovrn.com/reference/getbid
   baseURL: https://api.viglink.com
   tags:
+  - Affiliate Marketing
+  - Real-Time Bidding
+  - Commerce
+  - Programmatic
+  tags_raw:
   - affiliate-marketing
   - real-time-bidding
   - commerce
@@ -105,6 +127,10 @@ apis:
   humanURL: https://developer.sovrn.com/reference/campaigns
   baseURL: https://rest.viglink.com/api
   tags:
+  - Affiliate Marketing
+  - Account Management
+  - Commerce
+  tags_raw:
   - affiliate-marketing
   - account-management
   - commerce
@@ -126,6 +152,11 @@ apis:
   humanURL: https://developer.sovrn.com/reference/get_reports-transactions
   baseURL: https://viglink.io/v1
   tags:
+  - Affiliate Marketing
+  - Reporting
+  - Analytics
+  - Commerce
+  tags_raw:
   - affiliate-marketing
   - reporting
   - analytics
@@ -150,6 +181,10 @@ apis:
   humanURL: https://developer.sovrn.com/reference/post_summaries
   baseURL: https://viglink.io/merchants/rates
   tags:
+  - Affiliate Marketing
+  - Merchant Data
+  - Commerce
+  tags_raw:
   - affiliate-marketing
   - merchant-data
   - commerce
@@ -171,6 +206,11 @@ apis:
   humanURL: https://developer.sovrn.com/reference/get_product_recommendations
   baseURL: https://shopping-gallery.prd-commerce.sovrnservices.com
   tags:
+  - Product Data
+  - Recommendations
+  - Commerce
+  - Artificial Intelligence
+  tags_raw:
   - product-data
   - recommendations
   - commerce
@@ -191,6 +231,10 @@ apis:
   humanURL: https://developer.sovrn.com/reference/product-affiliate-api
   baseURL: https://comparisons.sovrn.com/api/affiliate/v3.5
   tags:
+  - Product Data
+  - Price Comparison
+  - Commerce
+  tags_raw:
   - product-data
   - price-comparison
   - commerce
@@ -211,6 +255,10 @@ apis:
   humanURL: https://developer.sovrn.com/reference/get_product
   baseURL: https://viglink.io/coupons
   tags:
+  - Product Data
+  - Promo Codes
+  - Commerce
+  tags_raw:
   - product-data
   - promo-codes
   - commerce
@@ -231,6 +279,12 @@ apis:
   humanURL: https://developer.sovrn.com/reference/custom-reporting
   baseURL: https://api.sovrn.com
   tags:
+  - Advertising
+  - Programmatic
+  - Reporting
+  - Analytics
+  - CTV
+  tags_raw:
   - advertising
   - programmatic
   - reporting
@@ -257,6 +311,11 @@ apis:
   humanURL: https://developer.sovrn.com/docs/mcp
   baseURL: https://mcp.sovrn.com/commerce
   tags:
+  - MCP
+  - agent-native
+  - Affiliate Marketing
+  - Commerce
+  tags_raw:
   - mcp
   - agent-native
   - affiliate-marketing
