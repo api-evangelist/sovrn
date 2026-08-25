@@ -9,13 +9,13 @@
       "method": "feed"
     },
     {
-      "source": "https://www.sovrn.com",
-      "feed_url": "https://www.sovrn.com/feed/",
+      "source": "https://knowledge.sovrn.com/kb/api-onboarding-guide-for-commerce",
+      "feed_url": "https://knowledge.sovrn.com/kb/api-onboarding-guide-for-commerce",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "none"
     }
   ],
   "post_count": 15,
-  "fetched": "2026-08-15T12:11:08Z"
+  "fetched": "2026-08-22T20:20:02Z"
 }
