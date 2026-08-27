@@ -68,246 +68,12 @@ tags_raw:
 - Product Data
 - Agent Native
 apis:
-- name: Sovrn Commerce Link Check API
-  description: >-
-    Check whether a destination URL can be monetized by Sovrn Commerce, get its estimated
-    earnings per click, and receive the optimized affiliate URL to use in its place. Supports
-    a geo override for affiliation testing plus a fallback URL and bid floor.
-  humanURL: https://developer.sovrn.com/reference/link
-  baseURL: https://api.viglink.com/api
-  tags:
-  - Affiliate Marketing
-  - link-monetization
-  - Commerce
-  tags_raw:
-  - affiliate-marketing
-  - link-monetization
-  - commerce
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-commerce-link-check-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-commerce-link-check-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/link
-  - type: Documentation
-    url: https://developer.sovrn.com/reference/building-affiliate-links
-- name: Sovrn Commerce Bid Check API
-  description: >-
-    Real-time bid on a single click. Returns either a bid win (pricing model CPC or CPA,
-    expected earnings per click net of revenue share, the Sovrn redirect URL and a
-    millisecond expiry) or a no-fill, so a publisher can decide whether to route traffic
-    through Sovrn before sending the user. Accepts IAB TCF, CCPA and GPP consent strings.
-  humanURL: https://developer.sovrn.com/reference/getbid
-  baseURL: https://api.viglink.com
-  tags:
-  - Affiliate Marketing
-  - Real-Time Bidding
-  - Commerce
-  - Programmatic
-  tags_raw:
-  - affiliate-marketing
-  - real-time-bidding
-  - commerce
-  - programmatic
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-commerce-bid-check-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-commerce-bid-check-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/getbid
-  - type: Documentation
-    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
-- name: Sovrn Commerce Campaigns API
-  description: >-
-    List the campaigns (sites) on a Sovrn Commerce account or search them by name or
-    campaignId, returning each campaign's id, public API key, approval status, category,
-    platform and application type. Supports JSON and XML output and a JSON-P callback.
-  humanURL: https://developer.sovrn.com/reference/campaigns
-  baseURL: https://rest.viglink.com/api
-  tags:
-  - Affiliate Marketing
-  - Account Management
-  - Commerce
-  tags_raw:
-  - affiliate-marketing
-  - account-management
-  - commerce
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-commerce-campaigns-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-commerce-campaigns-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/campaigns
-- name: Sovrn Commerce Real-Time Reports API
-  description: >-
-    Eight endpoints returning affiliate commission performance in real time, each aggregating
-    the same event set on a different dimension — individual transactions, merchants,
-    merchants by date, links, pages, merchandise, networks and publisher-defined CUIDs.
-    Metrics include revenue, clicks, sales, actions, conversion rate and EPC, filterable by
-    click/commission/update date, campaign, merchant group, country, device type and both
-    link-level and page-level UTM parameters.
-  humanURL: https://developer.sovrn.com/reference/get_reports-transactions
-  baseURL: https://viglink.io/v1
-  tags:
-  - Affiliate Marketing
-  - Reporting
-  - Analytics
-  - Commerce
-  tags_raw:
-  - affiliate-marketing
-  - reporting
-  - analytics
-  - commerce
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-commerce-reports-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-commerce-reports-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/get_reports-transactions
-  - type: RateLimits
-    url: rate-limits/sovrn-rate-limits.yml
-- name: Sovrn Commerce Merchant Group Summaries API
-  description: >-
-    Retrieve the merchants a Commerce account is approved to work with, including
-    geo-specific commission rates, rate formats, average EPC and order value,
-    preferred-status flags and per-merchant domains. Filterable by name, group id, domain,
-    geo, program type and category, with page/pageSize pagination, and paired with a delta
-    endpoint that returns only merchants changed since a timestamp and supports
-    If-None-Match / 304.
-  humanURL: https://developer.sovrn.com/reference/post_summaries
-  baseURL: https://viglink.io/merchants/rates
-  tags:
-  - Affiliate Marketing
-  - Merchant Data
-  - Commerce
-  tags_raw:
-  - affiliate-marketing
-  - merchant-data
-  - commerce
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-merchant-summaries-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-merchant-summaries-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/post_summaries
-  - type: Documentation
-    url: https://developer.sovrn.com/reference/get_summaries-delta
-- name: Sovrn Commerce Product Recommendation API
-  description: >-
-    Returns products tailored to a piece of content. Callers pass their content plus optional
-    filters such as price range or preferred merchants and receive a curated product list with
-    sale and retail price, discount rate, stock status, affiliatability and a deep link.
-    Responses are cached on the caller-supplied pageUrl key.
-  humanURL: https://developer.sovrn.com/reference/get_product_recommendations
-  baseURL: https://shopping-gallery.prd-commerce.sovrnservices.com
-  tags:
-  - Product Data
-  - Recommendations
-  - Commerce
-  - Artificial Intelligence
-  tags_raw:
-  - product-data
-  - recommendations
-  - commerce
-  - ai
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-product-recommendations-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-product-recommendations-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/get_product_recommendations
-- name: Sovrn Commerce Price Comparisons (Product Affiliate) API
-  description: >-
-    Compare prices for the same product across merchants in a given market, ranked by match
-    accuracy, returning merchant identity and logo, deep link, images, sale and retail price,
-    discount rate, affiliatability and EPC. Also rendered client-side by the Automated
-    Comparisons JavaScript library.
-  humanURL: https://developer.sovrn.com/reference/product-affiliate-api
-  baseURL: https://comparisons.sovrn.com/api/affiliate/v3.5
-  tags:
-  - Product Data
-  - Price Comparison
-  - Commerce
-  tags_raw:
-  - product-data
-  - price-comparison
-  - commerce
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-price-comparisons-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-price-comparisons-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/product-affiliate-api
-  - type: Components
-    url: components/sovrn-components.yml
-- name: Sovrn Commerce Product Promo Codes API
-  description: >-
-    Retrieve ranked, product-specific promo codes with verification status — code, affiliated
-    URL, original price, price with the code applied, currency, verified flag and timestamp —
-    alongside merchant identity and the current verification-scan state.
-  humanURL: https://developer.sovrn.com/reference/get_product
-  baseURL: https://viglink.io/coupons
-  tags:
-  - Product Data
-  - Promo Codes
-  - Commerce
-  tags_raw:
-  - product-data
-  - promo-codes
-  - commerce
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-product-coupons-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-product-coupons-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/get_product
-- name: Sovrn Advertising Performance Reporting API
-  description: >-
-    Custom reporting over Sovrn Ad Exchange performance across web, connected TV and mobile
-    app inventory. Requires start, end, metrics, dimensions and granularity on every request,
-    with hour, day and month granularities carrying different history depths and per-request
-    windows. Authenticated with an account-level x-api-key, separate from the Commerce
-    credential.
-  humanURL: https://developer.sovrn.com/reference/custom-reporting
-  baseURL: https://api.sovrn.com
-  tags:
-  - Advertising
-  - Programmatic
-  - Reporting
-  - Analytics
-  - CTV
-  tags_raw:
-  - advertising
-  - programmatic
-  - reporting
-  - analytics
-  - ctv
-  properties:
-  - type: OpenAPI
-    url: openapi/sovrn-advertising-reporting-openapi.yml
-  - type: Overlay
-    url: overlays/sovrn-advertising-reporting-overlay.yaml
-  - type: APIReference
-    url: https://developer.sovrn.com/reference/custom-reporting
-  - type: Documentation
-    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
-  - type: GettingStarted
-    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
 - name: Sovrn Commerce MCP Server
   description: >-
-    Hosted, beta Model Context Protocol server exposing Sovrn Commerce affiliate data,
-    campaigns and products to AI clients — twelve tools covering price search, link checking,
-    product recommendations and eight reporting cuts, plus a setup prompt and a campaigns
-    resource. Authenticated with the same Commerce Secret Key as the REST APIs; rate limits
-    are inherited per tool from the backing API.
+    Hosted, beta Model Context Protocol server exposing Sovrn Commerce affiliate data, campaigns and products
+    to AI clients — twelve tools covering price search, link checking, product recommendations and eight
+    reporting cuts, plus a setup prompt and a campaigns resource. Authenticated with the same Commerce
+    Secret Key as the REST APIs; rate limits are inherited per tool from the backing API.
   humanURL: https://developer.sovrn.com/docs/mcp
   baseURL: https://mcp.sovrn.com/commerce
   tags:
@@ -331,12 +97,409 @@ apis:
     url: https://developer.sovrn.com/docs/mcp
   - type: Examples
     url: https://developer.sovrn.com/docs/mcp-demos
+- aid: sovrn:sovrn-account-api
+  name: Sovrn Account API
+  description: The Account API from Sovrn — 1 operation(s) for account.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-account-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-ai-orchestration-api
+  name: Sovrn Ai Orchestration API
+  description: The Ai Orchestration API from Sovrn — 1 operation(s) for ai orchestration.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - Ai Orchestration
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-ai-orchestration-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-bid-api
+  name: Sovrn Bid API
+  description: The Bid API from Sovrn — 1 operation(s) for bid.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - Bid
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-bid-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-link-api
+  name: Sovrn Link API
+  description: The Link API from Sovrn — 1 operation(s) for link.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - Link
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-link-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-merchant-group-summaries-api
+  name: Sovrn Merchant Group Summaries API
+  description: >-
+    The Merchant Group Summaries API from Sovrn — 2 operation(s) for merchant group summaries.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - Merchant Group Summaries
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-merchant-group-summaries-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-product-coupons-api
+  name: Sovrn Product Coupons API
+  description: The Product Coupons API from Sovrn — 1 operation(s) for product coupons.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - Product Coupons
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-product-coupons-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-reporting-api
+  name: Sovrn Reporting API
+  description: The reporting API from Sovrn — 1 operation(s) for reporting.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-reporting-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-reports-api
+  name: Sovrn Reports API
+  description: The reports API from Sovrn — 8 operation(s) for reports.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - reports
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-reports-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
+- aid: sovrn:sovrn-sites-api
+  name: Sovrn Sites API
+  description: The Sites API from Sovrn — 1 operation(s) for sites.
+  humanURL: https://developer.sovrn.com/reference/link
+  baseURL: https://api.viglink.com/api
+  tags:
+  - Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/sovrn-sites-api-openapi.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/link
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/building-affiliate-links
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/getbid
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/commerce-bid-check-api
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/campaigns
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_reports-transactions
+  - type: RateLimits
+    url: rate-limits/sovrn-rate-limits.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/post_summaries
+  - type: Documentation
+    url: https://developer.sovrn.com/reference/get_summaries-delta
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product_recommendations
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/product-affiliate-api
+  - type: Components
+    url: components/sovrn-components.yml
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/get_product
+  - type: APIReference
+    url: https://developer.sovrn.com/reference/custom-reporting
+  - type: Documentation
+    url: https://knowledge.sovrn.com/kb/how-do-i-use-the-sovrn-reporting-api
+  - type: GettingStarted
+    url: https://knowledge.sovrn.com/kb/how-do-i-create-a-sovrn-api-key-for-the-ad-exchange-api
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/sovrn-commerce-link-check-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-commerce-bid-check-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-commerce-campaigns-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-commerce-reports-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-merchant-summaries-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-product-recommendations-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-price-comparisons-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-product-coupons-overlay.yaml
+- type: Overlay
+  url: overlays/sovrn-advertising-reporting-overlay.yaml
 - type: Website
   url: https://www.sovrn.com
 - type: DeveloperPortal
