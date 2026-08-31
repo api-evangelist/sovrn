@@ -55,7 +55,7 @@ created: '2026-07-17'
 modified: '2026-08-12'
 tags:
 - Company
-- AdTech
+- Adtech
 - Advertising
 - Monetization
 - Affiliate Marketing
@@ -65,7 +65,7 @@ tags:
 - Data
 - Reporting
 - Product Data
-- agent-native
+- Agent Native
 tags_raw:
 - Company
 - Adtech
@@ -91,8 +91,8 @@ apis:
   tags:
   - MCP
   - agent-native
-  - Affiliate Marketing
-  - Commerce
+  - affiliate-marketing
+  - commerce
   tags_raw:
   - mcp
   - agent-native
@@ -157,6 +157,8 @@ apis:
   humanURL: https://developer.sovrn.com/reference/link
   baseURL: https://api.viglink.com/api
   tags:
+  - AI Orchestration
+  tags_raw:
   - Ai Orchestration
   properties:
   - type: OpenAPI
@@ -368,6 +370,8 @@ apis:
   humanURL: https://developer.sovrn.com/reference/link
   baseURL: https://api.viglink.com/api
   tags:
+  - Reporting
+  tags_raw:
   - reporting
   properties:
   - type: OpenAPI
@@ -410,6 +414,8 @@ apis:
   humanURL: https://developer.sovrn.com/reference/link
   baseURL: https://api.viglink.com/api
   tags:
+  - Reports
+  tags_raw:
   - reports
   properties:
   - type: OpenAPI
