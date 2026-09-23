@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Sovrn Commerce Product Recommendation Ai Orchestration API
+  title: Fast Ai Orchestration API
   version: 0.1.0
-  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.
-  x-source-title: FastAPI
 servers:
 - url: https://shopping-gallery.prd-commerce.sovrnservices.com
   description: Production Server

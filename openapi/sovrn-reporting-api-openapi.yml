@@ -8,12 +8,12 @@ servers:
 - url: https://api.sovrn.com
   description: API server
 tags:
-- name: reporting
+- name: Reporting
 paths:
   /reporting/advertising/publishers/{publisherId}/:
     get:
       tags:
-      - reporting
+      - Reporting
       description: Get custom reporting data for a publisher
       parameters:
       - schema:
@@ -123,6 +123,10 @@ paths:
               schema:
                 description: Unexpected server error
                 type: string
+      summary: Get reporting advertising publishers by publisher id
+      x-summary-source: derived
+      operationId: getReportingAdvertisingPublishersByPublisherId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     apiAuth:

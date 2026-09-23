@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Sovrn Commerce Campaigns Account API
+  title: rest Account API
   version: '1.0'
-  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.
-  x-source-title: rest
 servers:
 - url: https://rest.viglink.com/api
 security:
@@ -135,3 +133,8 @@ components:
       in: header
       name: authorization
       x-default: secret <secret key>
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

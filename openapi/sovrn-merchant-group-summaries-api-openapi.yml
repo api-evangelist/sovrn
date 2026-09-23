@@ -97,6 +97,8 @@ paths:
           description: Too many requests (rate limit exceeded)
         '500':
           description: Internal server error
+      operationId: getSummariesDelta
+      x-operation-id-source: derived
   /summaries:
     post:
       summary: Approved Merchants
@@ -208,118 +210,10 @@ paths:
           description: Too many requests (rate limit exceeded)
         '500':
           description: Internal server error
+      operationId: postSummaries
+      x-operation-id-source: derived
 components:
   schemas:
-    MerchantGroupSummaryFilterType:
-      type: string
-      enum:
-      - NAME
-      - GROUP_ID
-      - CATEGORY
-      - GEO
-      - PROGRAM_TYPE
-      - DOMAIN
-    MerchantGroupSummaryRequest:
-      type: object
-      properties:
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantGroupSummaryFilter'
-        page:
-          type: integer
-          minimum: 1
-          default: 1
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 2500
-          default: 1000
-      required:
-      - page
-      - pageSize
-    CPCSummary:
-      type: object
-      properties:
-        calculatedEpc:
-          type: number
-          format: float
-    IOCollectionResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantGroupSummaryResponse'
-        page:
-          type: integer
-          format: int32
-        perPage:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
-    MerchantRateDto:
-      type: object
-      properties:
-        currentRate:
-          type: number
-          format: double
-        rateFormat:
-          type: string
-        action:
-          type: string
-        details:
-          type: string
-    MerchantGroupSummaryFilter:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/MerchantGroupSummaryFilterType'
-        values:
-          type: array
-          items:
-            type: integer
-          description: 'For GROUP_ID: Enter numbers directly (e.g., 384)
-
-            For all other filters: Enter text values - the red highlight can be ignored for non-GROUP_ID filters
-
-            '
-      required:
-      - type
-      - values
-    NetworkSummary:
-      type: object
-      properties:
-        CPA:
-          type: array
-          items:
-            $ref: '#/components/schemas/CPASummary'
-        CPC:
-          $ref: '#/components/schemas/CPCSummary'
-    CPASummary:
-      type: object
-      properties:
-        geo:
-          type: string
-        averageEpc:
-          type: number
-          format: float
-        averageOrderValue:
-          type: number
-          format: float
-        calculatedCommissionRate:
-          type: number
-          format: float
-        rates:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantRateDto'
-        domains:
-          type: array
-          items:
-            type: string
     MerchantGroupSummaryResponse:
       type: object
       properties:
@@ -376,6 +270,116 @@ components:
             - UN
         sovrn:
           $ref: '#/components/schemas/NetworkSummary'
+    MerchantRateDto:
+      type: object
+      properties:
+        currentRate:
+          type: number
+          format: double
+        rateFormat:
+          type: string
+        action:
+          type: string
+        details:
+          type: string
+    MerchantGroupSummaryFilterType:
+      type: string
+      enum:
+      - NAME
+      - GROUP_ID
+      - CATEGORY
+      - GEO
+      - PROGRAM_TYPE
+      - DOMAIN
+    IOCollectionResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantGroupSummaryResponse'
+        page:
+          type: integer
+          format: int32
+        perPage:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
+    NetworkSummary:
+      type: object
+      properties:
+        CPA:
+          type: array
+          items:
+            $ref: '#/components/schemas/CPASummary'
+        CPC:
+          $ref: '#/components/schemas/CPCSummary'
+    CPCSummary:
+      type: object
+      properties:
+        calculatedEpc:
+          type: number
+          format: float
+    MerchantGroupSummaryFilter:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MerchantGroupSummaryFilterType'
+        values:
+          type: array
+          items:
+            type: integer
+          description: 'For GROUP_ID: Enter numbers directly (e.g., 384)
+
+            For all other filters: Enter text values - the red highlight can be ignored for non-GROUP_ID filters
+
+            '
+      required:
+      - type
+      - values
+    MerchantGroupSummaryRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantGroupSummaryFilter'
+        page:
+          type: integer
+          minimum: 1
+          default: 1
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 2500
+          default: 1000
+      required:
+      - page
+      - pageSize
+    CPASummary:
+      type: object
+      properties:
+        geo:
+          type: string
+        averageEpc:
+          type: number
+          format: float
+        averageOrderValue:
+          type: number
+          format: float
+        calculatedCommissionRate:
+          type: number
+          format: float
+        rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantRateDto'
+        domains:
+          type: array
+          items:
+            type: string
   securitySchemes:
     SecretKey:
       type: apiKey

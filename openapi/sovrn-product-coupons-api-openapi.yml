@@ -1,9 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Sovrn Commerce Product Promo Codes Product Coupons API
+  title: Product Coupons API
   version: 1.0.0
-  description: Harvested verbatim from the OpenAPI definitions Sovrn publishes inside its Sovrn Developer Center reference pages at https://developer.sovrn.com/. Operations sharing this info/servers block were merged into one document by API Evangelist; operation content is unmodified.
-  x-source-title: Product Coupons API
+  description: Returns product-specific promo codes for a given retailer product URL. Responses include verified and unverified coupon codes, merchant metadata, and scan status indicating whether verification is in progress.
 servers:
 - url: https://viglink.io/coupons
   description: Product Coupons API
@@ -13,9 +12,7 @@ paths:
   /product:
     get:
       summary: Product coupons by URL
-      description: 'Returns verified and unverified coupon codes for a specific product URL, along with merchant information and verification status.
-
-        '
+      description: Returns verified and unverified coupon codes for a specific product URL, along with merchant information and verification status.
       tags:
       - Product Coupons
       security:
@@ -126,8 +123,50 @@ paths:
           description: Resource not found.
         '500':
           description: Internal server error.
+      operationId: getProduct
+      x-operation-id-source: derived
 components:
   schemas:
+    Merchant:
+      type: object
+      required:
+      - domain
+      - group_id
+      - group_name
+      properties:
+        domain:
+          type: string
+          example: kiehls.com
+        group_id:
+          type: integer
+          format: int64
+          example: 2528
+        group_name:
+          type: string
+          example: Kiehl's
+        logo_url:
+          type:
+          - string
+          - 'null'
+          format: url
+    ProductCouponsResponse:
+      type: object
+      required:
+      - merchant
+      - scan
+      - coupons
+      properties:
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+        scan:
+          $ref: '#/components/schemas/Scan'
+        coupons:
+          type: array
+          description: 'Ranked list of coupon codes. Verified coupons appear first, followed by unverified codes.
+
+            '
+          items:
+            $ref: '#/components/schemas/Coupon'
     Coupon:
       type: object
       required:
@@ -191,46 +230,6 @@ components:
           description: 'Best-effort description of the promotion. May be null or inaccurate.
 
             '
-    ProductCouponsResponse:
-      type: object
-      required:
-      - merchant
-      - scan
-      - coupons
-      properties:
-        merchant:
-          $ref: '#/components/schemas/Merchant'
-        scan:
-          $ref: '#/components/schemas/Scan'
-        coupons:
-          type: array
-          description: 'Ranked list of coupon codes. Verified coupons appear first, followed by unverified codes.
-
-            '
-          items:
-            $ref: '#/components/schemas/Coupon'
-    Merchant:
-      type: object
-      required:
-      - domain
-      - group_id
-      - group_name
-      properties:
-        domain:
-          type: string
-          example: kiehls.com
-        group_id:
-          type: integer
-          format: int64
-          example: 2528
-        group_name:
-          type: string
-          example: Kiehl's
-        logo_url:
-          type:
-          - string
-          - 'null'
-          format: url
     Scan:
       type: object
       required:
