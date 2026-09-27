@@ -270,27 +270,15 @@ components:
             - UN
         sovrn:
           $ref: '#/components/schemas/NetworkSummary'
-    MerchantRateDto:
+    NetworkSummary:
       type: object
       properties:
-        currentRate:
-          type: number
-          format: double
-        rateFormat:
-          type: string
-        action:
-          type: string
-        details:
-          type: string
-    MerchantGroupSummaryFilterType:
-      type: string
-      enum:
-      - NAME
-      - GROUP_ID
-      - CATEGORY
-      - GEO
-      - PROGRAM_TYPE
-      - DOMAIN
+        CPA:
+          type: array
+          items:
+            $ref: '#/components/schemas/CPASummary'
+        CPC:
+          $ref: '#/components/schemas/CPCSummary'
     IOCollectionResponse:
       type: object
       properties:
@@ -307,21 +295,6 @@ components:
         totalItems:
           type: integer
           format: int32
-    NetworkSummary:
-      type: object
-      properties:
-        CPA:
-          type: array
-          items:
-            $ref: '#/components/schemas/CPASummary'
-        CPC:
-          $ref: '#/components/schemas/CPCSummary'
-    CPCSummary:
-      type: object
-      properties:
-        calculatedEpc:
-          type: number
-          format: float
     MerchantGroupSummaryFilter:
       type: object
       properties:
@@ -358,6 +331,33 @@ components:
       required:
       - page
       - pageSize
+    MerchantGroupSummaryFilterType:
+      type: string
+      enum:
+      - NAME
+      - GROUP_ID
+      - CATEGORY
+      - GEO
+      - PROGRAM_TYPE
+      - DOMAIN
+    MerchantRateDto:
+      type: object
+      properties:
+        currentRate:
+          type: number
+          format: double
+        rateFormat:
+          type: string
+        action:
+          type: string
+        details:
+          type: string
+    CPCSummary:
+      type: object
+      properties:
+        calculatedEpc:
+          type: number
+          format: float
     CPASummary:
       type: object
       properties:

@@ -65,7 +65,7 @@ tags:
 - Data
 - Reporting
 - Product Data
-- agent-native
+- Agent-Native
 tags_raw:
 - Company
 - Adtech
@@ -79,6 +79,7 @@ tags_raw:
 - Reporting
 - Product Data
 - Agent Native
+- agent-native
 apis:
 - name: Sovrn Commerce MCP Server
   description: >-
@@ -90,7 +91,7 @@ apis:
   baseURL: https://mcp.sovrn.com/commerce
   tags:
   - MCP
-  - agent-native
+  - Agent-Native
   - Affiliate Marketing
   - Commerce
   tags_raw:

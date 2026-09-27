@@ -149,24 +149,6 @@ components:
           - string
           - 'null'
           format: url
-    ProductCouponsResponse:
-      type: object
-      required:
-      - merchant
-      - scan
-      - coupons
-      properties:
-        merchant:
-          $ref: '#/components/schemas/Merchant'
-        scan:
-          $ref: '#/components/schemas/Scan'
-        coupons:
-          type: array
-          description: 'Ranked list of coupon codes. Verified coupons appear first, followed by unverified codes.
-
-            '
-          items:
-            $ref: '#/components/schemas/Coupon'
     Coupon:
       type: object
       required:
@@ -230,6 +212,24 @@ components:
           description: 'Best-effort description of the promotion. May be null or inaccurate.
 
             '
+    ProductCouponsResponse:
+      type: object
+      required:
+      - merchant
+      - scan
+      - coupons
+      properties:
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+        scan:
+          $ref: '#/components/schemas/Scan'
+        coupons:
+          type: array
+          description: 'Ranked list of coupon codes. Verified coupons appear first, followed by unverified codes.
+
+            '
+          items:
+            $ref: '#/components/schemas/Coupon'
     Scan:
       type: object
       required:

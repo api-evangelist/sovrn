@@ -46,27 +46,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Merchant:
-      type: object
-      title: Merchant
-      description: Internal representation of a merchant.
-      properties:
-        id:
-          type: integer
-          example: 8767
-          description: The unique identifier of the merchant within the system.
-        name:
-          type: string
-          example: Asda George
-          description: Human readable name of the merchant.
-        logo:
-          type: string
-          example: https://cdn.imgwzzmb.net/image/merchant/logo/aw/asda_george_88x31.jpeg
-          description: URL where to find the logo image of the merchant.
-      example:
-        id: 8767
-        name: Asda George
-        logo: https://cdn.imgwzzmb.net/image/merchant/logo/aw/asda_george_88x31.jpeg
     Product:
       type: object
       title: Product
@@ -134,6 +113,27 @@ components:
         discountRate: 50
         affiliatable: true
         epc: 1.05
+    Merchant:
+      type: object
+      title: Merchant
+      description: Internal representation of a merchant.
+      properties:
+        id:
+          type: integer
+          example: 8767
+          description: The unique identifier of the merchant within the system.
+        name:
+          type: string
+          example: Asda George
+          description: Human readable name of the merchant.
+        logo:
+          type: string
+          example: https://cdn.imgwzzmb.net/image/merchant/logo/aw/asda_george_88x31.jpeg
+          description: URL where to find the logo image of the merchant.
+      example:
+        id: 8767
+        name: Asda George
+        logo: https://cdn.imgwzzmb.net/image/merchant/logo/aw/asda_george_88x31.jpeg
     Error:
       type: object
       title: Error
@@ -143,7 +143,31 @@ components:
           description: The error message
       example:
         message: An error message
+  responses:
+    BadRequest:
+      description: A Bad Request status code will be returned if provided parameters are malformed.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error:
+      description: For any unexpected error a status code 500 will be returned.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    OptionalSearchKeywords:
+      name: search-keywords
+      in: query
+      required: false
+      description: 'List of keywords to search in the product name, **separated by space**.
+
+        For example: ''Dickies hat red'' or ''iPhone X''.
+
+        '
+      schema:
+        type: string
     EpcSort:
       name: epc-sort
       in: query
@@ -153,28 +177,6 @@ components:
         '
       schema:
         type: boolean
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: 'Limits the number of results, for example if limit=3 the service will return up to 3 products.
-
-        The products in the response will be those from the best performing merchants according to our merchant-ranking system.
-
-        '
-      schema:
-        type: integer
-    OptionalPlainlink:
-      name: plainlink
-      in: query
-      required: false
-      description: 'The link of the product web page in a merchant''s site.
-
-        **Note**: the link must be plain, if you provide a tracked link the service may not work.
-
-        '
-      schema:
-        type: string
     PriceRange:
       name: price-range
       in: query
@@ -188,24 +190,6 @@ components:
         **Note**: using \*-\* is the same as not defining any filter.
 
         '
-      schema:
-        type: string
-    OptionalSearchKeywords:
-      name: search-keywords
-      in: query
-      required: false
-      description: 'List of keywords to search in the product name, **separated by space**.
-
-        For example: ''Dickies hat red'' or ''iPhone X''.
-
-        '
-      schema:
-        type: string
-    OptionalBarcode:
-      name: barcode
-      in: query
-      required: false
-      description: 'The barcode of the product to search, can be one of: UPC,EAN,GTIN,ISBN,ASIN.'
       schema:
         type: string
     Market:
@@ -235,6 +219,17 @@ components:
         '
       schema:
         type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: 'Limits the number of results, for example if limit=3 the service will return up to 3 products.
+
+        The products in the response will be those from the best performing merchants according to our merchant-ranking system.
+
+        '
+      schema:
+        type: integer
     ExcludeKeywords:
       name: exclude-keywords
       in: query
@@ -248,19 +243,24 @@ components:
         '
       schema:
         type: string
-  responses:
-    Error:
-      description: For any unexpected error a status code 500 will be returned.
-      content:
-        '*/*':
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: A Bad Request status code will be returned if provided parameters are malformed.
-      content:
-        '*/*':
-          schema:
-            $ref: '#/components/schemas/Error'
+    OptionalBarcode:
+      name: barcode
+      in: query
+      required: false
+      description: 'The barcode of the product to search, can be one of: UPC,EAN,GTIN,ISBN,ASIN.'
+      schema:
+        type: string
+    OptionalPlainlink:
+      name: plainlink
+      in: query
+      required: false
+      description: 'The link of the product web page in a merchant''s site.
+
+        **Note**: the link must be plain, if you provide a tracked link the service may not work.
+
+        '
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
