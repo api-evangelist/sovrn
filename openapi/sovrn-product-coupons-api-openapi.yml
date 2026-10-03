@@ -127,28 +127,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Merchant:
-      type: object
-      required:
-      - domain
-      - group_id
-      - group_name
-      properties:
-        domain:
-          type: string
-          example: kiehls.com
-        group_id:
-          type: integer
-          format: int64
-          example: 2528
-        group_name:
-          type: string
-          example: Kiehl's
-        logo_url:
-          type:
-          - string
-          - 'null'
-          format: url
     Coupon:
       type: object
       required:
@@ -230,6 +208,28 @@ components:
             '
           items:
             $ref: '#/components/schemas/Coupon'
+    Merchant:
+      type: object
+      required:
+      - domain
+      - group_id
+      - group_name
+      properties:
+        domain:
+          type: string
+          example: kiehls.com
+        group_id:
+          type: integer
+          format: int64
+          example: 2528
+        group_name:
+          type: string
+          example: Kiehl's
+        logo_url:
+          type:
+          - string
+          - 'null'
+          format: url
     Scan:
       type: object
       required:

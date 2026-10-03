@@ -270,15 +270,6 @@ components:
             - UN
         sovrn:
           $ref: '#/components/schemas/NetworkSummary'
-    NetworkSummary:
-      type: object
-      properties:
-        CPA:
-          type: array
-          items:
-            $ref: '#/components/schemas/CPASummary'
-        CPC:
-          $ref: '#/components/schemas/CPCSummary'
     IOCollectionResponse:
       type: object
       properties:
@@ -295,6 +286,15 @@ components:
         totalItems:
           type: integer
           format: int32
+    MerchantGroupSummaryFilterType:
+      type: string
+      enum:
+      - NAME
+      - GROUP_ID
+      - CATEGORY
+      - GEO
+      - PROGRAM_TYPE
+      - DOMAIN
     MerchantGroupSummaryFilter:
       type: object
       properties:
@@ -312,52 +312,6 @@ components:
       required:
       - type
       - values
-    MerchantGroupSummaryRequest:
-      type: object
-      properties:
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantGroupSummaryFilter'
-        page:
-          type: integer
-          minimum: 1
-          default: 1
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 2500
-          default: 1000
-      required:
-      - page
-      - pageSize
-    MerchantGroupSummaryFilterType:
-      type: string
-      enum:
-      - NAME
-      - GROUP_ID
-      - CATEGORY
-      - GEO
-      - PROGRAM_TYPE
-      - DOMAIN
-    MerchantRateDto:
-      type: object
-      properties:
-        currentRate:
-          type: number
-          format: double
-        rateFormat:
-          type: string
-        action:
-          type: string
-        details:
-          type: string
-    CPCSummary:
-      type: object
-      properties:
-        calculatedEpc:
-          type: number
-          format: float
     CPASummary:
       type: object
       properties:
@@ -380,6 +334,52 @@ components:
           type: array
           items:
             type: string
+    NetworkSummary:
+      type: object
+      properties:
+        CPA:
+          type: array
+          items:
+            $ref: '#/components/schemas/CPASummary'
+        CPC:
+          $ref: '#/components/schemas/CPCSummary'
+    CPCSummary:
+      type: object
+      properties:
+        calculatedEpc:
+          type: number
+          format: float
+    MerchantGroupSummaryRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantGroupSummaryFilter'
+        page:
+          type: integer
+          minimum: 1
+          default: 1
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 2500
+          default: 1000
+      required:
+      - page
+      - pageSize
+    MerchantRateDto:
+      type: object
+      properties:
+        currentRate:
+          type: number
+          format: double
+        rateFormat:
+          type: string
+        action:
+          type: string
+        details:
+          type: string
   securitySchemes:
     SecretKey:
       type: apiKey

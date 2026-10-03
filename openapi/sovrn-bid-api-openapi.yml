@@ -220,6 +220,20 @@ paths:
       - Bid
 components:
   schemas:
+    BidNoFill:
+      type: object
+      description: 'Returned when there is no eligible bid, the destination URL is not monetizable, or the available bid is below the submitted bid floor.
+
+        '
+      required:
+      - affiliated
+      properties:
+        affiliated:
+          type: boolean
+          description: '`false` when there is no eligible bid, the destination URL is not monetizable, or the available bid is below the submitted `bidFloor`.
+
+            '
+          example: false
     BidWin:
       type: object
       description: Returned when Sovrn returns a bid or offer for the click.
@@ -262,17 +276,3 @@ components:
 
             '
           example: 250
-    BidNoFill:
-      type: object
-      description: 'Returned when there is no eligible bid, the destination URL is not monetizable, or the available bid is below the submitted bid floor.
-
-        '
-      required:
-      - affiliated
-      properties:
-        affiliated:
-          type: boolean
-          description: '`false` when there is no eligible bid, the destination URL is not monetizable, or the available bid is below the submitted `bidFloor`.
-
-            '
-          example: false

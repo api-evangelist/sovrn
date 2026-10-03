@@ -1152,45 +1152,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PagesResponseModel:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/BaseResponseModel'
-            - type: object
-              properties:
-                pageUrl:
-                  type: string
-                pageviews:
-                  type: number
-                rpm:
-                  type: number
-        totals:
-          type: object
-          properties:
-            revenueTotal:
-              type: number
-            clicksTotal:
-              type: number
-            salesTotal:
-              type: number
-            actionsTotal:
-              type: number
-            conversionRateTotal:
-              type: number
-            epcTotal:
-              type: number
-            ctrTotal:
-              type: number
-            rpmTotal:
-              type: number
-            pageUrlTotal:
-              type: number
-            pageviewsTotal:
-              type: number
     MerchantsResponseModel:
       type: object
       description: TSR Merchants response model
@@ -1233,6 +1194,157 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TransactionModel'
+    NetworkResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                networkName:
+                  type: string
+        totals:
+          properties:
+            networkNameTotal:
+              type: number
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+    LinkUtmInfoModel:
+      type: object
+      properties:
+        utmSource:
+          type: string
+        utmMedium:
+          type: string
+        utmCampaign:
+          type: string
+        utmTerm:
+          type: string
+        utmContent:
+          type: string
+    PageUtmInfoModel:
+      type: object
+      properties:
+        utmSource:
+          type: string
+        utmMedium:
+          type: string
+        utmCampaign:
+          type: string
+        utmTerm:
+          type: string
+        utmContent:
+          type: string
+    MerchandiseResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              productName:
+                type: string
+              merchantGroupName:
+                type: string
+              merchantGroupId:
+                type: integer
+                format: int64
+              revenue:
+                type: number
+              sales:
+                type: number
+              actions:
+                type: number
+        totals:
+          type: object
+          properties:
+            productNameTotal:
+              type: number
+            merchantGroupNameTotal:
+              type: number
+            merchantGroupIdsTotal:
+              type: number
+            revenueTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+    LinksResponseModel:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                linkUrl:
+                  type: string
+                linkText:
+                  type: string
+        totals:
+          properties:
+            linkUrlTotal:
+              type: number
+            linkTextTotal:
+              type: number
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+    ProductModel:
+      type: object
+      properties:
+        productId:
+          type: string
+        productName:
+          type: string
+        price:
+          type: number
+          format: float
+          example: 100.99
+        quantity:
+          type: number
+          example: 10
+    BaseResponseModel:
+      type: object
+      properties:
+        revenue:
+          type: number
+        clicks:
+          type: number
+        sales:
+          type: number
+        actions:
+          type: number
+        conversionRate:
+          type: number
+        epc:
+          type: number
     TransactionModel:
       type: object
       properties:
@@ -1291,19 +1403,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductModel'
-    LinkUtmInfoModel:
+    PagesResponseModel:
       type: object
       properties:
-        utmSource:
-          type: string
-        utmMedium:
-          type: string
-        utmCampaign:
-          type: string
-        utmTerm:
-          type: string
-        utmContent:
-          type: string
+        data:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BaseResponseModel'
+            - type: object
+              properties:
+                pageUrl:
+                  type: string
+                pageviews:
+                  type: number
+                rpm:
+                  type: number
+        totals:
+          type: object
+          properties:
+            revenueTotal:
+              type: number
+            clicksTotal:
+              type: number
+            salesTotal:
+              type: number
+            actionsTotal:
+              type: number
+            conversionRateTotal:
+              type: number
+            epcTotal:
+              type: number
+            ctrTotal:
+              type: number
+            rpmTotal:
+              type: number
+            pageUrlTotal:
+              type: number
+            pageviewsTotal:
+              type: number
+    DeviceTypeModel:
+      type: string
+      enum:
+      - DSK
+      - MBL
+      - TBL
+      - UKN
     CuidsResponseModel:
       type: object
       properties:
@@ -1333,41 +1478,6 @@ components:
               type: number
             epcTotal:
               type: number
-    BaseResponseModel:
-      type: object
-      properties:
-        revenue:
-          type: number
-        clicks:
-          type: number
-        sales:
-          type: number
-        actions:
-          type: number
-        conversionRate:
-          type: number
-        epc:
-          type: number
-    DeviceTypeModel:
-      type: string
-      enum:
-      - DSK
-      - MBL
-      - TBL
-      - UKN
-    PageUtmInfoModel:
-      type: object
-      properties:
-        utmSource:
-          type: string
-        utmMedium:
-          type: string
-        utmCampaign:
-          type: string
-        utmTerm:
-          type: string
-        utmContent:
-          type: string
     SovrnProductModel:
       type: string
       enum:
@@ -1420,116 +1530,6 @@ components:
               type: number
             merchantGroupNameTotal:
               type: number
-    LinksResponseModel:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/BaseResponseModel'
-            - type: object
-              properties:
-                linkUrl:
-                  type: string
-                linkText:
-                  type: string
-        totals:
-          properties:
-            linkUrlTotal:
-              type: number
-            linkTextTotal:
-              type: number
-            revenueTotal:
-              type: number
-            clicksTotal:
-              type: number
-            salesTotal:
-              type: number
-            actionsTotal:
-              type: number
-            conversionRateTotal:
-              type: number
-            epcTotal:
-              type: number
-    NetworkResponseModel:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/BaseResponseModel'
-            - type: object
-              properties:
-                networkName:
-                  type: string
-        totals:
-          properties:
-            networkNameTotal:
-              type: number
-            revenueTotal:
-              type: number
-            clicksTotal:
-              type: number
-            salesTotal:
-              type: number
-            actionsTotal:
-              type: number
-            conversionRateTotal:
-              type: number
-            epcTotal:
-              type: number
-    MerchandiseResponseModel:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              productName:
-                type: string
-              merchantGroupName:
-                type: string
-              merchantGroupId:
-                type: integer
-                format: int64
-              revenue:
-                type: number
-              sales:
-                type: number
-              actions:
-                type: number
-        totals:
-          type: object
-          properties:
-            productNameTotal:
-              type: number
-            merchantGroupNameTotal:
-              type: number
-            merchantGroupIdsTotal:
-              type: number
-            revenueTotal:
-              type: number
-            salesTotal:
-              type: number
-            actionsTotal:
-              type: number
-    ProductModel:
-      type: object
-      properties:
-        productId:
-          type: string
-        productName:
-          type: string
-        price:
-          type: number
-          format: float
-          example: 100.99
-        quantity:
-          type: number
-          example: 10
   securitySchemes:
     bearerAuth:
       type: apiKey
