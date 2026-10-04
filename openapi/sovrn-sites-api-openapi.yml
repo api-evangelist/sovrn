@@ -45,134 +45,7 @@ paths:
       operationId: getSitesBySiteApiKeyComparePricesByMarketByAccuracy
       x-operation-id-source: derived
 components:
-  parameters:
-    SiteApiKey:
-      name: site-api-key
-      in: path
-      required: true
-      description: The unique identifier of the publishers site.
-      schema:
-        type: string
-    Market:
-      name: market
-      in: path
-      required: true
-      description: "The market where to perform the search. Read the market section for the list of supported markets.\nFor example: 'usd_en' for the US market. \n"
-      schema:
-        type: string
-    ExcludeKeywords:
-      name: exclude-keywords
-      in: query
-      required: false
-      description: 'List of keywords to exclude from the search, **separated by space**.
-
-        Any result matching any of the provided keywords will be stripped out from the results.
-
-        For example: ''Dickies hat red'' or ''iPhone 10''.
-
-        '
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: 'Limits the number of results, for example if limit=3 the service will return up to 3 products.
-
-        The products in the response will be those from the best performing merchants according to our merchant-ranking system.
-
-        '
-      schema:
-        type: integer
-    EpcSort:
-      name: epc-sort
-      in: query
-      required: false
-      description: 'Sort results by EPC. If true the results will be sorted by EPC otherwise default sorting will be used.
-
-        '
-      schema:
-        type: boolean
-    PriceRange:
-      name: price-range
-      in: query
-      required: false
-      description: 'Range of prices where the ''salePlace'' of the returned products should belong.
-
-        The range is defined in the form <min-price>-<max-price>, for example 20-30 or 19.9-26.8.
-
-        The star can be used to avoid to limit one side of the range, for example *-20 equals to 0-20 and 20-* will take all results with a sale price >= 20
-
-        **Note**: using \*-\* is the same as not defining any filter.
-
-        '
-      schema:
-        type: string
-    OptionalSearchKeywords:
-      name: search-keywords
-      in: query
-      required: false
-      description: 'List of keywords to search in the product name, **separated by space**.
-
-        For example: ''Dickies hat red'' or ''iPhone X''.
-
-        '
-      schema:
-        type: string
-    Sid:
-      name: sid
-      in: query
-      required: false
-      description: 'Custom source ID to be used for tracking purposes. This will be the sovrn CUID.
-
-        Can contain only letters, digits, and the following punctuation characters: ''-'',''_'',''.'',''~''.
-
-        Cannot be longer than 32 characters.
-
-        '
-      schema:
-        type: string
-    OptionalBarcode:
-      name: barcode
-      in: query
-      required: false
-      description: 'The barcode of the product to search, can be one of: UPC,EAN,GTIN,ISBN,ASIN.'
-      schema:
-        type: string
-    OptionalPlainlink:
-      name: plainlink
-      in: query
-      required: false
-      description: 'The link of the product web page in a merchant''s site.
-
-        **Note**: the link must be plain, if you provide a tracked link the service may not work.
-
-        '
-      schema:
-        type: string
-  responses:
-    Error:
-      description: For any unexpected error a status code 500 will be returned.
-      content:
-        '*/*':
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: A Bad Request status code will be returned if provided parameters are malformed.
-      content:
-        '*/*':
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      title: Error
-      properties:
-        message:
-          type: string
-          description: The error message
-      example:
-        message: An error message
     Merchant:
       type: object
       title: Merchant
@@ -261,6 +134,133 @@ components:
         discountRate: 50
         affiliatable: true
         epc: 1.05
+    Error:
+      type: object
+      title: Error
+      properties:
+        message:
+          type: string
+          description: The error message
+      example:
+        message: An error message
+  parameters:
+    Sid:
+      name: sid
+      in: query
+      required: false
+      description: 'Custom source ID to be used for tracking purposes. This will be the sovrn CUID.
+
+        Can contain only letters, digits, and the following punctuation characters: ''-'',''_'',''.'',''~''.
+
+        Cannot be longer than 32 characters.
+
+        '
+      schema:
+        type: string
+    OptionalBarcode:
+      name: barcode
+      in: query
+      required: false
+      description: 'The barcode of the product to search, can be one of: UPC,EAN,GTIN,ISBN,ASIN.'
+      schema:
+        type: string
+    OptionalPlainlink:
+      name: plainlink
+      in: query
+      required: false
+      description: 'The link of the product web page in a merchant''s site.
+
+        **Note**: the link must be plain, if you provide a tracked link the service may not work.
+
+        '
+      schema:
+        type: string
+    SiteApiKey:
+      name: site-api-key
+      in: path
+      required: true
+      description: The unique identifier of the publishers site.
+      schema:
+        type: string
+    EpcSort:
+      name: epc-sort
+      in: query
+      required: false
+      description: 'Sort results by EPC. If true the results will be sorted by EPC otherwise default sorting will be used.
+
+        '
+      schema:
+        type: boolean
+    OptionalSearchKeywords:
+      name: search-keywords
+      in: query
+      required: false
+      description: 'List of keywords to search in the product name, **separated by space**.
+
+        For example: ''Dickies hat red'' or ''iPhone X''.
+
+        '
+      schema:
+        type: string
+    ExcludeKeywords:
+      name: exclude-keywords
+      in: query
+      required: false
+      description: 'List of keywords to exclude from the search, **separated by space**.
+
+        Any result matching any of the provided keywords will be stripped out from the results.
+
+        For example: ''Dickies hat red'' or ''iPhone 10''.
+
+        '
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: 'Limits the number of results, for example if limit=3 the service will return up to 3 products.
+
+        The products in the response will be those from the best performing merchants according to our merchant-ranking system.
+
+        '
+      schema:
+        type: integer
+    PriceRange:
+      name: price-range
+      in: query
+      required: false
+      description: 'Range of prices where the ''salePlace'' of the returned products should belong.
+
+        The range is defined in the form <min-price>-<max-price>, for example 20-30 or 19.9-26.8.
+
+        The star can be used to avoid to limit one side of the range, for example *-20 equals to 0-20 and 20-* will take all results with a sale price >= 20
+
+        **Note**: using \*-\* is the same as not defining any filter.
+
+        '
+      schema:
+        type: string
+    Market:
+      name: market
+      in: path
+      required: true
+      description: "The market where to perform the search. Read the market section for the list of supported markets.\nFor example: 'usd_en' for the US market. \n"
+      schema:
+        type: string
+  responses:
+    Error:
+      description: For any unexpected error a status code 500 will be returned.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: A Bad Request status code will be returned if provided parameters are malformed.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
