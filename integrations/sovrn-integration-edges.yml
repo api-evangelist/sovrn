@@ -2,6 +2,7 @@ generated: '2026-10-14'
 method: searched
 checked:
 - https://vendor-list.consensu.org/v3/vendor-list.json
+- wordpress/integrations/wordpress-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: IAB Europe TCF Global Vendor List
@@ -39,3 +40,22 @@ edges:
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
   detected: '2026-10-14'
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/sovrn-workbench/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - Workbench by Sovrn
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
+source:
+- wordpress/integrations/wordpress-integration-edges.yml
