@@ -3,6 +3,7 @@ method: searched
 checked:
 - https://vendor-list.consensu.org/v3/vendor-list.json
 - wordpress/integrations/wordpress-integration-edges.yml
+- https://marketplace.databricks.com/
 marketplace_apps: []
 edges:
 - partner_name: IAB Europe TCF Global Vendor List
@@ -57,5 +58,30 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: WordPress plugin
+- partner_name: Databricks Marketplace
+  partner: databricks
+  partner_match: aggregator
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://marketplace.databricks.com/provider/a55c6cf4-69b8-4ad2-85f5-bede1c86ae6d
+  category: data product listing
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Sovrn
+    matched_domain: sovrn.com
+    matched_by: domain+name-among-holders
+    listings: 1
+    sample_listings:
+    - Sovrn Weblog Data
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
 source:
 - wordpress/integrations/wordpress-integration-edges.yml
