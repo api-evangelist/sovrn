@@ -4,6 +4,10 @@ checked:
 - https://vendor-list.consensu.org/v3/vendor-list.json
 - wordpress/integrations/wordpress-integration-edges.yml
 - https://marketplace.databricks.com/
+- https://hubgloo.opxar.com/search
+- https://www.tagtoday.net/certifications
+- https://www.tagtoday.net/registry
+- https://www.tagtoday.net/registry-search/
 marketplace_apps: []
 edges:
 - partner_name: IAB Europe TCF Global Vendor List
@@ -83,5 +87,72 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-data-marketplaces.py
   detected: '2026-10-20'
+- partner_name: TAG Registry (Trustworthy Accountability Group)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.tagtoday.net/registry
+  category: Ad fraud / brand safety certification (TAG)
+  contract_reference:
+    register: TAG Registry (tagtoday.net/registry; registry-search public endpoint)
+    spec_file: null
+    standard: TAG certification programs (Trustworthy Accountability Group)
+    role: tag-certified
+    registrations:
+    - registered_name: Sovrn
+      register_id: https://hubgloo.opxar.com/company/292342916
+      verified_by_tag: true
+      seals:
+      - Certified Against Fraud
+      - Certified Against Malvertising
+      - Brand Safety Certified
+      matched_domain: sovrn.com
+      matched_by: domain+name-among-holders
+      other_names:
+      - sovrn, Inc.
+      identity: wikidata Q22908948 'Sovrn Holdings' P856 https://www.sovrn.com/
+    signal_note: certified_products = one entry per TAG seal held (CAF, BSC, CAM, CAP, CFT), never per registration;
+      validation route (third-party auditor / TAG Validation / self-attestation) and category are context. The registry
+      shows current seals only and marks none expired, so lapsed is false. Verified by TAG with no seal = listing
+      only (participation)
+    detected_by: sweep-tag-certified-ad-fraud.py
+    detected: '2026-10-23'
+    certified_products:
+    - product: Brand Safety Certified
+      product_type: Brand Safety Certified
+      standard: TAG Brand Safety Certified (BSC)
+      lapsed: false
+      validation:
+      - third-party auditor
+      categories:
+      - Intermediary
+      scope:
+      - the company’s global operations
+    - product: Certified Against Fraud
+      product_type: Certified Against Fraud
+      standard: TAG Certified Against Fraud (CAF)
+      lapsed: false
+      validation:
+      - third-party auditor
+      categories:
+      - Intermediary
+      scope:
+      - the company’s global operations
+    - product: Certified Against Malvertising
+      product_type: Certified Against Malvertising
+      standard: TAG Certified Against Malvertising (CAM)
+      lapsed: false
+      validation:
+      - third-party auditor
+      categories:
+      - Intermediary
+      scope:
+      - the company’s global operations
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  detected_by: sweep-tag-certified-ad-fraud.py
+  first_seen: '2026-10-23'
 source:
 - wordpress/integrations/wordpress-integration-edges.yml
