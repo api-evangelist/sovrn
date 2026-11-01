@@ -64,28 +64,154 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Sovrn is an advertising technology and content monetization company in Boulder, Colorado, serving
-publishers, creators and advertisers across Ad Exchange, Signal, Commerce (formerly VigLink) and Data.
+Sovrn is an advertising technology and content monetization company that helps online publishers, advertisers, and creators earn revenue from their websites and audiences. Its platform spans Ad Exchange (an omnichannel programmatic demand pipeline connecting publisher inventory to buyers and DSPs), Signal (ad-inventory and yield optimization), Commerce (affiliate and commerce-content monetization, formerly VigLink, with access to tens of thousands of merchants), and Data solutions for first-party data activation. Sovrn publishes a ReadMe-hosted developer center at developer.sovrn.com carrying eight OpenAPI definitions across seventeen operations — affiliate link checking, real-time bid pricing on clicks, campaign management, real-time commission reporting, merchant rate summaries, product recommendations, price comparisons, promo codes, and Ad Exchange performance reporting — plus a beta hosted Commerce MCP server at mcp.sovrn.com/commerce, an Agent Skills discovery document, and llms.txt files on three hosts. Sovrn is headquartered in Boulder, Colorado.
 
-This profile is built from Sovrn's public developer surface at
-[developer.sovrn.com](https://developer.sovrn.com/) — a ReadMe-hosted developer center carrying
-**eight OpenAPI definitions across seventeen operations**, harvested here into `openapi/` with the
-per-operation originals in `openapi/_original/`:
+**Areas:** Company · AdTech · Advertising · Monetization · Affiliate Marketing · Programmatic · Publishers · Commerce · Data · Reporting · Product Data · Agent-Native
 
-| API | Base | Ops |
-|---|---|---|
-| Commerce Link Check | `api.viglink.com/api` | 1 |
-| Commerce Bid Check | `api.viglink.com` | 1 |
-| Commerce Campaigns | `rest.viglink.com/api` | 1 |
-| Commerce Real-Time Reports | `viglink.io/v1` | 8 |
-| Merchant Group Summaries | `viglink.io/merchants/rates` | 2 |
-| Product Promo Codes | `viglink.io/coupons` | 1 |
-| Product Recommendations | `shopping-gallery.prd-commerce.sovrnservices.com` | 1 |
-| Price Comparisons | `comparisons.sovrn.com/api/affiliate/v3.5` | 1 |
-| Advertising Performance Reporting | `api.sovrn.com` | 1 |
+## Sovrn on APIs.io
 
-Sovrn also runs a beta hosted **Commerce MCP server** at `https://mcp.sovrn.com/commerce` (14 tools,
-prompts and resources; `tools/list` is auth-gated), publishes an **Agent Skills** discovery document at
-`developer.sovrn.com/.well-known/agent-skills/index.json`, and serves **llms.txt** on three hosts.
+Everything profiled for Sovrn is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sovrn/](https://apis.io/providers/sovrn/)** — or go straight to one of the APIs or properties below.
 
-Sector: adtech. Backed by: foundry-group — https://www.sovrn.com
+### APIs (10)
+
+- [Sovrn Commerce MCP Server](https://apis.io/apis/sovrn/sovrn-commerce-mcp-server/) — Hosted, beta Model Context Protocol server exposing Sovrn Commerce affiliate data, campaigns and products to AI clients — twelve tools covering price…
+- [Sovrn Account API](https://apis.io/apis/sovrn/sovrn-account-api/) — The Account API from Sovrn — 1 operation(s) for account.
+- [Sovrn Ai Orchestration API](https://apis.io/apis/sovrn/sovrn-ai-orchestration-api/) — The Ai Orchestration API from Sovrn — 1 operation(s) for ai orchestration.
+- [Sovrn Bid API](https://apis.io/apis/sovrn/sovrn-bid-api/) — The Bid API from Sovrn — 1 operation(s) for bid.
+- [Sovrn Link API](https://apis.io/apis/sovrn/sovrn-link-api/) — The Link API from Sovrn — 1 operation(s) for link.
+- [Sovrn Merchant Group Summaries API](https://apis.io/apis/sovrn/sovrn-merchant-group-summaries-api/) — The Merchant Group Summaries API from Sovrn — 2 operation(s) for merchant group summaries.
+- [Sovrn Product Coupons API](https://apis.io/apis/sovrn/sovrn-product-coupons-api/) — The Product Coupons API from Sovrn — 1 operation(s) for product coupons.
+- [Sovrn Reporting API](https://apis.io/apis/sovrn/sovrn-reporting-api/) — The reporting API from Sovrn — 1 operation(s) for reporting.
+- [Sovrn Reports API](https://apis.io/apis/sovrn/sovrn-reports-api/) — The reports API from Sovrn — 8 operation(s) for reports.
+- [Sovrn Sites API](https://apis.io/apis/sovrn/sovrn-sites-api/) — The Sites API from Sovrn — 1 operation(s) for sites.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Commerce MCP Server](https://apis.io/servers/sovrn/commerce-mcp-server/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Sovrn Advertising Performance Reporting API](https://apis.io/collections/sovrn/open-sovrn-advertising-reporting/)
+- [Sovrn Commerce Bid Check API](https://apis.io/collections/sovrn/open-sovrn-commerce-bid-check/)
+- [Sovrn Commerce Campaigns API](https://apis.io/collections/sovrn/open-sovrn-commerce-campaigns/)
+- [Sovrn Commerce Link Check API](https://apis.io/collections/sovrn/open-sovrn-commerce-link-check/)
+- [Sovrn Commerce Real-Time Reports API](https://apis.io/collections/sovrn/open-sovrn-commerce-reports/)
+- [Sovrn Commerce Merchant Group Summaries API](https://apis.io/collections/sovrn/open-sovrn-merchant-summaries/)
+- [Sovrn Commerce Price Comparisons (Product Affiliate) API](https://apis.io/collections/sovrn/open-sovrn-price-comparisons/)
+- [Sovrn Commerce Product Promo Codes API](https://apis.io/collections/sovrn/open-sovrn-product-coupons/)
+- [Sovrn Commerce Product Recommendation API](https://apis.io/collections/sovrn/open-sovrn-product-recommendations/)
+
+#### Overlays (9)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Sovrn Advertising Reporting Overlay](https://apis.io/overlays/sovrn/sovrn-advertising-reporting-overlay/)
+- [Sovrn Commerce Bid Check Overlay](https://apis.io/overlays/sovrn/sovrn-commerce-bid-check-overlay/)
+- [Sovrn Commerce Campaigns Overlay](https://apis.io/overlays/sovrn/sovrn-commerce-campaigns-overlay/)
+- [Sovrn Commerce Link Check Overlay](https://apis.io/overlays/sovrn/sovrn-commerce-link-check-overlay/)
+- [Sovrn Commerce Reports Overlay](https://apis.io/overlays/sovrn/sovrn-commerce-reports-overlay/)
+- [Sovrn Merchant Summaries Overlay](https://apis.io/overlays/sovrn/sovrn-merchant-summaries-overlay/)
+- [Sovrn Price Comparisons Overlay](https://apis.io/overlays/sovrn/sovrn-price-comparisons-overlay/)
+- [Sovrn Product Coupons Overlay](https://apis.io/overlays/sovrn/sovrn-product-coupons-overlay/)
+- [Sovrn Product Recommendations Overlay](https://apis.io/overlays/sovrn/sovrn-product-recommendations-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Sovrn Authentication](https://apis.io/security/sovrn/sovrn-authentication/)
+- [Sovrn Domain Security](https://apis.io/security/sovrn/sovrn-domain-security/)
+- [Sovrn Vulnerability Disclosure](https://apis.io/security/sovrn/sovrn-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Sovrn Plans Pricing](https://apis.io/plans/sovrn/sovrn-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Sovrn Rate Limits](https://apis.io/rate-limits/sovrn/sovrn-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.sovrn.com)
+- [Documentation](https://developer.sovrn.com/)
+- [Getting started](https://knowledge.sovrn.com/kb/api-onboarding-guide-for-commerce)
+- [API reference](https://developer.sovrn.com/reference/campaigns)
+- [Sign up](https://platform.sovrn.com/account/signup)
+- [Support](https://knowledge.sovrn.com/)
+- [Blog](https://www.sovrn.com/blog/)
+- [Security](https://www.sovrn.com/responsible-disclosure-policy/)
+- [Trust centre](https://www.sovrn.com/trust-center/)
+- [Terms of service](https://www.sovrn.com/legal/msa/)
+- [Privacy policy](https://www.sovrn.com/privacy-policy/privacy-policy/)
+- [GitHub](https://github.com/sovrn)
+- [Status](https://status.sovrn.com/)
+
+## API Evangelist rating
+
+**Kin Score 51.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 90.0 |
+| Contract quality | 52.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 54.2 |
+| Access clarity | 42.1 |
+
+**Agent readiness 33.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sovrn/](https://apis.io/providers/sovrn/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Sovrn: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sovrn/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
